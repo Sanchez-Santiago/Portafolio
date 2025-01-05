@@ -1,0 +1,82 @@
+---
+import Header from "../components/Header.astro";
+import "@fontsource-variable/onest";
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="header">
+      <Header />
+    </header>
+    <main>
+      <slot />
+    </main>
+  </body>
+
+  <style is:global>
+    /* Variables de color */
+    :root {
+      color-scheme: light dark;
+    }
+
+    /* Estilo general */
+    html {
+      font-family: "Onest Variable", system-ui, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(125% 125% at 50% 10%, #000 40%, #267e1b 100%);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    header {
+      width: 100%;
+      max-width: 1120px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+    }
+
+    header img {
+      border-radius: 50%;
+      width: 48px; /* Tamaño equivalente a w-12 */
+      height: 48px;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #1e90ff; /* Efecto hover en los enlaces */
+    }
+  </style>
+</html>

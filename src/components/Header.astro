@@ -1,0 +1,88 @@
+<header class="header">
+  <div class="container">
+    <div class="content">
+      <img class="logo" src="/src/imagin/My Logo3.png" alt="Logo" />
+      <nav class="nav">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/projects">Projects</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<style>
+  /* General Styles */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+  /* Header Styles */
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    padding: 12px 0;
+    background: linear-gradient(
+      90deg,
+      rgba(38, 126, 27, 0.6),
+      rgba(10, 32, 7, 0.6),
+      rgba(47, 124, 35, 0.6)
+    );
+    backdrop-filter: blur(7px);
+    ilter: blur(50%);
+    border: 1px solid rgb(78, 82, 77);
+    width: 50%; /* Ancho específico */
+    height: 60px; /* Alto específico */
+    margin: 0 auto; /* Centrado horizontal */
+    position: fixed; /* Fija el header */
+    top: 0; /* Posición en la parte superior */
+    left: 0; /* Centrado horizontal automático */
+    right: 0;
+    z-index: 10; /* Asegura que esté encima del contenido */
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full screen height */
+  }
+
+  .content {
+    display: flex;
+    align-items: center;
+    gap: 40px; /* Similar to gap-x-10 in Tailwind */
+  }
+
+  .logo {
+    border-radius: 50%; /* Circular image */
+    width: 48px; /* 12 * 4px */
+    height: 48px; /* 12 * 4px */
+  }
+
+  .nav {
+    display: flex;
+    flex-direction: row;
+    gap: 40px; /* Space between links */
+  }
+
+  .nav a {
+    text-decoration: none;
+    color: #e5ece7;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+
+  .nav a:hover {
+    color: #007bff; /* Hover effect */
+  }
+</style>
