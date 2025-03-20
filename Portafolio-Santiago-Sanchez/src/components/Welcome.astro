@@ -1,0 +1,66 @@
+---
+import welom from "../locales/welcome.json";
+const translationsJSON = JSON.stringify(welom);
+---
+
+<div id="container">
+  <a href="/es" id="welcome">Welcome</a>
+</div>
+<script define:vars={{ translationsJSON }}>
+  // Usar define:vars para pasar la variable del contexto de Astro al script
+  const translations = JSON.parse(translationsJSON);
+  console.log("Translations:", translations);
+  const keys = Object.keys(translations);
+  let index = 0;
+  function updateText() {
+    const welcomeEl = document.getElementById("welcome");
+    if (welcomeEl) {
+      welcomeEl.innerText = translations[keys[index]];
+    }
+    index = (index + 1) % keys.length;
+  }
+  // Cambiar a 2 segundos (2000ms) como solicitaste
+  updateText();
+  setInterval(updateText, 2000);
+</script>
+<style>
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  #container {
+    width: 100%;
+    height: 100%;
+    /* background-color: transparent; /* Fondo transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px); /* Blur en el contenedor */
+  }
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%; /* Reducido para mejor efecto visual */
+    height: 50%;
+    text-decoration: none;
+    /* background-color: rgba(0, 123, 255, 0.5); /* Transparencia */
+    color: #fff;
+    font-size: 3rem;
+    border-radius: 15px; /* Bordes redondeados */
+    transition:
+      background-color 0.3s ease,
+      backdrop-filter 0.3s ease;
+    backdrop-filter: blur(10px); /* Blur más intenso en el botón */
+    -webkit-backdrop-filter: blur(10px); /* Soporte para Safari */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Sombra difuminada */
+  }
+  a:hover {
+    /* background-color: rgba(0, 86, 179, 0.7); /* Transparencia al hacer hover */
+    backdrop-filter: blur(12px); /* Aumentar blur al hover */
+    -webkit-backdrop-filter: blur(12px);
+  }
+</style>

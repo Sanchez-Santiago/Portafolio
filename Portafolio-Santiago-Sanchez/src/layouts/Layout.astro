@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro Basics</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        position: relative;
+        min-height: 100vh;
+      }
+
+      /* Capas de fondo */
+      .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        transition:
+          opacity 2s ease-in-out,
+          filter 2s ease-in-out;
+        filter: blur(8px);
+        opacity: 0;
+        z-index: -2;
+      }
+
+      .background.active {
+        opacity: 1;
+        filter: blur(0);
+      }
+
+      /* Degradado overlay */
+      .gradient-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          45deg,
+          rgba(0, 0, 0, 0.7) 0%,
+          rgba(100, 0, 100, 0.3) 100%
+        );
+        z-index: -1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <slot />
+
+    <!-- Capas de fondo -->
+    <div class="background active"></div>
+    <div class="background"></div>
+
+    <!-- Overlay de degradado -->
+    <div class="gradient-overlay"></div>
+
+    <script>
+      const images = [
+        "/assets/Wallpaper/imagen1.jpg",
+        "/assets/Wallpaper/imagen2.jpg",
+        "/assets/Wallpaper/imagen3.jpg",
+        "/assets/Wallpaper/imagen4.jpg",
+        "/assets/Wallpaper/imagen5.jpg",
+        "/assets/Wallpaper/imagen6.jpg",
+        "/assets/Wallpaper/imagen7.jpg",
+        "/assets/Wallpaper/imagen8.jpg",
+        "/assets/Wallpaper/imagen9.jpg",
+        "/assets/Wallpaper/imagen10.jpg",
+        "/assets/Wallpaper/imagen11.jpg",
+        "/assets/Wallpaper/imagen12.jpg",
+        "/assets/Wallpaper/imagen13.jpg",
+        "/assets/Wallpaper/imagen14.jpg",
+        "/assets/Wallpaper/imagen15.jpg",
+        "/assets/Wallpaper/imagen16.jpg",
+      ];
+
+      const backgrounds = document.querySelectorAll(
+        ".background"
+      ) as NodeListOf<HTMLElement>;
+      let currentActive = 0;
+      let index = 1;
+
+      // Configuración inicial
+      backgrounds[0].style.backgroundImage = `url(${images[0]})`;
+
+      function cambiarFondo() {
+        const nextActive = 1 - currentActive;
+
+        // Prepara la siguiente imagen con type assertion
+        (backgrounds[nextActive] as HTMLElement).style.backgroundImage =
+          `url(${images[index]})`;
+
+        // Transición
+        backgrounds[nextActive].classList.add("active");
+        backgrounds[currentActive].classList.remove("active");
+
+        // Actualiza índices
+        currentActive = nextActive;
+        index = (index + 1) % images.length;
+      }
+
+      setInterval(cambiarFondo, 5000);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "es": {
+    "header": {
+      "name": "Santiago Sánchez"
+    },
+    "about": {
+      "title": "Sobre mí",
+      "text": "Tu texto de presentación"
+    }
+  },
+  "en": {
+    "header": {
+      "name": "Santiago Sánchez"
+    },
+    "about": {
+      "title": "About me",
+      "text": "Your presentation text"
+    }
+  }
+}

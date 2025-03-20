@@ -1,0 +1,85 @@
+---
+import santiagoImg from "../assets/Santiago-Sanchez.jpeg";
+const { t } = Astro.props;
+---
+
+<div id="container">
+  <div>
+    <img id="imagen" src={santiagoImg.src} alt="Logo" />
+    <h1 id="name">{t?.header?.name || "Nombre por defecto"}</h1>
+  </div>
+  <div>
+    <h2 id="sobre mi">{t?.about?.title || "Sobre Mí"}:</h2>
+    <p id="parrafo">{t?.about?.text || "Texto de presentación por defecto"}</p>
+  </div>
+</div>
+
+<style>
+  #container {
+    display: grid;
+    grid-template-columns: auto 1fr; /* Columna para la imagen y otra para el nombre */
+    grid-template-rows: auto auto; /* Fila para imagen y nombre; fila para 'Sobre Mí' */
+    align-items: start; /* Alinea todos los elementos al inicio (parte superior) */
+    gap: 1rem;
+    padding: 1rem;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    width: 100%;
+  }
+
+  /* Imagen en la esquina superior izquierda */
+  #imagen {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    object-fit: cover;
+    border: 3px solid white;
+  }
+
+  /* Nombre a la derecha de la imagen, en la parte superior */
+  #name {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    justify-self: end; /* Lo coloca a la derecha dentro de su celda */
+    margin-top: 0.5rem; /* Pequeña separación vertical, ajustable */
+  }
+
+  /* Sección 'Sobre Mí' abarca ambas columnas en la segunda fila */
+  #about {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  /* Opcional: resetear márgenes en la sección 'Sobre Mí' */
+  #about h2,
+  #about p {
+    margin: 0;
+  }
+
+  /**
+  #arriba-derecha {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#abajo-derecha {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+#arriba-izquierda {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#abajo-izquierda {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+  */
+</style>

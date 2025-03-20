@@ -1,0 +1,247 @@
+---
+// src/pages/[lang]/index.astro
+
+import SobreMi from "../../components/SobreMi.astro";
+import Layout from "../../layouts/Layout.astro";
+import LanguageSwitcher from "../../components/LanguageSwitcher";
+import translations from "../../locales/translations.json";
+
+// 1. Definir tipo para las traducciones
+type Translations = typeof translations;
+
+// 2. Definir rutas estáticas
+export async function getStaticPaths() {
+  return [{ params: { lang: "es" } }, { params: { lang: "en" } }];
+}
+
+// 3. Validación segura de idioma
+const { lang } = Astro.params;
+const isValidLang = (lang: string): lang is keyof Translations => {
+  return Object.keys(translations).includes(lang);
+};
+const currentLang = isValidLang(lang) ? lang : "en";
+
+// 4. Acceso seguro a las traducciones
+const t = translations[currentLang];
+---
+
+<Layout>
+  <div class="grid">
+    <div class="grid-item item-1"><SobreMi t={t} /></div>
+    <div class="grid-item item-14">14</div>
+    <div class="grid-item item-15">15</div>
+    <div class="grid-item item-16">16</div>
+    <div class="grid-item item-18">18</div>
+    <div class="grid-item item-22">22</div>
+    <div class="grid-item item-23">23</div>
+    <div class="grid-item item-30">30</div>
+    <div class="grid-item item-31">31</div>
+    <div class="grid-item item-32">32</div>
+  </div>
+
+  <!-- Botón de cambio de idioma fijo en la esquina inferior derecha -->
+  <div class="language-switcher">
+    <LanguageSwitcher currentLang={currentLang} />
+  </div>
+</Layout>
+
+<style>
+  /* Estilos globales */
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #000; /* Fondo negro */
+    color: #fff; /* Texto en blanco */
+    font-family: Arial, sans-serif;
+  }
+  .language-switcher {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    /* Puedes agregar más estilos, por ejemplo, un fondo y padding */
+    background-color: rgba(19, 158, 163, 0.671);
+    padding: 10px;
+    border-radius: 5px;
+    transition:
+      transform 0.2s ease-in-out,
+      background-color 0.3s;
+  }
+
+  /* Contenedor de la cuadrícula */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    grid-template-rows: repeat(11, minmax(150px, 1fr));
+    gap: 10px; /* Espacio uniforme entre filas y columnas */
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    grid-auto-flow: dense; /* Llena los espacios vacíos */
+  }
+
+  /* Estilos comunes para los elementos de la cuadrícula */
+  .grid-item {
+    min-height: 80px;
+    min-width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    padding: 1rem;
+    color: #fff;
+    transition:
+      transform 0.2s ease-in-out,
+      background-color 0.3s;
+  }
+  .grid-item:hover {
+    transform: scale(1.05);
+  }
+
+  /* Posicionamiento y colores específicos para cada elemento */
+  .item-1 {
+    grid-column: span 5;
+    grid-row: span 3;
+    background-color: #ff4444; /* Rojo */
+  }
+
+  .item-14 {
+    grid-column: span 4;
+    grid-row: span 3;
+    background-color: #ffbb33; /* Naranja */
+  }
+
+  .item-15 {
+    grid-column: span 2;
+    grid-row: span 2;
+    background-color: #00c851; /* Verde */
+  }
+
+  .item-16 {
+    grid-column: 10 / span 2;
+    grid-row: span 1;
+    grid-row-start: 3;
+    background-color: #33b5e5; /* Azul claro */
+  }
+
+  .item-18 {
+    grid-column: span 10;
+    grid-row: span 4;
+    background-color: #2bbbad; /* Verde azulado */
+  }
+
+  .item-22 {
+    grid-column: span 1;
+    grid-row: span 4;
+    grid-column-start: 11;
+    background-color: #aa66cc; /* Morado */
+  }
+
+  .item-23 {
+    grid-column: span 5;
+    grid-row: span 1;
+    grid-row-start: 8;
+    background-color: #ff4444; /* Rojo */
+  }
+
+  .item-30 {
+    grid-column: span 6;
+    grid-row: span 2;
+    background-color: #ffbb33; /* Naranja */
+  }
+
+  .item-31 {
+    grid-column: span 5;
+    grid-row: span 4;
+    background-color: #33b5e5; /* Azul claro */
+  }
+
+  .item-32 {
+    grid-column: span 6;
+    grid-row: span 3;
+    background-color: #33b5e5; /* Azul claro */
+  }
+
+  /* Estilos para LanguageSwitcher fijo en la parte inferior derecha */
+  .language-switcher {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+
+  /* Media Queries para hacer el diseño responsivo */
+  @media (max-width: 1024px) {
+    .grid {
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+    }
+    .item-1 {
+      grid-column: span 4;
+    }
+    .item-14 {
+      grid-column: span 4;
+    }
+    .item-16 {
+      grid-column: 7 / span 2;
+    }
+    .item-18 {
+      grid-column: span 8;
+    }
+    .item-22 {
+      grid-column: span 1;
+      grid-column-start: 8;
+    }
+    .item-23 {
+      grid-column: span 4;
+    }
+    .item-30 {
+      grid-column: span 6;
+    }
+    .item-31 {
+      grid-column: span 4;
+    }
+    .item-32 {
+      grid-column: span 6;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+    }
+    .item-1 {
+      grid-column: span 4;
+    }
+    .item-14 {
+      grid-column: span 4;
+    }
+    .item-15 {
+      grid-column: span 2;
+    }
+    .item-16 {
+      grid-column: span 2;
+      grid-column-start: 3;
+    }
+    .item-18 {
+      grid-column: span 4;
+    }
+    .item-22 {
+      grid-column: span 1;
+      grid-column-start: 4;
+    }
+    .item-23 {
+      grid-column: span 4;
+    }
+    .item-30 {
+      grid-column: span 4;
+    }
+    .item-31 {
+      grid-column: span 4;
+    }
+    .item-32 {
+      grid-column: span 4;
+    }
+  }
+</style>
