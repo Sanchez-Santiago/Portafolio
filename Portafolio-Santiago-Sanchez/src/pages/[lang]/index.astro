@@ -1,10 +1,11 @@
 ---
 // src/pages/[lang]/index.astro
 
-import SobreMi from "../../components/SobreMi.astro";
+import SobreMi from "../../components/componetsGrids/SobreMi.astro";
 import Layout from "../../layouts/Layout.astro";
 import LanguageSwitcher from "../../components/LanguageSwitcher";
 import translations from "../../locales/translations.json";
+import Skil from "../../components/componetsGrids/Skil.astro";
 
 // 1. Definir tipo para las traducciones
 type Translations = typeof translations;
@@ -28,7 +29,9 @@ const t = translations[currentLang];
 <Layout>
   <div class="grid">
     <div class="grid-item item-1"><SobreMi t={t} /></div>
-    <div class="grid-item item-14">14</div>
+    <div class="grid-item item-14">
+      <Skil />
+    </div>
     <div class="grid-item item-15">15</div>
     <div class="grid-item item-16">16</div>
     <div class="grid-item item-18">18</div>

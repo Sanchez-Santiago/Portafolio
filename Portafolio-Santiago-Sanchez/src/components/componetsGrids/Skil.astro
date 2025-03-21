@@ -1,0 +1,300 @@
+---
+/** Inspiración de: Anne Klapwijk */
+---
+
+<div class="orbit">
+  <ul class="orbit-wrap">
+    <li class="orbit-center">
+      <i class="orbit-center__icon fa fa-code"></i>
+    </li>
+
+    <li>
+      <ul class="ring-0">
+        <li><i class="orbit-icon fa fa-git"></i></li>
+        <li><i class="orbit-icon fa fa-free-code-camp"></i></li>
+        <li><i class="orbit-icon fa fa-meetup"></i></li>
+        <li><i class="orbit-icon fa fa-codepen"></i></li>
+      </ul>
+    </li>
+
+    <li>
+      <ul class="ring-1">
+        <li><i class="orbit-icon fa fa-podcast"></i></li>
+        <li><i class="orbit-icon fa fa-css3"></i></li>
+        <li><i class="orbit-icon fa fa-html5"></i></li>
+      </ul>
+    </li>
+
+    <li>
+      <ul class="ring-2">
+        <li><i class="orbit-icon fa fa-windows"></i></li>
+        <li><i class="orbit-icon fa fa-safari"></i></li>
+        <li><i class="orbit-icon fa fa-edge"></i></li>
+        <li><i class="orbit-icon fa fa-linux"></i></li>
+        <li><i class="orbit-icon fa fa-apple"></i></li>
+        <li><i class="orbit-icon fa fa-chrome"></i></li>
+        <li><i class="orbit-icon fa fa-android"></i></li>
+        <li><i class="orbit-icon fa fa-firefox"></i></li>
+      </ul>
+    </li>
+
+    <li>
+      <ul class="ring-3">
+        <li><i class="orbit-icon fa fa-coffee"></i></li>
+        <li><i class="orbit-icon fa fa-terminal"></i></li>
+        <li><i class="orbit-icon fa fa-heart-o"></i></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<style>
+  :root {
+    --orbit-item-size: 1.6em;
+    --orbit-center-size: 1.8em;
+    --ring-size: 25em;
+    --ring-color: rgba(33, 150, 243, 0.8);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .orbit {
+    background: var(--background-color);
+    width: 100%;
+    height: 100%; /* Ocupa todo el espacio del padre */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .orbit-wrap {
+    position: relative;
+    width: 100%; /* Ajusta al 100% del contenedor padre */
+    aspect-ratio: 1 / 1; /* Mantiene la proporción cuadrada */
+    list-style: none;
+    font-size: 1.3em;
+  }
+
+  .orbit-icon {
+    width: var(--orbit-item-size);
+    height: var(--orbit-item-size);
+    line-height: var(--orbit-item-size);
+    font-size: 1.2em;
+    border-radius: 50%;
+    background: #ccc;
+    color: #fff;
+    text-align: center;
+    display: block;
+    transition: all 0.3s ease;
+  }
+
+  .orbit-wrap > li {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  ul[class^="ring"] {
+    border: solid 1px var(--ring-color);
+    position: relative;
+    padding: 0;
+    border-radius: 50%;
+    list-style: none;
+    box-sizing: content-box;
+    transition: all 0.3s ease;
+  }
+
+  ul[class^="ring"] li {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--orbit-item-size);
+    height: var(--orbit-item-size);
+    margin: calc(var(--orbit-item-size) / -2);
+  }
+
+  .ring-0 {
+    width: calc(var(--ring-size) - 0em);
+    height: calc(var(--ring-size) - 0em);
+    animation: clockwiseRotate 35s linear infinite;
+  }
+
+  .ring-1 {
+    width: calc(var(--ring-size) - 5em);
+    height: calc(var(--ring-size) - 5em);
+    animation: clockwiseRotate 30s linear infinite;
+  }
+
+  .ring-2 {
+    width: calc(var(--ring-size) - 10em);
+    height: calc(var(--ring-size) - 10em);
+    animation: clockwiseRotate 25s linear infinite;
+  }
+
+  .ring-3 {
+    width: calc(var(--ring-size) - 15em);
+    height: calc(var(--ring-size) - 15em);
+    animation: clockwiseRotate 20s linear infinite;
+  }
+
+  .ring-0 > *:nth-of-type(1) {
+    transform: rotate(95deg) translate(12.5em) rotate(-95deg);
+  }
+  .ring-0 > *:nth-of-type(2) {
+    transform: rotate(190deg) translate(12.5em) rotate(-190deg);
+  }
+  .ring-0 > *:nth-of-type(3) {
+    transform: rotate(285deg) translate(12.5em) rotate(-285deg);
+  }
+  .ring-0 > *:nth-of-type(4) {
+    transform: rotate(380deg) translate(12.5em) rotate(-380deg);
+  }
+
+  .ring-1 > *:nth-of-type(1) {
+    transform: rotate(126.666deg) translate(10em) rotate(-126.666deg);
+  }
+  .ring-1 > *:nth-of-type(2) {
+    transform: rotate(253.333deg) translate(10em) rotate(-253.333deg);
+  }
+  .ring-1 > *:nth-of-type(3) {
+    transform: rotate(380deg) translate(10em) rotate(-380deg);
+  }
+
+  .ring-2 > *:nth-of-type(1) {
+    transform: rotate(47.5deg) translate(7.5em) rotate(-47.5deg);
+  }
+  .ring-2 > *:nth-of-type(2) {
+    transform: rotate(95deg) translate(7.5em) rotate(-95deg);
+  }
+  .ring-2 > *:nth-of-type(3) {
+    transform: rotate(142.5deg) translate(7.5em) rotate(-142.5deg);
+  }
+  .ring-2 > *:nth-of-type(4) {
+    transform: rotate(190deg) translate(7.5em) rotate(-190deg);
+  }
+  .ring-2 > *:nth-of-type(5) {
+    transform: rotate(237.5deg) translate(7.5em) rotate(-237.5deg);
+  }
+  .ring-2 > *:nth-of-type(6) {
+    transform: rotate(285deg) translate(7.5em) rotate(-285deg);
+  }
+  .ring-2 > *:nth-of-type(7) {
+    transform: rotate(332.5deg) translate(7.5em) rotate(-332.5deg);
+  }
+  .ring-2 > *:nth-of-type(8) {
+    transform: rotate(380deg) translate(7.5em) rotate(-380deg);
+  }
+
+  .ring-3 > *:nth-of-type(1) {
+    transform: rotate(126.666deg) translate(5em) rotate(-126.666deg);
+  }
+  .ring-3 > *:nth-of-type(2) {
+    transform: rotate(253.333deg) translate(5em) rotate(-253.333deg);
+  }
+  .ring-3 > *:nth-of-type(3) {
+    transform: rotate(380deg) translate(5em) rotate(-380deg);
+  }
+
+  .orbit-center {
+    z-index: 5;
+    font-size: 2em;
+    width: var(--orbit-center-size);
+    height: var(--orbit-center-size);
+    line-height: var(--orbit-center-size);
+    text-align: center;
+    background: hotpink;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+
+  .orbit-center__icon {
+    transition: all 0.3s ease;
+  }
+
+  @keyframes clockwiseRotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .fa-heart-o {
+    background: #b71c1c;
+    color: white;
+  }
+  .fa-coffee {
+    background: #4caf50;
+    color: #cddc39;
+  }
+  .fa-safari {
+    background: white;
+    color: darkslateblue;
+  }
+  .fa-firefox {
+    background: #1565c0;
+    color: #ff8f00;
+  }
+  .fa-chrome {
+    background: #fbc02d;
+    color: #ef6c00;
+  }
+  .fa-edge {
+    background: #03a9f4;
+    color: white;
+  }
+  .fa-android {
+    background: snow;
+    color: limegreen;
+  }
+  .fa-apple {
+    background: #444;
+    color: white;
+  }
+  .fa-linux {
+    background: white;
+    color: #222;
+  }
+  .fa-windows {
+    background: white;
+    color: #03a9f4;
+  }
+  .fa-terminal {
+    background: #222;
+    color: #fff;
+  }
+  .fa-html5 {
+    background: white;
+    color: #e65100;
+  }
+  .fa-css3 {
+    background: white;
+    color: #2196f3;
+  }
+  .fa-git {
+    background: #222;
+    color: white;
+  }
+  .fa-free-code-camp {
+    background: green;
+    color: white;
+  }
+  .fa-meetup {
+    background: red;
+    color: white;
+  }
+  .fa-podcast {
+    background: red;
+    color: white;
+  }
+  .fa-codepen {
+    background: #333;
+    color: white;
+  }
+</style>
