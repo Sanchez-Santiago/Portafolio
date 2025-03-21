@@ -8,6 +8,7 @@ import translations from "../../locales/translations.json";
 import Skil from "../../components/componetsGrids/Skil.astro";
 import Contact from "../../components/componetsGrids/Contact.astro";
 import DogGrid from "../../components/componetsGrids/DogGrid.astro";
+import ClokGrid from "../../components/componetsGrids/ClokGrid.astro";
 
 // 1. Definir tipo para las traducciones
 type Translations = typeof translations;
@@ -34,7 +35,9 @@ const t = translations[currentLang];
     <div class="grid-item item-14">
       <Skil />
     </div>
-    <div class="grid-item item-15">15</div>
+    <div class="grid-item item-15">
+      <ClokGrid />
+    </div>
     <div class="grid-item item-16">
       <DogGrid />
     </div>
