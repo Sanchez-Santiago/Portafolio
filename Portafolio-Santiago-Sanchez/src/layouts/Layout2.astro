@@ -1,3 +1,7 @@
+---
+import SolarSystem from "../components/SolarSystem.astro";
+---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -6,344 +10,64 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>Astro Basics</title>
-    <style lang="scss">
-      // Variables
-      $gravitation-constant: 6.673;
-      $stars: 300;
-
-      // Default Styles
-      html,
-      body {
-        background: #222;
-        overflow-y: auto;
-        min-height: 100%;
-      }
-
-      // Contenedor del sistema solar (fondo)
-      .solar-system {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-      }
-
-      .container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0.6);
-        width: 768px;
-      }
-
-      // Planets & Sun
-      .sun {
-        background: linear-gradient(90deg, #bb513e, darken(#bb513e, 9%));
-        box-shadow: inset 15px 10px 0px darken(#bb513e, 9%);
-        width: 60px;
-        height: 60px;
-        border-radius: 100%;
-        margin: 105px auto;
-        position: absolute;
-        left: 0;
-        right: 0;
-      }
-
-      .mercury {
-        background: linear-gradient(90deg, #453217, darken(#453217, 7%));
-        box-shadow: inset 0px 7px 0px darken(#453217, 7%);
-        width: 20px;
-        height: 20px;
-        border-radius: 100%;
-        margin-top: 10px; // 1 * 10px
-      }
-
-      .venus {
-        background: linear-gradient(90deg, #ac6339, darken(#ac6339, 7%));
-        box-shadow: inset 0px 7px 0px darken(#ac6339, 12%);
-        width: 20px;
-        height: 20px;
-        border-radius: 100%;
-        margin-top: 30px; // 3 * 10px
-      }
-
-      .earth {
-        background: linear-gradient(90deg, #3e8ebb, darken(#3e8ebb, 7%));
-        box-shadow: inset 0px 7px 0px darken(#3e8ebb, 12%);
-        width: 20px;
-        height: 20px;
-        border-radius: 100%;
-        margin-top: 70px; // 7 * 10px
-      }
-
-      .mars {
-        background: linear-gradient(90deg, #6f3125, darken(#6f3125, 7%));
-        box-shadow: inset 0px 7px 0px darken(#6f3125, 9%);
-        width: 20px;
-        height: 20px;
-        border-radius: 100%;
-        margin-top: 110px; // 11 * 10px
-      }
-
-      .jupiter {
-        background: linear-gradient(90deg, #3d2c14, darken(#3d2c14, 7%));
-        box-shadow: inset 0px 7px 0px darken(#3d2c14, 5%);
-        width: 20px;
-        height: 20px;
-        border-radius: 100%;
-        margin-top: 160px; // 16 * 10px
-      }
-
-      .saturn {
-        background: linear-gradient(90deg, #e97340, darken(#e97340, 7%));
-        box-shadow: inset 0px 7px 0px darken(#e97340, 14%);
-        width: 20px;
-        height: 20px;
-        border-radius: 100%;
-        margin-top: 200px; // 20 * 10px
-      }
-
-      .uranus {
-        background: linear-gradient(90deg, #337799, darken(#337799, 7%));
-        box-shadow: inset 0px 7px 0px darken(#337799, 12%);
-        width: 20px;
-        height: 20px;
-        border-radius: 100%;
-        margin-top: 240px; // 24 * 10px
-      }
-
-      .neptune {
-        background: linear-gradient(90deg, #6acdc0, darken(#6acdc0, 7%));
-        box-shadow: inset 0px 7px 0px darken(#6acdc0, 17%);
-        width: 20px;
-        height: 20px;
-        border-radius: 100%;
-        margin-top: 280px; // 28 * 10px
-      }
-
-      .pluto {
-        background: linear-gradient(90deg, #c6c053, darken(#c6c053, 7%));
-        box-shadow: inset 0px 7px 0px darken(#c6c053, 12%);
-        width: 20px;
-        height: 20px;
-        border-radius: 100%;
-        margin-top: 320px; // 32 * 10px
-      }
-
-      // Planets Orbit
-      [class*="-orbit"] {
-        position: absolute;
-        left: 0;
-        right: 0;
-        border: 1px solid #333;
-        box-shadow: 0px 1px 1px #4096ee;
-        border-radius: 100%;
-      }
-
-      .mercurys-orbit {
-        width: 100px;
-        height: 100px;
-        margin: 85px auto;
-        animation: gravity #{$gravitation-constant * 0.09}s linear infinite;
-      }
-
-      .venus-orbit {
-        width: #{2 * 100 - 30}px; // 170px
-        height: #{2 * 100 - 30}px;
-        margin: 50px auto;
-        animation: gravity #{$gravitation-constant * 0.5}s linear infinite;
-      }
-
-      .earths-orbit {
-        width: #{3 * 100 - 30}px; // 270px
-        height: #{3 * 100 - 30}px;
-        margin: 0px auto;
-        animation: gravity #{$gravitation-constant * 1}s linear infinite;
-      }
-
-      .mars-orbit {
-        width: #{4 * 100 - 30}px; // 370px
-        height: #{4 * 100 - 30}px;
-        margin: -50px auto;
-        animation: gravity #{$gravitation-constant * 1.5}s linear infinite;
-      }
-
-      .jupiters-orbit {
-        width: #{5 * 100 - 30}px; // 470px
-        height: #{5 * 100 - 30}px;
-        margin: -100px auto;
-        animation: gravity #{$gravitation-constant * 2}s linear infinite;
-      }
-
-      .saturns-orbit {
-        width: #{6 * 100 - 30}px; // 570px
-        height: #{6 * 100 - 30}px;
-        margin: -150px auto;
-        animation: gravity #{$gravitation-constant * 3}s linear infinite;
-      }
-
-      .uranus-orbit {
-        width: #{7 * 100 - 30}px; // 670px
-        height: #{7 * 100 - 30}px;
-        margin: -200px auto;
-        animation: gravity #{$gravitation-constant * 4}s linear infinite;
-      }
-
-      .neptunes-orbit {
-        width: #{8 * 100 - 30}px; // 770px
-        height: #{8 * 100 - 30}px;
-        margin: -250px auto;
-        animation: gravity #{$gravitation-constant * 5}s linear infinite;
-      }
-
-      .plutos-orbit {
-        width: #{9 * 100 - 30}px; // 870px
-        height: #{9 * 100 - 30}px;
-        margin: -300px auto;
-        margin-left: -50px;
-        animation: gravity #{$gravitation-constant * 6}s linear infinite;
-      }
-
-      // Stars
-      .star-container {
-        animation: gravity 200s linear infinite;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        margin: -200px 0;
-      }
-
-      // Styles For Stars
-      .star {
-        background: #fff;
-        border-radius: 100px;
-        width: 1px;
-        height: 1px;
-        position: absolute;
-        filter: brightness(5);
-      }
-
-      @for $i from 1 through $stars {
-        .star:nth-of-type(#{$i}) {
-          margin-left: #{random(4000)}px;
-          margin-top: #{random(900)}px;
-          animation: flash #{random(10)}s linear infinite;
-        }
-      }
-
-      // Animate Stars
-      @keyframes flash {
-        0% {
-          opacity: 0;
-        }
-        50% {
-          opacity: 1;
-        }
-        100% {
-          opacity: 0;
-        }
-      }
-
-      // Gravitational Pull
-      @keyframes gravity {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-      body {
-        position: relative;
-      }
-
-      .solar-system {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: 0; // Nivel inferior
-        overflow: hidden;
-      }
-
-      .container {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0.6);
-        pointer-events: none; // Permite interactuar con el contenido superior
-      }
-
-      // Capa semitransparente para el contenido
-      main::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        z-index: 1;
-        backdrop-filter: blur(2px);
-      }
-
-      // Contenido principal
-      main {
-        position: relative;
-        z-index: 2; // Nivel superior
-        min-height: 100vh;
-        color: white;
-        padding: 2rem;
-      }
-    </style>
+    <style lang="scss"></style>
   </head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      color: #fff;
+      background-color: rgb(7, 61, 7);
+      font-family: Arial, sans-serif;
+      position: relative;
+      min-height: 100vh;
+      background: linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(100, 0, 100, 0.3) 100%
+      );
+    }
+
+    /* Capas de fondo */
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      transition:
+        opacity 2s ease-in-out,
+        filter 2s ease-in-out;
+      filter: blur(8px);
+      opacity: 0;
+      z-index: -2;
+    }
+
+    .background.active {
+      opacity: 1;
+      filter: blur(0);
+    }
+
+    /* Degradado overlay */
+    .gradient-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(100, 0, 100, 0.3) 100%
+      );
+      z-index: -1;
+    }
+  </style>
 
   <body>
-    <!-- Fondo del sistema solar -->
-    <div class="solar-system">
-      <div class="star-container">
-        <!-- Las estrellas se generarán mediante el loop de SCSS -->
-      </div>
-
-      <div class="container">
-        <div class="sun"></div>
-
-        <div class="mercurys-orbit">
-          <div class="mercury"></div>
-        </div>
-
-        <div class="venus-orbit">
-          <div class="venus"></div>
-        </div>
-
-        <div class="earths-orbit">
-          <div class="earth"></div>
-        </div>
-
-        <div class="mars-orbit">
-          <div class="mars"></div>
-        </div>
-
-        <div class="jupiters-orbit">
-          <div class="jupiter"></div>
-        </div>
-
-        <div class="saturns-orbit">
-          <div class="saturn"></div>
-        </div>
-
-        <div class="uranus-orbit">
-          <div class="uranus"></div>
-        </div>
-
-        <div class="neptunes-orbit">
-          <div class="neptune"></div>
-        </div>
-
-        <div class="plutos-orbit">
-          <div class="pluto"></div>
-        </div>
-      </div>
-    </div>
+    <SolarSystem />
 
     <!-- Contenido principal -->
     <slot />

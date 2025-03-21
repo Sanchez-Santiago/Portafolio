@@ -1,0 +1,299 @@
+---
+// SolarSystem.astro
+---
+
+<div class="solar-system-background">
+  <div class="star-container" id="star-container"></div>
+  <div class="container">
+    <div class="sun"></div>
+
+    <div class="mercurys-orbit">
+      <div class="mercury"></div>
+    </div>
+    <div class="venus-orbit">
+      <div class="venus"></div>
+    </div>
+    <div class="earths-orbit">
+      <div class="earth"></div>
+    </div>
+    <div class="mars-orbit">
+      <div class="mars"></div>
+    </div>
+    <div class="jupiters-orbit">
+      <div class="jupiter"></div>
+    </div>
+    <div class="saturns-orbit">
+      <div class="saturn"></div>
+    </div>
+    <div class="uranus-orbit">
+      <div class="uranus"></div>
+    </div>
+    <div class="neptunes-orbit">
+      <div class="neptune"></div>
+    </div>
+    <div class="plutos-orbit">
+      <div class="pluto"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Variables */
+  :root {
+    --gravitation-constant: 6.673;
+  }
+
+  /* Estilos para asegurar que funcione como fondo */
+  .solar-system-background {
+    background-color: #092902;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Esto asegura que esté detrás de todo */
+    pointer-events: none; /* Esto hace que no interfiera con los clics */
+    overflow: hidden;
+  }
+
+  /* Resto de tus estilos actuales */
+  .container {
+    margin: 250px auto;
+    width: 768px;
+    transform: scale(0.6);
+  }
+
+  /* Planetas y Sol */
+  .sun {
+    background: linear-gradient(90deg, #bb513e, #9b3b2a);
+    box-shadow: inset 15px 10px 0px #9b3b2a;
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    margin: 105px auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+
+  .mercury {
+    background: linear-gradient(90deg, #453217, #3d2c15);
+    box-shadow: inset 0px 7px 0px #3d2c15;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    margin-top: 10px;
+  }
+
+  .venus {
+    background: linear-gradient(90deg, #ac6339, #9c5934);
+    box-shadow: inset 0px 7px 0px #884e2e;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    margin-top: 30px;
+  }
+
+  .earth {
+    background: linear-gradient(90deg, #3e8ebb, #3980a9);
+    box-shadow: inset 0px 7px 0px #326f91;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    margin-top: 70px;
+  }
+
+  .mars {
+    background: linear-gradient(90deg, #6f3125, #652d22);
+    box-shadow: inset 0px 7px 0px #5a2820;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    margin-top: 110px;
+  }
+
+  .jupiter {
+    background: linear-gradient(90deg, #3d2c14, #372812);
+    box-shadow: inset 0px 7px 0px #352713;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    margin-top: 160px;
+  }
+
+  .saturn {
+    background: linear-gradient(90deg, #e97340, #d7683a);
+    box-shadow: inset 0px 7px 0px #b8582f;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    margin-top: 200px;
+  }
+
+  .uranus {
+    background: linear-gradient(90deg, #337799, #2e6c8a);
+    box-shadow: inset 0px 7px 0px #275d77;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    margin-top: 240px;
+  }
+
+  .neptune {
+    background: linear-gradient(90deg, #6acdc0, #62bcb0);
+    box-shadow: inset 0px 7px 0px #519e93;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    margin-top: 280px;
+  }
+
+  .pluto {
+    background: linear-gradient(90deg, #c6c053, #b7b14d);
+    box-shadow: inset 0px 7px 0px #9d9842;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    margin-top: 320px;
+  }
+
+  /* Órbitas de planetas */
+  [class*="-orbit"] {
+    position: absolute;
+    left: 0;
+    right: 0;
+    border: 1px solid #333;
+    box-shadow: 0px 1px 1px #4096ee;
+    border-radius: 100%;
+  }
+
+  .mercurys-orbit {
+    width: 100px;
+    height: 100px;
+    margin: 85px auto;
+    animation: gravity calc(var(--gravitation-constant) * 0.09s) linear infinite;
+  }
+
+  .venus-orbit {
+    width: 170px;
+    height: 170px;
+    margin: 50px auto;
+    animation: gravity calc(var(--gravitation-constant) * 0.5s) linear infinite;
+  }
+
+  .earths-orbit {
+    width: 270px;
+    height: 270px;
+    margin: 0px auto;
+    animation: gravity calc(var(--gravitation-constant) * 1s) linear infinite;
+  }
+
+  .mars-orbit {
+    width: 370px;
+    height: 370px;
+    margin: -50px auto;
+    animation: gravity calc(var(--gravitation-constant) * 1.5s) linear infinite;
+  }
+
+  .jupiters-orbit {
+    width: 470px;
+    height: 470px;
+    margin: -100px auto;
+    animation: gravity calc(var(--gravitation-constant) * 2s) linear infinite;
+  }
+
+  .saturns-orbit {
+    width: 570px;
+    height: 570px;
+    margin: -150px auto;
+    animation: gravity calc(var(--gravitation-constant) * 3s) linear infinite;
+  }
+
+  .uranus-orbit {
+    width: 670px;
+    height: 670px;
+    margin: -200px auto;
+    animation: gravity calc(var(--gravitation-constant) * 4s) linear infinite;
+  }
+
+  .neptunes-orbit {
+    width: 770px;
+    height: 770px;
+    margin: -250px auto;
+    animation: gravity calc(var(--gravitation-constant) * 5s) linear infinite;
+  }
+
+  .plutos-orbit {
+    width: 870px;
+    height: 870px;
+    margin: -300px auto;
+    margin-left: -50px;
+    animation: gravity calc(var(--gravitation-constant) * 6s) linear infinite;
+  }
+
+  /* Estrellas */
+  .star-container {
+    animation: gravity 200s linear infinite;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    margin: -200px 0;
+  }
+
+  /* Estilos para estrellas */
+  .star {
+    background: #fff;
+    border-radius: 100px;
+    width: 1px;
+    height: 1px;
+    position: absolute;
+    filter: brightness(5);
+  }
+
+  /* Animación de parpadeo para estrellas */
+  @keyframes flash {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Rotación gravitacional */
+  @keyframes gravity {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+<script>
+  // Generar estrellas dinámicamente
+  document.addEventListener("DOMContentLoaded", () => {
+    const starContainer = document.getElementById("star-container");
+
+    // Verificación para evitar el error de TypeScript
+    if (starContainer) {
+      const starsCount = 300;
+
+      for (let i = 0; i < starsCount; i++) {
+        const star = document.createElement("div");
+        star.className = "star";
+
+        // Posición aleatoria
+        star.style.marginLeft = `${Math.random() * 4000}px`;
+        star.style.marginTop = `${Math.random() * 900}px`;
+
+        // Animación aleatoria
+        const animationDuration = Math.random() * 10;
+        star.style.animation = `flash ${animationDuration}s linear infinite`;
+
+        starContainer.appendChild(star);
+      }
+    }
+  });
+</script>

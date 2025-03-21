@@ -6,6 +6,8 @@ import Layout from "../../layouts/Layout.astro";
 import LanguageSwitcher from "../../components/LanguageSwitcher";
 import translations from "../../locales/translations.json";
 import Skil from "../../components/componetsGrids/Skil.astro";
+import Contact from "../../components/componetsGrids/Contact.astro";
+import DogGrid from "../../components/componetsGrids/DogGrid.astro";
 
 // 1. Definir tipo para las traducciones
 type Translations = typeof translations;
@@ -33,10 +35,14 @@ const t = translations[currentLang];
       <Skil />
     </div>
     <div class="grid-item item-15">15</div>
-    <div class="grid-item item-16">16</div>
+    <div class="grid-item item-16">
+      <DogGrid />
+    </div>
     <div class="grid-item item-18">18</div>
     <div class="grid-item item-22">22</div>
-    <div class="grid-item item-23">23</div>
+    <div class="grid-item item-23">
+      <Contact />
+    </div>
     <div class="grid-item item-30">30</div>
     <div class="grid-item item-31">31</div>
     <div class="grid-item item-32">32</div>
@@ -76,7 +82,7 @@ const t = translations[currentLang];
     display: grid;
     grid-template-columns: repeat(11, 1fr);
     grid-template-rows: repeat(11, minmax(150px, 1fr));
-    gap: 10px; /* Espacio uniforme entre filas y columnas */
+    gap: 15px; /* Espacio uniforme entre filas y columnas */
     padding: 1rem;
     max-width: 1200px;
     margin: 0 auto;
@@ -93,64 +99,66 @@ const t = translations[currentLang];
     border-radius: 15px;
     padding: 1rem;
     color: #fff;
+    backdrop-filter: blur(5px); /* Blur en el contenedor */
     transition:
       transform 0.2s ease-in-out,
       background-color 0.3s;
   }
   .grid-item:hover {
     transform: scale(1.01);
+    border: 1px solid rgba(193, 247, 163, 0.397);
   }
 
   /* Posicionamiento y colores específicos para cada elemento */
   .item-1 {
     grid-column: span 5;
     grid-row: span 3;
-    background-color: #ff4444; /* Rojo */
+    background-color: #287e1d91; /* Rojo */
   }
 
   .item-14 {
     grid-column: span 4;
     grid-row: span 3;
-    background-color: #ffbb33; /* Naranja */
+    background-color: #003f009f; /* Naranja */
   }
 
   .item-15 {
     grid-column: span 2;
     grid-row: span 2;
-    background-color: #00c851; /* Verde */
+    background-color: #028b3975; /* Verde */
   }
 
   .item-16 {
     grid-column: 10 / span 2;
     grid-row: span 1;
     grid-row-start: 3;
-    background-color: #33b5e5; /* Azul claro */
+    background-color: #33e57d85; /* Azul claro */
   }
 
   .item-18 {
     grid-column: span 10;
     grid-row: span 4;
-    background-color: #2bbbad; /* Verde azulado */
+    background-color: #287e1d91; /* Verde azulado */
   }
 
   .item-22 {
     grid-column: span 1;
     grid-row: span 4;
     grid-column-start: 11;
-    background-color: #aa66cc; /* Morado */
+    background-color: #094f07a1; /* Morado */
   }
 
   .item-23 {
     grid-column: span 5;
     grid-row: span 1;
     grid-row-start: 8;
-    background-color: #ff4444; /* Rojo */
+    background-color: #ff44449f; /* Rojo */
   }
 
   .item-30 {
     grid-column: span 6;
     grid-row: span 2;
-    background-color: #ffbb33; /* Naranja */
+    background-color: #58920dab; /* Naranja */
   }
 
   .item-31 {
