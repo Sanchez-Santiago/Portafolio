@@ -36,7 +36,7 @@ function numberNew(number) {
            *       00 
            *       00 
            * */
-          numerofinal = `       ${caractereRandom()}${caractereRandom()}\n       ${caractereRandom()}${caractereRandom()}\n       ${caractereRandom()}${caractereRandom()}\n       ${caractereRandom()}${caractereRandom()}\n       ${caractereRandom()}${caractereRandom()}`;
+          numerofinal = `      ${caractereRandom()}${caractereRandom()}\n      ${caractereRandom()}${caractereRandom()}\n      ${caractereRandom()}${caractereRandom()}\n      ${caractereRandom()}${caractereRandom()}\n      ${caractereRandom()}${caractereRandom()}`;
           break;
       case 2:
           /**
