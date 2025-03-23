@@ -1,3 +1,83 @@
+---
+const { t } = Astro.props as any;
+---
+
 <div>
-  <h1>Contacto</h1>
+  <h1 class="title">{t?.Contact}</h1>
+  <div class="conteiner-nav">
+    <a class="nav" href="">
+      <img
+        class="image"
+        src="../../../public/assets/icons/social/Github_dark.svg"
+        alt="Discord"
+      />
+    </a>
+    <a class="nav" href="">
+      <img
+        class="image"
+        src="../../../public/assets/icons/social/linkedin.svg"
+        alt="Discord"
+      />
+    </a>
+    <a class="nav" href="">
+      <img
+        class="image"
+        src="../../../public/assets/icons/social/slack.svg"
+        alt="Discord"
+      />
+    </a>
+    <a class="nav" href="">
+      <img
+        class="image"
+        src="../../../public/assets/icons/social/gmail.svg"
+        alt="Discord"
+      />
+    </a>
+    <a class="nav" href="">
+      <img
+        class="image"
+        src="../../../public/assets/icons/social/facebook.svg"
+        alt="Discord"
+      />
+    </a>
+    <a class="nav" href="">
+      <img
+        class="image"
+        src="../../../public/assets/icons/social/Instagram_dark.svg"
+        alt="Discord"
+      />
+    </a>
+    <a class="nav" href="">
+      <img
+        class="image"
+        src="../../../public/assets/icons/social/discord.svg"
+        alt="Discord"
+      />
+    </a>
+  </div>
 </div>
+<style>
+  .title {
+    font-size: 2.5rem; /* Tamaño grande y legible */
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff; /* Color blanco */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+
+    /* Efecto de sombra */
+    text-shadow:
+      2px 2px 5px rgba(8, 53, 25, 0.8),
+      0 0 10px rgba(0, 255, 255, 0.5);
+
+    /* Fondo con gradiente */
+    background: linear-gradient(90deg, #00ffaa, #00aaff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .image {
+    width: 50px;
+  }
+</style>

@@ -49,7 +49,7 @@ const t = translations[currentLang];
     </div>
     <div class="grid-item item-22">22</div>
     <div class="grid-item item-23">
-      <Contact />
+      <Contact t={t} />
     </div>
     <div class="grid-item item-30">30</div>
     <div class="grid-item item-31">31</div>
@@ -86,18 +86,23 @@ const t = translations[currentLang];
   }
 
   /* Contenedor de la cuadrícula */
+  /* Contenedor de la cuadrícula - versión mejorada */
   .grid {
     display: grid;
     grid-template-columns: repeat(11, 1fr);
-    grid-template-rows: repeat(11, minmax(150px, 1fr));
-    gap: 15px; /* Espacio uniforme entre filas y columnas */
+    grid-template-rows: repeat(
+      12,
+      minmax(100px, auto)
+    ); /* Define un número fijo de filas */
+    gap: 15px;
     padding: 1rem;
     max-width: 1200px;
     margin: 0 auto;
-    grid-auto-flow: dense; /* Llena los espacios vacíos */
+    /* Elimina max-height para permitir que el contenedor crezca según sea necesario */
+    /* Elimina grid-auto-flow: dense para un control más preciso */
   }
 
-  /* Estilos comunes para los elementos de la cuadrícula */
+  /* Estilos comunes para los elementos de la cuadrícula - sin cambios */
   .grid-item {
     min-height: 80px;
     min-width: 100px;
@@ -105,167 +110,192 @@ const t = translations[currentLang];
     justify-content: center;
     align-items: center;
     border-radius: 15px;
+    border: solid 1px rgb(195, 197, 192);
     padding: 1rem;
     color: #fff;
-    backdrop-filter: blur(5px); /* Blur en el contenedor */
+    backdrop-filter: blur(5px);
     transition:
       transform 0.2s ease-in-out,
       background-color 0.3s;
-  }
-  .grid-item:hover {
-    transform: scale(1.01);
-    border: 1px solid rgba(193, 247, 163, 0.397);
+    overflow: auto; /* Permite scroll si el contenido es demasiado grande */
   }
 
-  /* Posicionamiento y colores específicos para cada elemento */
+  /* Define posiciones específicas y explícitas para cada elemento */
   .item-1 {
-    grid-column: span 5;
-    grid-row: span 3;
-    background-color: #287e1d91; /* Rojo */
+    grid-column: 1 / span 5;
+    grid-row: 1 / span 3;
+    background-color: #287e1d33;
   }
 
   .item-14 {
-    grid-column: span 4;
-    grid-row: span 3;
-    background-color: #003f009f; /* Naranja */
+    grid-column: 6 / span 4;
+    grid-row: 1 / span 3;
+    background-color: #003f009f;
   }
 
   .item-15 {
-    grid-column: span 2;
-    grid-row: span 2;
-    background-color: #028b3975; /* Verde */
+    grid-column: 10 / span 2;
+    grid-row: 1 / span 2;
+    background-color: #028b3975;
   }
 
   .item-16 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     grid-column: 10 / span 2;
-    grid-row: span 1;
-    grid-row-start: 3;
-    background-color: #33e57d85; /* Azul claro */
+    grid-row: 3 / span 1;
+    background-color: #33e57d85;
   }
 
   .item-18 {
-    grid-column: span 10;
-    grid-row: span 4;
-    background-color: #287e1d91; /* Verde azulado */
+    grid-column: 1 / span 10;
+    grid-row: 4 / span 4;
+    background-color: #287e1d91;
   }
 
   .item-22 {
-    grid-column: span 1;
-    grid-row: span 4;
-    grid-column-start: 11;
-    background-color: #094f07a1; /* Morado */
+    grid-column: 11 / span 1;
+    grid-row: 4 / span 4;
+    background-color: #094f07a1;
   }
 
   .item-23 {
-    grid-column: span 5;
-    grid-row: span 1;
-    grid-row-start: 8;
-    background-color: #ff44449f; /* Rojo */
+    grid-column: 1 / span 5;
+    grid-row: 8 / span 1;
+    background-color: #ff44449f;
   }
 
   .item-30 {
-    grid-column: span 6;
-    grid-row: span 2;
-    background-color: #58920dab; /* Naranja */
+    grid-column: 6 / span 6;
+    grid-row: 8 / span 2;
+    background-color: #58920dab;
   }
 
   .item-31 {
-    grid-column: span 5;
-    grid-row: span 4;
-    background-color: #33b5e5; /* Azul claro */
+    grid-column: 1 / span 5;
+    grid-row: 9 / span 4;
+    background-color: #33b5e5;
   }
 
   .item-32 {
-    grid-column: span 6;
-    grid-row: span 3;
-    background-color: #33b5e5; /* Azul claro */
+    grid-column: 6 / span 6;
+    grid-row: 10 / span 3;
+    background-color: #33b5e5;
   }
 
-  /* Estilos para LanguageSwitcher fijo en la parte inferior derecha */
-  .language-switcher {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-  }
-
-  /* Media Queries para hacer el diseño responsivo */
+  /* Media Queries más específicos y controlados */
   @media (max-width: 1024px) {
     .grid {
       grid-template-columns: repeat(8, 1fr);
-      grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+      grid-template-rows: repeat(16, minmax(100px, auto));
     }
+
     .item-1 {
-      grid-column: span 4;
+      grid-column: 1 / span 4;
+      grid-row: 1 / span 3;
     }
+
     .item-14 {
-      grid-column: span 4;
+      grid-column: 5 / span 4;
+      grid-row: 1 / span 3;
     }
+
     .item-15 {
-      grid-column: span 2;
-      grid-row: span 2;
+      grid-column: 1 / span 2;
+      grid-row: 4 / span 2;
     }
+
     .item-16 {
-      grid-column: 7 / span 2;
+      grid-column: 3 / span 6;
+      grid-row: 4 / span 1;
     }
+
     .item-18 {
-      grid-column: span 8;
+      grid-column: 1 / span 7;
+      grid-row: 6 / span 4;
     }
+
     .item-22 {
-      grid-column: span 1;
-      grid-column-start: 8;
+      grid-column: 8 / span 1;
+      grid-row: 6 / span 4;
     }
+
     .item-23 {
-      grid-column: span 4;
+      grid-column: 1 / span 4;
+      grid-row: 10 / span 1;
     }
+
     .item-30 {
-      grid-column: span 6;
+      grid-column: 5 / span 4;
+      grid-row: 10 / span 2;
     }
+
     .item-31 {
-      grid-column: span 4;
+      grid-column: 1 / span 4;
+      grid-row: 11 / span 4;
     }
+
     .item-32 {
-      grid-column: span 6;
+      grid-column: 5 / span 4;
+      grid-row: 12 / span 3;
     }
   }
 
   @media (max-width: 768px) {
     .grid {
       grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+      grid-template-rows: repeat(24, minmax(100px, auto));
     }
+
     .item-1 {
-      grid-column: span 4;
+      grid-column: 1 / span 4;
+      grid-row: 1 / span 3;
     }
+
     .item-14 {
-      grid-column: span 4;
+      grid-column: 1 / span 4;
+      grid-row: 4 / span 3;
     }
+
     .item-15 {
-      grid-column: span 2;
-      grid-row: span 2;
+      grid-column: 1 / span 2;
+      grid-row: 7 / span 2;
     }
+
     .item-16 {
-      grid-column: span 2;
-      grid-column-start: 3;
+      grid-column: 3 / span 2;
+      grid-row: 7 / span 2;
     }
+
     .item-18 {
-      grid-column: span 4;
+      grid-column: 1 / span 4;
+      grid-row: 9 / span 4;
     }
+
     .item-22 {
-      grid-column: span 1;
-      grid-column-start: 4;
+      grid-column: 1 / span 4;
+      grid-row: 13 / span 1;
     }
+
     .item-23 {
-      grid-column: span 4;
+      grid-column: 1 / span 4;
+      grid-row: 14 / span 1;
     }
+
     .item-30 {
-      grid-column: span 4;
+      grid-column: 1 / span 4;
+      grid-row: 15 / span 2;
     }
+
     .item-31 {
-      grid-column: span 4;
+      grid-column: 1 / span 4;
+      grid-row: 17 / span 3;
     }
+
     .item-32 {
-      grid-column: span 4;
+      grid-column: 1 / span 4;
+      grid-row: 20 / span 3;
     }
   }
 </style>
