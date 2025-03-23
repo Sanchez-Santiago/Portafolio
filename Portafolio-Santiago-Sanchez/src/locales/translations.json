@@ -6,8 +6,23 @@
     "about": {
       "title": "Sobre mí",
       "text": "Tu texto de presentación"
+    },
+    "TituleExperiencie": "Experiencia",
+    "Cards": {
+      "Cards1":{
+        "title": "Card 1",
+        "text": "Texto de la tarjeta 1",
+        "image": "../../../public/favicon.svg"
+      },
+      "Cards2":{
+        "title": "Card 1",
+        "text": "Texto de la tarjeta 1",
+        "image": "../../../public/favicon.svg"
+      }
     }
   },
+
+
   "en": {
     "header": {
       "name": "Santiago Sánchez"
@@ -15,6 +30,19 @@
     "about": {
       "title": "About me",
       "text": "Your presentation text"
+    },
+    "TituleExperiencie": "Experiens",
+    "Cards": {
+      "Cards1":{
+        "title": "Card 1",
+        "text": "Texto de la tarjeta 1",
+        "image": "../../../public/favicon.svg"
+      },
+      "Cards2":{
+        "title": "Card 1",
+        "text": "Texto de la tarjeta 1",
+        "image": "../../../public/favicon.svg"
+      }
     }
   }
 }

@@ -2,13 +2,14 @@
 // src/pages/[lang]/index.astro
 
 import SobreMi from "../../components/componetsGrids/SobreMi.astro";
-import Layout from "../../layouts/Layout2.astro";
+import Layout from "../../layouts/Layout.astro";
 import LanguageSwitcher from "../../components/LanguageSwitcher";
 import translations from "../../locales/translations.json";
 import Skil from "../../components/componetsGrids/Skil.astro";
 import Contact from "../../components/componetsGrids/Contact.astro";
 import DogGrid from "../../components/componetsGrids/DogGrid.astro";
 import ClokGrid from "../../components/componetsGrids/ClockGrid.astro";
+import CardsGrid from "../../components/componetsGrids/CardsGrid.astro";
 
 // 1. Definir tipo para las traducciones
 type Translations = typeof translations;
@@ -31,7 +32,9 @@ const t = translations[currentLang];
 
 <Layout>
   <div class="grid">
-    <div class="grid-item item-1"><SobreMi t={t} /></div>
+    <div class="grid-item item-1">
+      <SobreMi t={t} />
+    </div>
     <div class="grid-item item-14">
       <Skil />
     </div>
@@ -41,7 +44,9 @@ const t = translations[currentLang];
     <div class="grid-item item-16">
       <DogGrid />
     </div>
-    <div class="grid-item item-18">18</div>
+    <div class="grid-item item-18">
+      <CardsGrid t={t} />
+    </div>
     <div class="grid-item item-22">22</div>
     <div class="grid-item item-23">
       <Contact />
@@ -196,6 +201,10 @@ const t = translations[currentLang];
     .item-14 {
       grid-column: span 4;
     }
+    .item-15 {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
     .item-16 {
       grid-column: 7 / span 2;
     }
@@ -233,6 +242,7 @@ const t = translations[currentLang];
     }
     .item-15 {
       grid-column: span 2;
+      grid-row: span 2;
     }
     .item-16 {
       grid-column: span 2;
