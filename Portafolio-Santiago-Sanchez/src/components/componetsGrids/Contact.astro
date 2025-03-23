@@ -8,54 +8,43 @@ const { t } = Astro.props as any;
     <a class="nav" href="">
       <img
         class="image"
-        src="../../../public/assets/icons/social/Github_dark.svg"
-        alt="Discord"
+        src="/assets/icons/social/Github_dark.svg"
+        alt="Github"
       />
     </a>
     <a class="nav" href="">
       <img
         class="image"
-        src="../../../public/assets/icons/social/linkedin.svg"
-        alt="Discord"
+        src="/assets/icons/social/linkedin.svg"
+        alt="LinkedIn"
+      />
+    </a>
+    <a class="nav" href="">
+      <img class="image" src="/assets/icons/social/slack.svg" alt="Slack" />
+    </a>
+    <a class="nav" href="">
+      <img class="image" src="/assets/icons/social/gmail.svg" alt="Gmail" />
+    </a>
+    <a class="nav" href="">
+      <img
+        class="image"
+        src="/assets/icons/social/facebook.svg"
+        alt="Facebook"
       />
     </a>
     <a class="nav" href="">
       <img
         class="image"
-        src="../../../public/assets/icons/social/slack.svg"
-        alt="Discord"
+        src="/assets/icons/social/Instagram_dark.svg"
+        alt="Instagram"
       />
     </a>
     <a class="nav" href="">
-      <img
-        class="image"
-        src="../../../public/assets/icons/social/gmail.svg"
-        alt="Discord"
-      />
-    </a>
-    <a class="nav" href="">
-      <img
-        class="image"
-        src="../../../public/assets/icons/social/facebook.svg"
-        alt="Discord"
-      />
-    </a>
-    <a class="nav" href="">
-      <img
-        class="image"
-        src="../../../public/assets/icons/social/Instagram_dark.svg"
-        alt="Discord"
-      />
-    </a>
-    <a class="nav" href="">
-      <img
-        class="image"
-        src="../../../public/assets/icons/social/discord.svg"
-        alt="Discord"
-      />
+      <img class="image" src="/assets/icons/social/discord.svg" alt="Discord" />
     </a>
   </div>
 </div>
+
 <style>
   .title {
     font-size: 2.5rem; /* Tamaño grande y legible */
@@ -65,12 +54,10 @@ const { t } = Astro.props as any;
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 20px;
-
     /* Efecto de sombra */
     text-shadow:
       2px 2px 5px rgba(8, 53, 25, 0.8),
       0 0 10px rgba(0, 255, 255, 0.5);
-
     /* Fondo con gradiente */
     background: linear-gradient(90deg, #00ffaa, #00aaff);
     -webkit-background-clip: text;
