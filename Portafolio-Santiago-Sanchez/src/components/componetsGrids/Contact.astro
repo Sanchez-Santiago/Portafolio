@@ -4,7 +4,7 @@ const { t } = Astro.props as any;
 
 <div>
   <h1 class="title">{t?.Contact}</h1>
-  <div class="conteiner-nav">
+  <nav class="container-nav">
     <a class="nav" href="">
       <img
         class="image"
@@ -42,29 +42,72 @@ const { t } = Astro.props as any;
     <a class="nav" href="">
       <img class="image" src="/assets/icons/social/discord.svg" alt="Discord" />
     </a>
-  </div>
+  </nav>
 </div>
 
 <style>
   .title {
-    font-size: 2.5rem; /* Tamaño grande y legible */
-    font-weight: bold;
     text-align: center;
-    color: #ffffff; /* Color blanco */
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-    /* Efecto de sombra */
-    text-shadow:
-      2px 2px 5px rgba(8, 53, 25, 0.8),
-      0 0 10px rgba(0, 255, 255, 0.5);
-    /* Fondo con gradiente */
-    background: linear-gradient(90deg, #00ffaa, #00aaff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: #333;
+  }
+
+  .container-nav {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+    grid-template-rows: repeat(2, auto); /* 2 filas */
+    gap: 1rem;
+    justify-content: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+  .nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .nav:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
   .image {
     width: 50px;
+    height: 50px;
+    transition: transform 0.2s ease;
+  }
+
+  .nav:hover .image {
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 600px) {
+    .container-nav {
+      grid-template-columns: repeat(3, 1fr); /* 3 columnas en móviles */
+      gap: 0.5rem;
+    }
+
+    .image {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .container-nav {
+      grid-template-columns: repeat(
+        2,
+        1fr
+      ); /* 2 columnas en pantallas pequeñas */
+    }
   }
 </style>

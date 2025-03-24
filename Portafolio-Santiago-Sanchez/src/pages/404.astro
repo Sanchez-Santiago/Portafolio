@@ -1,51 +1,156 @@
 ---
+import Layout from "../layouts/Layout.astro";
 
+// Configuración para evitar warnings de rutas
+export async function getStaticPaths() {
+  return [
+    { params: { lang: "es" } },
+    { params: { lang: "en" } },
+    { path: "/favicon.ico", _route: false }, // Excluir favicon de rutas dinámicas
+  ];
+}
 ---
 
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>404 - Página no encontrada</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-      :root {
-        --bg-color: #1a1a1a;
-        --text-color: #ffffff;
-      }
-      body {
-        background: var(--bg-color);
-        color: var(--text-color);
-        font-family: "Segoe UI", system-ui;
-        margin: 0;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-      main {
-        text-align: center;
-        padding: 2rem;
-        width: 100%;
-        max-width: 800px;
-      }
-      p {
-        font-size: 1.25rem;
-        margin-top: 2rem;
-      }
-      .fuzzy-container {
-        width: 100%;
-        height: 250px;
-        margin: 0 auto;
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <div class="fuzzy-container">
-        <h1>404</h1>
-      </div>
-      <p>Lo sentimos, la página que buscas no existe.</p>
-    </main>
-  </body>
-</html>
+<Layout>
+  <h1 class="error-code">404</h1>
+
+  <div class="cloak-wrapper">
+    <div class="cloak-container">
+      <div class="cloak-effect"></div>
+    </div>
+  </div>
+
+  <div class="error-info">
+    <p class="error-message">
+      We're fairly sure that page used to be here, but seems to have gone
+      missing. We do apologise on its behalf.
+    </p>
+    <a
+      href="/"
+      class="home-link"
+      role="button"
+      aria-label="Return to home page"
+    >
+      Home page
+    </a>
+  </div>
+</Layout>
+
+<style is:global>
+  @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&family=Roboto:wght@100;300&display=swap");
+
+  :root {
+    --shadow: rgba(0, 0, 0, 0.9);
+    --bg: #b3b3b3;
+    --lit-header: #ffffff;
+    --speed: 2s;
+    --transition: all 0.3s ease;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    gap: 1rem;
+    background: var(--bg);
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    position: relative;
+  }
+
+  .error-code {
+    animation: swing var(--speed) ease-in-out infinite;
+    font-size: clamp(5rem, 40vmin, 20rem);
+    font-family: "Open Sans", sans-serif;
+    margin: 0;
+    letter-spacing: 1rem;
+    color: var(--lit-header);
+    text-shadow: 2px 2px 4px var(--shadow);
+    position: relative;
+    z-index: 2;
+  }
+
+  .cloak-effect {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(
+      circle at center,
+      transparent 40%,
+      rgba(0, 0, 0, 0.9)
+    );
+    animation: cloak-anim var(--speed) ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .error-info {
+    color: rgba(255, 255, 255, 0.75);
+    text-align: center;
+    max-width: 44ch;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .home-link {
+    border: 1px solid currentColor;
+    padding: 0.75rem 2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    color: inherit;
+    margin-top: 1rem;
+    display: inline-block;
+    transition: var(--transition);
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    z-index: 3;
+  }
+
+  .home-link:hover,
+  .home-link:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    outline: none;
+  }
+
+  @keyframes swing {
+    0%,
+    100% {
+      transform: translateX(-10px);
+    }
+    50% {
+      transform: translateX(10px);
+    }
+  }
+
+  @keyframes cloak-anim {
+    0%,
+    100% {
+      opacity: 0.9;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.95;
+      transform: scale(1.02);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .error-code {
+      font-size: 15vw;
+      letter-spacing: 0.5rem;
+    }
+
+    .error-message {
+      font-size: 0.9rem;
+    }
+
+    .home-link {
+      padding: 0.5rem 1.5rem;
+    }
+  }
+</style>
