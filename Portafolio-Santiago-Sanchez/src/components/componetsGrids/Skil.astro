@@ -5,44 +5,175 @@
 <div class="orbit">
   <ul class="orbit-wrap">
     <li class="orbit-center">
-      <i class="orbit-center__icon fa fa-code"></i>
+      <img
+        class="orbit-center__icon fa fa-code"
+        class="image-icon-orbit"
+        src="../../../public/assets/icons/docker.svg"
+        alt="Kotlin"
+      />
     </li>
 
     <li>
       <ul class="ring-0">
-        <li><i class="orbit-icon fa fa-git"></i></li>
-        <li><i class="orbit-icon fa fa-free-code-camp"></i></li>
-        <li><i class="orbit-icon fa fa-meetup"></i></li>
-        <li><i class="orbit-icon fa fa-codepen"></i></li>
+        <li>
+          <img
+            class="orbit-icon fa fa-git"
+            class="image-icon-orbit"
+            src="../../../public/assets/icons/docker.svg"
+            alt="Kotlin"
+          />
+        </li>
+        <li>
+          <img
+            class="orbit-icon fa fa-free-code-camp"
+            class="image-icon-orbit"
+            src="../../../public/assets/icons/kotlin.svg"
+            alt="Kotlin"
+          />
+        </li>
+        <li>
+          <img
+            class="orbit-icon fa fa-meetup"
+            class="image-icon-orbit"
+            src="../../../public/assets/icons/typescript.svg"
+            alt="Typescript"
+          />
+        </li>
+        <li>
+          <img
+            class="orbit-icon fa fa-codepen"
+            class="image-icon-orbit"
+            src="../../../public/assets/icons/mariadb.svg"
+            alt="MariaDB"
+          />
+        </li>
       </ul>
     </li>
 
     <li>
       <ul class="ring-1">
-        <li><i class="orbit-icon fa fa-podcast"></i></li>
-        <li><i class="orbit-icon fa fa-css3"></i></li>
-        <li><i class="orbit-icon fa fa-html5"></i></li>
+        <li>
+          <img
+            class="orbit-icon fa fa-podcast"
+            class="image-icon-orbit"
+            src="../../../public/assets/icons/python.svg"
+            alt="python"
+          />
+        </li>
+        <li>
+          <img
+            class="orbit-icon fa fa-css3"
+            class="image-icon-orbit"
+            src="../../../public/assets/icons/c-plusplus.svg"
+            alt="C++"
+          />
+        </li>
+        <li>
+          <img
+            class="orbit-icon fa fa-html5"
+            class="image-icon-orbit"
+            src="../../../public/assets/icons/linux.svg"
+            alt="Linux"
+          />
+        </li>
       </ul>
     </li>
 
     <li>
       <ul class="ring-2">
-        <li><i class="orbit-icon fa fa-windows"></i></li>
-        <li><i class="orbit-icon fa fa-safari"></i></li>
-        <li><i class="orbit-icon fa fa-edge"></i></li>
-        <li><i class="orbit-icon fa fa-linux"></i></li>
-        <li><i class="orbit-icon fa fa-apple"></i></li>
-        <li><i class="orbit-icon fa fa-chrome"></i></li>
-        <li><i class="orbit-icon fa fa-android"></i></li>
-        <li><i class="orbit-icon fa fa-firefox"></i></li>
+        <li>
+          <img
+            class="orbit-icon fa fa-windows"
+            class="image-icon-orbit"
+            src="../../../public/assets/icons/git.svg"
+            alt="git"
+          />
+        </li>
+        <li>
+          <img
+            class="orbit-icon fa fa-safari"
+            class="image-icon-orbit"
+            src="../../../public/assets/icons/css.svg"
+            alt="css"
+          />
+        </li>
+        <li>
+          <img
+            class="orbit-icon fa fa-edge"
+            class="image-icon-orbit"
+            src="../../../public/assets/icons/html5.svg"
+            alt="html5"
+          />
+        </li>
+        <li>
+          <img
+            class="orbit-icon fa fa-linux"
+            class="image-icon-orbit"
+            src="../../../public/assets/icons/Astro_light.svg"
+            alt="Astro"
+          />
+        </li>
+        <li>
+          <img
+            class="orbit-icon fa fa-apple"
+            class="image-icon-orbit"
+            src="../../../public/assets/icons/mongodb.svg"
+            alt="MongoDB"
+          />
+        </li>
+        <li>
+          <img
+            class="orbit-icon fa fa-chrome"
+            class="image-icon-orbit"
+            src="../../../public/assets/icons/mysql.svg"
+            alt="MySQL"
+          />
+        </li>
+        <li>
+          <img
+            class="orbit-icon fa fa-android"
+            class="image-icon-orbit"
+            src="../../../public/assets/icons/react.svg"
+            alt="React"
+          />
+        </li>
+        <li>
+          <img
+            class="orbit-icon fa fa-firefox"
+            class="image-icon-orbit"
+            src="../../../public/assets/icons/nodejs.svg"
+            alt="NodeJS"
+          />
+        </li>
       </ul>
     </li>
 
     <li>
       <ul class="ring-3">
-        <li><i class="orbit-icon fa fa-coffee"></i></li>
-        <li><i class="orbit-icon fa fa-terminal"></i></li>
-        <li><i class="orbit-icon fa fa-heart-o"></i></li>
+        <li>
+          <img
+            class="orbit-icon fa fa-coffee"
+            class="image-icon-orbit"
+            src="../../../public/assets/icons/java.svg"
+            alt="Java"
+          />
+        </li>
+        <li>
+          <img
+            class="orbit-icon fa fa-terminal"
+            class="image-icon-orbit"
+            src="../../../public/assets/icons/Rust_dark.svg"
+            alt="Rust"
+          />
+        </li>
+        <li>
+          <img
+            class="orbit-icon fa fa-heart-o"
+            class="image-icon-orbit"
+            src="../../../public/assets/icons/javascript.svg"
+            alt="javascript"
+          />
+        </li>
       </ul>
     </li>
   </ul>
@@ -82,15 +213,22 @@
     width: var(--orbit-item-size);
     height: var(--orbit-item-size);
     line-height: var(--orbit-item-size);
-    font-size: 1.2em;
+    padding: 3px;
     border-radius: 50%;
     background: #ccc;
     color: #fff;
     text-align: center;
+    align-items: center;
     display: block;
     transition: all 0.3s ease;
   }
-
+  .image-icon-orbit {
+    width: var(--orbit-item-size); /* Establece un ancho fijo */
+    height: var(--orbit-item-size); /* Establece una altura fija */
+    object-fit: contain; /* Mantiene la proporción de la imagen */
+    padding: 5px; /* Padding reducido */
+    background: white; /* Fondo blanco para mejor contraste */
+  }
   .orbit-wrap > li {
     position: absolute;
     left: 50%;
@@ -203,6 +341,7 @@
   .orbit-center {
     z-index: 5;
     font-size: 2em;
+    padding: 10px;
     width: var(--orbit-center-size);
     height: var(--orbit-center-size);
     line-height: var(--orbit-center-size);

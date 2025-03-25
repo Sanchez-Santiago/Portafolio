@@ -5,16 +5,24 @@ const { t } = Astro.props as any;
 const cards = (t && t.Cards ? Object.values(t.Cards) : []) as any[];
 ---
 
-<div class="cards-container">
-  <h1>{t.TituleExperiencie}</h1>
-  {
-    cards.map((card: any) => (
-      <Card title={card.title} content={card.text} image={card.image} />
-    ))
-  }
+<div class="conteiner">
+  <h1 class="titule">{t.TituleExperiencie}</h1>
+  <div class="cards-container">
+    {
+      cards.map((card: any) => (
+        <Card title={card.title} content={card.text} image={card.image} />
+      ))
+    }
+  </div>
 </div>
-
 <style>
+  .conteiner {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .titule {
+  }
   .cards-container {
     display: flex;
     flex-wrap: wrap; /* Permite que se envuelvan si no caben en una línea */

@@ -2,9 +2,9 @@
 const { t } = Astro.props as any;
 ---
 
-<div>
+<div class="contact-section">
   <h1 class="title">{t?.Contact}</h1>
-  <nav class="container-nav">
+  <nav class="conteiner-nav">
     <a class="nav" href="">
       <img
         class="image"
@@ -47,67 +47,58 @@ const { t } = Astro.props as any;
 
 <style>
   .title {
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 2rem;
-    color: #333;
+  }
+  .contact-section {
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 800px;
   }
 
-  .container-nav {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columnas */
-    grid-template-rows: repeat(2, auto); /* 2 filas */
-    gap: 1rem;
+  .title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+  }
+
+  .conteiner-nav {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    max-width: 600px;
+    gap: 20px;
+    max-width: 500px;
     margin: 0 auto;
-    padding: 1rem;
   }
 
   .nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0.5rem;
-    border-radius: 8px;
-    transition:
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
+    width: calc(25% - 20px); /* 4 elementos en la primera fila */
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+    text-decoration: none;
   }
 
   .nav:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  .image {
-    width: 50px;
-    height: 50px;
-    transition: transform 0.2s ease;
-  }
-
-  .nav:hover .image {
     transform: scale(1.1);
   }
 
-  @media (max-width: 600px) {
-    .container-nav {
-      grid-template-columns: repeat(3, 1fr); /* 3 columnas en móviles */
-      gap: 0.5rem;
+  .image {
+    width: 60px;
+    height: auto;
+    display: block;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  /* Media query para dispositivos móviles */
+  @media (max-width: 500px) {
+    .nav {
+      width: calc(33.33% - 20px); /* 3 elementos por fila en móviles */
     }
 
     .image {
-      width: 40px;
-      height: 40px;
-    }
-  }
-
-  @media (max-width: 400px) {
-    .container-nav {
-      grid-template-columns: repeat(
-        2,
-        1fr
-      ); /* 2 columnas en pantallas pequeñas */
+      width: 45px;
     }
   }
 </style>
