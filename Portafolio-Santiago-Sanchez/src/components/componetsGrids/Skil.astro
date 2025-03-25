@@ -5,12 +5,7 @@
 <div class="orbit">
   <ul class="orbit-wrap">
     <li class="orbit-center">
-      <img
-        class="orbit-center__icon fa fa-code"
-        class="image-icon-orbit"
-        src="/assets/icons/docker.svg"
-        alt="Kotlin"
-      />
+      <h1 class="orbit-center__icon on fa fa-code">Skills</h1>
     </li>
 
     <li>
@@ -213,7 +208,7 @@
     width: var(--orbit-item-size);
     height: var(--orbit-item-size);
     line-height: var(--orbit-item-size);
-    padding: 3px;
+    padding: 6px;
     border-radius: 50%;
     background: #ccc;
     color: #fff;
@@ -222,12 +217,21 @@
     display: block;
     transition: all 0.3s ease;
   }
+
+  .orbit-icon:hover {
+    transform: scale(1.2); /* Aumenta el tamaño un 20% */
+    border: solid 1px green;
+    border-radius: 30%;
+  }
   .image-icon-orbit {
     width: var(--orbit-item-size); /* Establece un ancho fijo */
     height: var(--orbit-item-size); /* Establece una altura fija */
     object-fit: contain; /* Mantiene la proporción de la imagen */
-    padding: 5px; /* Padding reducido */
+    padding: 6px; /* Padding reducido */
     background: white; /* Fondo blanco para mejor contraste */
+  }
+
+  .image-icon-orbit:hover {
   }
   .orbit-wrap > li {
     position: absolute;
@@ -339,20 +343,39 @@
   }
 
   .orbit-center {
+    font-family: "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
     z-index: 5;
     font-size: 2em;
-    padding: 10px;
+    font-stretch: 120%; /* Aumenta el ancho */
+    padding: 70px;
     width: var(--orbit-center-size);
     height: var(--orbit-center-size);
     line-height: var(--orbit-center-size);
     text-align: center;
-    background: hotpink;
+    background: rgb(5, 99, 18);
     border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex; /* Centra el contenido */
+    justify-content: center;
+    align-items: center;
+  }
+
+  .orbit-center__icon .fa-codeon {
+    font-family: "Doto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400; /* Corrige <weight> */
+    font-style: normal;
+    display: flex; /* Asegura que se centre si hay un icono */
+    align-items: center;
+    justify-content: center;
     transition: all 0.3s ease;
   }
 
-  .orbit-center__icon {
-    transition: all 0.3s ease;
+  .fa-codeon {
+    font-size: 1.5em; /* Ajusta el tamaño del icono */
   }
 
   @keyframes clockwiseRotate {
