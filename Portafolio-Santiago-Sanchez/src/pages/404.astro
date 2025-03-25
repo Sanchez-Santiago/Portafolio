@@ -1,12 +1,11 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "../layouts/Layout2.astro";
 
-// Configuración para evitar warnings de rutas
 export async function getStaticPaths() {
   return [
     { params: { lang: "es" } },
     { params: { lang: "en" } },
-    { path: "/favicon.ico", _route: false }, // Excluir favicon de rutas dinámicas
+    { path: "/favicon.ico", _route: false },
   ];
 }
 ---
@@ -37,14 +36,15 @@ export async function getStaticPaths() {
 </Layout>
 
 <style is:global>
-  @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&family=Roboto:wght@100;300&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Sixtyfour&display=swap");
 
   :root {
     --shadow: rgba(0, 0, 0, 0.9);
-    --bg: #b3b3b3;
-    --lit-header: #ffffff;
+    --bg: #0a0a0a;
+    --lit-header: #878a87;
     --speed: 2s;
     --transition: all 0.3s ease;
+    --glow-color: rgba(7, 112, 3, 0.7);
   }
 
   body {
@@ -53,23 +53,37 @@ export async function getStaticPaths() {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    gap: 1rem;
+    gap: 1.5rem;
     background: var(--bg);
-    font-family: "Roboto", sans-serif;
     margin: 0;
     position: relative;
+    overflow: hidden;
   }
 
   .error-code {
-    animation: swing var(--speed) ease-in-out infinite;
+    font-family: "Sixtyfour", cursive !important;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+      "BLED" 60,
+      "SCAN" 25,
+      "XELA" 8,
+      "YELA" 8;
+    animation:
+      swing var(--speed) ease-in-out infinite,
+      glitch 2s infinite alternate;
     font-size: clamp(5rem, 40vmin, 20rem);
-    font-family: "Open Sans", sans-serif;
     margin: 0;
     letter-spacing: 1rem;
     color: var(--lit-header);
-    text-shadow: 2px 2px 4px var(--shadow);
+    text-shadow:
+      0 0 10px var(--glow-color),
+      0 0 20px var(--glow-color),
+      2px 2px 4px var(--shadow);
     position: relative;
     z-index: 2;
+    text-transform: uppercase;
   }
 
   .cloak-effect {
@@ -77,65 +91,104 @@ export async function getStaticPaths() {
     inset: 0;
     background: radial-gradient(
       circle at center,
-      transparent 40%,
-      rgba(0, 0, 0, 0.9)
+      transparent 30%,
+      rgba(0, 0, 0, 0.95)
     );
-    animation: cloak-anim var(--speed) ease-in-out infinite;
+    animation:
+      cloak-anim var(--speed) ease-in-out infinite,
+      static-flicker 0.5s infinite alternate;
     pointer-events: none;
     z-index: 1;
+    mix-blend-mode: multiply;
   }
 
   .error-info {
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.85);
     text-align: center;
     max-width: 44ch;
     padding: 0 1rem;
     position: relative;
     z-index: 2;
+    font-size: 1.1rem;
+    line-height: 1.6;
   }
 
   .home-link {
-    border: 1px solid currentColor;
-    padding: 0.75rem 2rem;
+    border: 1px solid var(--glow-color);
+    padding: 0.75rem 2.5rem;
     border-radius: 6px;
     text-decoration: none;
-    color: inherit;
-    margin-top: 1rem;
+    color: var(--lit-header);
+    margin-top: 1.5rem;
     display: inline-block;
     transition: var(--transition);
-    background: transparent;
+    background: rgba(0, 0, 0, 0.3);
     cursor: pointer;
     position: relative;
     z-index: 3;
+    font-weight: bold;
+    text-shadow: 0 0 5px var(--glow-color);
   }
 
   .home-link:hover,
   .home-link:focus {
-    background-color: rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    background: rgba(0, 255, 255, 0.1);
+    transform: translateY(-3px);
+    box-shadow:
+      0 0 20px var(--glow-color),
+      inset 0 0 10px var(--glow-color);
     outline: none;
   }
 
   @keyframes swing {
     0%,
     100% {
-      transform: translateX(-10px);
+      transform: translateX(-12px);
     }
     50% {
-      transform: translateX(10px);
+      transform: translateX(12px);
     }
   }
 
   @keyframes cloak-anim {
     0%,
     100% {
-      opacity: 0.9;
+      opacity: 0.8;
       transform: scale(1);
     }
     50% {
+      opacity: 0.9;
+      transform: scale(1.03);
+    }
+  }
+
+  @keyframes glitch {
+    0% {
+      text-shadow: 0 0 10px var(--glow-color);
+    }
+    20% {
+      transform: skewX(5deg);
+    }
+    40% {
+      transform: skewX(-5deg);
+    }
+    60% {
+      text-shadow: 5px 5px 0 var(--glow-color);
+    }
+    80% {
+      transform: skewY(3deg);
+    }
+    100% {
+      text-shadow: -5px -5px 0 var(--glow-color);
+    }
+  }
+
+  @keyframes static-flicker {
+    0% {
+      opacity: 0.8;
+    }
+    100% {
       opacity: 0.95;
-      transform: scale(1.02);
     }
   }
 
@@ -143,14 +196,26 @@ export async function getStaticPaths() {
     .error-code {
       font-size: 15vw;
       letter-spacing: 0.5rem;
+      font-variation-settings:
+        "BLED" 40,
+        "SCAN" 15;
     }
 
     .error-message {
-      font-size: 0.9rem;
+      font-size: 1rem;
     }
 
     .home-link {
-      padding: 0.5rem 1.5rem;
+      padding: 0.6rem 1.8rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .error-code {
+      font-size: 18vw;
+      font-variation-settings:
+        "BLED" 30,
+        "SCAN" 10;
     }
   }
 </style>

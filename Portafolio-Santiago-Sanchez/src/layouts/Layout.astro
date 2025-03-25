@@ -6,12 +6,21 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>Astro Basics</title>
-    <style>
+    <!-- Precarga -->
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Sixtyfour&family=Roboto:wght@100;300&display=swap"
+      as="style"
+    />
+
+    <style is:global>
+      @import url("https://fonts.googleapis.com/css2?family=Sixtyfour&family=Roboto:wght@100;300&display=swap");
+
       body {
         margin: 0;
         padding: 0;
         color: #fff;
-        font-family: Arial, sans-serif;
+        font-family: "Roboto", sans-serif; /* Solo fuente base */
         position: relative;
         min-height: 100vh;
       }
