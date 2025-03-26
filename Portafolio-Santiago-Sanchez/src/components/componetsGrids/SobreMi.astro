@@ -12,7 +12,9 @@ const { t } = Astro.props;
   </div>
   <div id="about" class="cont">
     <h2 id="sobre-mi">{t?.about?.title || "Sobre Mí"}:</h2>
-    <p id="parrafo">{t?.about?.text || "Texto de presentación por defecto"}</p>
+    <p id="parrafo">
+      {t?.about?.text || "Texto de presentación por defecto"}
+    </p>
   </div>
 </div>
 
@@ -20,7 +22,7 @@ const { t } = Astro.props;
   /* Contenedor general: usamos grid para organizar secciones */
   #container {
     display: grid;
-    grid-template-rows: auto auto; /* Primera fila para imagen y nombre, segunda para 'Sobre Mí' */
+    grid-template-rows: auto auto;
     gap: 1rem;
     padding: 1rem;
     color: #fff;
@@ -30,21 +32,18 @@ const { t } = Astro.props;
 
   /* Sección superior: imagen y h1 juntos en una sola fila, alineados a la izquierda */
   #conte-img-h1 {
-    top: auto;
     display: flex;
     align-items: center;
     gap: 1rem;
-    grid-row: 0;
-    grid-column: 1 / -1;
   }
 
   #imagen-container {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    overflow: hidden; /* Oculta cualquier parte que sobresalga del círculo */
+    overflow: hidden;
     border: 3px solid white;
-    flex-shrink: 0; /* Evita que se reduzca su tamaño si el contenedor se estrecha */
+    flex-shrink: 0;
   }
 
   #imagen {
@@ -53,11 +52,9 @@ const { t } = Astro.props;
     object-fit: cover;
   }
 
-  /* Nombre: alineado a la izquierda junto a la imagen */
   #name {
     font-family: "Doto", sans-serif;
     font-size: 3rem;
-    /* Puedes ajustar estos valores según tus necesidades */
     font-weight: 700;
     margin: 0.5rem 0;
     margin-left: auto;
@@ -67,7 +64,7 @@ const { t } = Astro.props;
   #about {
     font-family: "Pixelify Sans", sans-serif;
     font-optical-sizing: auto;
-    font-weight: <weight>;
+    font-weight: 400; /* Ajusta el valor de font-weight */
     font-style: normal;
     font-size: 3rem;
     grid-column: 1 / -1;
@@ -78,7 +75,27 @@ const { t } = Astro.props;
     margin: 0;
     font-family: "Pixelify Sans", sans-serif;
     font-optical-sizing: auto;
-    font-weight: <weight>;
+    font-weight: 400; /* Ajusta el valor de font-weight */
     font-style: normal;
+  }
+
+  /* Media queries para dispositivos móviles */
+  @media (max-width: 600px) {
+    #container {
+      padding: 0.5rem;
+    }
+    #imagen-container {
+      width: 100px;
+      height: 100px;
+    }
+    #name {
+      font-size: 2rem;
+    }
+    #about {
+      font-size: 2rem;
+    }
+    #parrafo {
+      font-size: 1.5rem;
+    }
   }
 </style>
