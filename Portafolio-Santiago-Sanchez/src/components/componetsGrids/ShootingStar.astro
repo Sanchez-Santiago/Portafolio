@@ -1,0 +1,132 @@
+---
+const shootingStars = Array.from({ length: 20 });
+---
+
+<style lang="scss">
+  @use "sass:math";
+
+  $shooting-time: 5000ms; // Controla la velocidad de la animación
+
+  .night {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    transform-origin: center;
+    overflow: hidden;
+    clip-path: inset(0);
+    /* Se elimina la rotación del contenedor */
+  }
+
+  .shooting_star {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 2px;
+    background: linear-gradient(
+      -45deg,
+      rgba(95, 145, 255, 1),
+      rgba(0, 0, 255, 0)
+    );
+    border-radius: 999px;
+    filter: drop-shadow(0 0 6px rgba(105, 155, 255, 1));
+    /* Se aplica la inclinación directamente a cada estrella */
+    transform: rotateZ(45deg);
+    animation:
+      tail $shooting-time ease-in-out infinite,
+      shooting $shooting-time ease-in-out infinite;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: calc(50% - 1px);
+      right: 0;
+      height: 2px;
+      background: linear-gradient(
+        -45deg,
+        rgba(0, 0, 255, 0),
+        rgba(95, 145, 255, 1),
+        rgba(0, 0, 255, 0)
+      );
+      transform: translateX(50%) rotateZ(45deg);
+      border-radius: 100%;
+      animation: shining $shooting-time ease-in-out infinite;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: calc(50% - 1px);
+      right: 0;
+      height: 2px;
+      background: linear-gradient(
+        -45deg,
+        rgba(0, 0, 255, 0),
+        rgba(95, 145, 255, 1),
+        rgba(0, 0, 255, 0)
+      );
+      border-radius: 100%;
+      animation: shining $shooting-time ease-in-out infinite;
+      transform: translateX(50%) rotateZ(-45deg);
+    }
+
+    // Genera estilos para cada una de las estrellas con valores aleatorios
+    @for $i from 1 through 20 {
+      &:nth-child(#{$i}) {
+        $delay: math.random(3000) + 0ms; // Delay aleatorio hasta 3000ms
+        $top-offset: math.random(400) - 200;
+        $left-offset: math.random(400) - 200;
+
+        top: calc(50% + #{$top-offset}px);
+        left: calc(50% + #{$left-offset}px);
+        animation-delay: $delay;
+
+        &::before,
+        &::after {
+          animation-delay: $delay;
+        }
+      }
+    }
+  }
+
+  @keyframes tail {
+    0% {
+      width: 0;
+    }
+    30% {
+      width: 100px;
+    }
+    100% {
+      width: 0;
+    }
+  }
+
+  @keyframes shining {
+    0% {
+      width: 0;
+    }
+    50% {
+      width: 30px;
+    }
+    100% {
+      width: 0;
+    }
+  }
+
+  /* La animación "shooting" incorpora la inclinación de 45° */
+  @keyframes shooting {
+    0% {
+      transform: rotateZ(45deg) translateX(0);
+    }
+    100% {
+      transform: rotateZ(45deg) translateX(300px);
+    }
+  }
+</style>
+
+<div class="night">
+  {shootingStars.map(() => <div class="shooting_star" />)}
+</div>
