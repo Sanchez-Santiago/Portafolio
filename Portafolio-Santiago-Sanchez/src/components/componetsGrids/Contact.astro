@@ -5,41 +5,38 @@ const { t } = Astro.props as any;
 <div class="contact-section">
   <h1 class="title">{t?.Contact}</h1>
   <nav class="conteiner-nav">
-    <a class="nav" href="">
+    <a class="nav" href="https://github.com/Sanchez-Santiago">
       <img
         class="image"
         src="/assets/icons/social/Github_dark.svg"
         alt="Github"
       />
     </a>
-    <a class="nav" href="">
+    <a class="nav" href="https://www.linkedin.com/in/santiago-sanchez-dev/">
       <img
         class="image"
         src="/assets/icons/social/linkedin.svg"
         alt="LinkedIn"
       />
     </a>
-    <a class="nav" href="">
-      <img class="image" src="/assets/icons/social/slack.svg" alt="Slack" />
-    </a>
-    <a class="nav" href="">
-      <img class="image" src="/assets/icons/social/gmail.svg" alt="Gmail" />
-    </a>
-    <a class="nav" href="">
+    <a
+      class="nav"
+      href="https://www.facebook.com/profile.php?id=100011906439626"
+    >
       <img
         class="image"
         src="/assets/icons/social/facebook.svg"
         alt="Facebook"
       />
     </a>
-    <a class="nav" href="">
+    <a class="nav" href="https://www.instagram.com/santiago_sanchez.24/">
       <img
         class="image"
         src="/assets/icons/social/Instagram_dark.svg"
         alt="Instagram"
       />
     </a>
-    <a class="nav" href="">
+    <a class="nav" href="https://www.discordapp.com/users/708152038961184779">
       <img class="image" src="/assets/icons/social/discord.svg" alt="Discord" />
     </a>
   </nav>
@@ -78,12 +75,17 @@ const { t } = Astro.props as any;
     align-items: center;
     width: calc(25% - 20px); /* 4 elementos en la primera fila */
     margin-bottom: 15px;
+    padding: 20px;
     transition: transform 0.3s ease;
     text-decoration: none;
+    border-radius: 40%;
+    border: solid 1px rgb(248, 248, 248);
+    box-shadow: 5ch;
   }
 
   .nav:hover {
     transform: scale(1.1);
+    border: solid 1px white;
   }
 
   .image {
@@ -103,5 +105,83 @@ const { t } = Astro.props as any;
     .image {
       width: 45px;
     }
+  }
+
+  /* 12 */
+  .btn-12 {
+    position: relative;
+    right: 20px;
+    bottom: 20px;
+    border: none;
+    box-shadow: none;
+    width: 130px;
+    height: 40px;
+    line-height: 42px;
+    -webkit-perspective: 230px;
+    perspective: 230px;
+  }
+  .btn-12 span {
+    background: rgb(0, 172, 238);
+    background: linear-gradient(
+      0deg,
+      rgba(0, 172, 238, 1) 0%,
+      rgba(2, 126, 251, 1) 100%
+    );
+    display: block;
+    position: absolute;
+    width: 130px;
+    height: 40px;
+    box-shadow:
+      inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+      7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+      4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin: 0;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  .btn-12 span:nth-child(1) {
+    box-shadow:
+      -7px -7px 20px 0px #fff9,
+      -4px -4px 5px 0px #fff9,
+      7px 7px 20px 0px #0002,
+      4px 4px 5px 0px #0001;
+    -webkit-transform: rotateX(90deg);
+    -moz-transform: rotateX(90deg);
+    transform: rotateX(90deg);
+    -webkit-transform-origin: 50% 50% -20px;
+    -moz-transform-origin: 50% 50% -20px;
+    transform-origin: 50% 50% -20px;
+  }
+  .btn-12 span:nth-child(2) {
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    -webkit-transform-origin: 50% 50% -20px;
+    -moz-transform-origin: 50% 50% -20px;
+    transform-origin: 50% 50% -20px;
+  }
+  .btn-12:hover span:nth-child(1) {
+    box-shadow:
+      inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+      7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+      4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+  }
+  .btn-12:hover span:nth-child(2) {
+    box-shadow:
+      inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+      7px 7px 20px 0px rgba(0, 0, 0, 0.1),
+      4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+    color: transparent;
+    -webkit-transform: rotateX(-90deg);
+    -moz-transform: rotateX(-90deg);
+    transform: rotateX(-90deg);
   }
 </style>
