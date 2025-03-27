@@ -9,6 +9,8 @@
 </div>
 <style>
   .animation-wrapper {
+    z-index: -1; /* Esto asegura que esté detrás de todo */
+    pointer-events: none; /* Esto hace que no interfiera con los clics */
     width: 100%;
     height: 100%;
     position: fixed;
