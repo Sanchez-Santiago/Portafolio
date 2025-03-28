@@ -11,14 +11,29 @@
     "TituleExperiencie": "Experiencia",
     "Cards": {
       "Cards1":{
-        "title": "Card 1",
+        "title": "Simulador ARM",
         "text": "Texto de la tarjeta 1",
-        "image": "../../../public/favicon.svg"
+        "image": "../../../public/assets/Proyects/ARM.webp",
+        "link": "https://github.com/Sanchez-Santiago/Simulador-ARM-"
       },
       "Cards2":{
-        "title": "Card 1",
+        "title": "Juego de la Vida",
         "text": "Texto de la tarjeta 1",
-        "image": "../../../public/favicon.svg"
+        "image": "../../../public/assets/Proyects/Juego_De_La_Vida.webp",
+        "link": "https://github.com/Sanchez-Santiago/Juago-De-La-Vida"
+      },
+       "Cards3":{
+        "title": "San Valentin",
+        "text": "Texto de la tarjeta 1",
+        "image": "../../../public/assets/Proyects/San_Valentin.webp",
+        "link": "https://san-valentin-ss.netlify.app/"
+      }
+      ,
+       "Cards4":{
+        "title": "Me Perdonas",
+        "text": "Texto de la tarjeta 1",
+        "image": "../../../public/assets/Proyects/Me_Perdonas.webp",
+        "link": "https://me-perdonas-porfa.netlify.app/"
       }
     }
   },
@@ -35,15 +50,26 @@
     "Contact": "CONTACT",
     "TituleExperiencie": "Experiens",
     "Cards": {
-      "Cards1":{
-        "title": "Card 1",
+            "Cards1":{
+        "title": "Simulador ARM",
         "text": "Texto de la tarjeta 1",
-        "image": "../../../public/favicon.svg"
+        "image": "../../../public/assets/Proyects/ARM.webp"
       },
       "Cards2":{
-        "title": "Card 1",
+        "title": "Juego de la Vida",
         "text": "Texto de la tarjeta 1",
-        "image": "../../../public/favicon.svg"
+        "image": "../../../public/assets/Proyects/Juego_De_La_Vida.webp"
+      },
+       "Cards3":{
+        "title": "San Valentin",
+        "text": "Texto de la tarjeta 1",
+        "image": "../../../public/assets/Proyects/San_Valentin.webp"
+      }
+      ,
+       "Cards3":{
+        "title": "Me Perdonas",
+        "text": "Texto de la tarjeta 1",
+        "image": "../../../public/assets/Proyects/Me_Perdonas.webp"
       }
     }
   }

@@ -1,14 +1,16 @@
 ---
 // Recibir datos a través de props
-const { title, content, image } = Astro.props;
+const { title, content, image, link } = Astro.props;
 ---
 
 <div class="nft">
   <div class="main">
-    <img class="tokenImage" src={image} alt="NFT" loading="lazy" />
-    <h2>{title}</h2>
-    <p class="description">{content}</p>
-    <hr />
+    <a href={link}>
+      <img class="tokenImage" src={image} alt="NFT" loading="lazy" />
+      <h2>{title}</h2>
+      <p class="description">{content}</p>
+      <hr />
+    </a>
   </div>
 </div>
 
