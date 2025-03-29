@@ -4,17 +4,17 @@ const { title, content, image, link, technology } = Astro.props;
 ---
 
 <div class="nft">
-  <a href={link}>
-    <div class="main">
-      <img class="tokenImage" src={image} alt="NFT" loading="lazy" />
-      <h2>{title}</h2>
-      <div class="description-container">
-        <p class="description">{content}</p>
-      </div>
-      <hr />
-      <p>{technology}</p>
+  <div class="main">
+    <img class="tokenImage" src={image} alt="NFT" loading="lazy" />
+    <a href={link}>
+      <h2 class="titule">{title}</h2>
+    </a>
+    <div class="description-container">
+      <p class="description">{content}</p>
     </div>
-  </a>
+    <hr />
+    <p>{technology}</p>
+  </div>
 </div>
 <style lang="scss">
   body {
@@ -113,10 +113,21 @@ const { title, content, image, link, technology } = Astro.props;
         max-height: 500px; /* Altura suficiente para mostrar todo */
       }
 
+      .titule {
+        padding-top: 1rem;
+        font-family: "Pixelify Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 700; /* Negritas (700 = bold, 400 = normal) */
+        font-style: normal;
+        font-size: 1.5rem; /* Tamaño grande (ajusta según necesites) */
+      }
       .description {
         margin: 0.5rem 0;
-        color: #a89ec9;
+        color: #fdfdfd;
         text-align: left; /* Alinea el texto a la izquierda */
+        font-family: "Oswald", sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
       }
       .tokenInfo {
         display: flex;
