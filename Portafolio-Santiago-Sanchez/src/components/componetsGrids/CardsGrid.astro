@@ -6,11 +6,17 @@ const cards = (t && t.Cards ? Object.values(t.Cards) : []) as any[];
 ---
 
 <div class="conteiner">
-  <h1 class="titule">{t.TituleExperiencie}</h1>
+  <h1 class="titule">{t.TituleProyects}</h1>
   <div class="cards-container">
     {
       cards.map((card: any) => (
-        <Card title={card.title} content={card.text} image={card.image} />
+        <Card
+          title={card.title}
+          content={card.text}
+          image={card.image}
+          link={card.link}
+          technology={card.technology}
+        />
       ))
     }
   </div>

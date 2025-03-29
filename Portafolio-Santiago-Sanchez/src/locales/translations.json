@@ -8,37 +8,38 @@
       "text": "Tu texto de presentación"
     },
     "Contact": "CONTACTO",
-    "TituleExperiencie": "Experiencia",
+    "TituleProyects": "Proyectos",
     "Cards": {
-      "Cards1":{
+      "Cards1": {
         "title": "Simulador ARM",
-        "text": "Texto de la tarjeta 1",
-        "image": "../../../public/assets/Proyects/ARM.webp",
-        "link": "https://github.com/Sanchez-Santiago/Simulador-ARM-"
+        "text": "Desarrollo de un simulador de arquitectura ARM reducida implementado en Rust, diseñado para ejecutar y analizar instrucciones de bajo nivel, optimizando la gestión de registros y el flujo de ejecución.",
+        "image": "/assets/Proyects/ARM.webp",
+        "link": "https://github.com/Sanchez-Santiago/Simulador-ARM-",
+        "technology": "Rust"
       },
-      "Cards2":{
+      "Cards2": {
         "title": "Juego de la Vida",
-        "text": "Texto de la tarjeta 1",
-        "image": "../../../public/assets/Proyects/Juego_De_La_Vida.webp",
-        "link": "https://github.com/Sanchez-Santiago/Juago-De-La-Vida"
+        "text": "Implementación interactiva del famoso Juego de la Vida de Conway, desarrollada en Java. Permite a los usuarios diseñar sus propios patrones, generar configuraciones aleatorias y controlar la simulación con opciones para iniciar, pausar y reiniciar el proceso. Una experiencia visual fascinante de autómatas celulares en acción.",
+        "image": "/assets/Proyects/Juego_De_La_Vida.webp",
+        "link": "https://github.com/Sanchez-Santiago/Juago-De-La-Vida",
+        "technology": "Java"
       },
-       "Cards3":{
+      "Cards3": {
         "title": "San Valentin",
-        "text": "Texto de la tarjeta 1",
-        "image": "../../../public/assets/Proyects/San_Valentin.webp",
-        "link": "https://san-valentin-ss.netlify.app/"
-      }
-      ,
-       "Cards4":{
+        "text": "Página web interactiva diseñada para invitar a alguien a ser mi San Valentín, con un diseño atractivo y una experiencia personalizada para hacer la propuesta aún más especial.",
+        "image": "/assets/Proyects/San_Valentin.webp",
+        "link": "https://san-valentin-ss.netlify.app/",
+        "technology": "React"
+      },
+      "Cards4": {
         "title": "Me Perdonas",
-        "text": "Texto de la tarjeta 1",
-        "image": "../../../public/assets/Proyects/Me_Perdonas.webp",
-        "link": "https://me-perdonas-porfa.netlify.app/"
+        "text": "Un sitio web diseñado para aquellos momentos en los que necesitas disculparte de una forma original y creativa. Con mensajes personalizados, efectos visuales románticos y hasta un botón de 'perdóname' que no se puede ignorar. Perfecta para calmar cualquier tormenta emocional y recuperar la paz en tu relación.",
+        "image": "/assets/Proyects/Me_Perdonas.webp",
+        "link": "https://me-perdonas-porfa.netlify.app/",
+        "technology": "Astro"
       }
     }
   },
-
-
   "en": {
     "header": {
       "name": "SANTIAGO SANCHEZ"
@@ -48,28 +49,35 @@
       "text": "Your presentation text loren"
     },
     "Contact": "CONTACT",
-    "TituleExperiencie": "Experiens",
+    "TituleProyects": "Proyects",
     "Cards": {
-            "Cards1":{
+      "Cards1": {
         "title": "Simulador ARM",
         "text": "Texto de la tarjeta 1",
-        "image": "../../../public/assets/Proyects/ARM.webp"
+        "image": "/assets/Proyects/ARM.webp",
+        "link": "https://github.com/Sanchez-Santiago/Simulador-ARM-",
+        "technology": "Rust"
       },
-      "Cards2":{
+      "Cards2": {
         "title": "Juego de la Vida",
         "text": "Texto de la tarjeta 1",
-        "image": "../../../public/assets/Proyects/Juego_De_La_Vida.webp"
+        "image": "/assets/Proyects/Juego_De_La_Vida.webp",
+        "link": "https://github.com/Sanchez-Santiago/Juago-De-La-Vida",
+        "technology": "Java"
       },
-       "Cards3":{
+      "Cards3": {
         "title": "San Valentin",
         "text": "Texto de la tarjeta 1",
-        "image": "../../../public/assets/Proyects/San_Valentin.webp"
-      }
-      ,
-       "Cards3":{
+        "image": "/assets/Proyects/San_Valentin.webp",
+        "link": "https://san-valentin-ss.netlify.app/",
+        "technology": "React"
+      },
+      "Cards4": {
         "title": "Me Perdonas",
         "text": "Texto de la tarjeta 1",
-        "image": "../../../public/assets/Proyects/Me_Perdonas.webp"
+        "image": "/assets/Proyects/Me_Perdonas.webp",
+        "link": "https://me-perdonas-porfa.netlify.app/",
+        "technology": "Astro"
       }
     }
   }
