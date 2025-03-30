@@ -5,7 +5,7 @@
     },
     "about": {
       "title": "Sobre mí",
-      "text": "Tu texto de presentación"
+      "text": "Soy un desarrollador web apasionado, siempre en busca de nuevos retos. Me encanta aprender, innovar y transformar ideas en soluciones digitales efectivas."
     },
     "Contact": "CONTACTO",
     "TituleProyects": "Proyectos",
@@ -14,7 +14,7 @@
     "Cards": {
       "Cards1": {
         "title": "Simulador ARM",
-        "text": "Desarrollo de un simulador de arquitectura ARM reducida implementado en Rust, diseñado para ejecutar y analizar instrucciones de bajo nivel, optimizando la gestión de registros y el flujo de ejecución.",
+        "text": "Soy un desarrollador apasionado, siempre en busca de nuevos desafíos. Me encanta aprender, crear innovaciones digitales y transformar ideas en soluciones creativas y funcionales, dígito a dígito y código a código.",
         "image": "/assets/Proyects/ARM.webp",
         "link": "https://github.com/Sanchez-Santiago/Simulador-ARM-",
         "technology": "Rust"
@@ -59,7 +59,7 @@
     },
     "about": {
       "title": "About me",
-      "text": "Your presentation text loren"
+      "text": "I am a passionate developer, always seeking new challenges. I love learning, creating digital innovations, and transforming ideas into creative and functional solutions, digit by digit and code by code."
     },
     "Contact": "CONTACT",
     "TituleProyects": "Proyects",

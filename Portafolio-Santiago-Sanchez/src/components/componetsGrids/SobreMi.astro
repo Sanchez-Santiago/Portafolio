@@ -23,89 +23,76 @@ const { t } = Astro.props;
 </div>
 
 <style>
-  /* Contenedor general: usamos grid para organizar secciones */
+  /* Contenedor principal simplificado */
   #container {
-    display: grid;
-    grid-template-rows: auto auto;
-    gap: 1rem;
-    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Espacio consistente entre secciones */
+    padding: 0;
     color: #fff;
     font-family: Arial, sans-serif;
-    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
   }
 
-  /* Sección superior: imagen y h1 juntos en una sola fila, alineados a la izquierda */
+  /* Sección superior optimizada */
   #conte-img-h1 {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
+    padding: 0 1rem;
   }
 
   #imagen-container {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid white;
+    border: 2px solid white;
     flex-shrink: 0;
-  }
-
-  #imagen {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
   }
 
   #name {
     font-family: "Doto", sans-serif;
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 700;
-    margin: 0.5rem 0;
-    margin-left: auto;
+    margin: 0;
+    line-height: 1;
   }
 
-  @keyframes rot {
-    to {
-      rotate: 360deg;
-    }
+  /* Sección de contenido */
+  .cont {
+    gap: 1rem;
+    padding: 1rem;
+    margin: 0;
   }
 
-  /* Sección 'Sobre Mí' en la segunda fila */
   #about {
-    font-family: "Pixelify Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400; /* Ajusta el valor de font-weight */
-    font-style: normal;
+    font-family: "Teko", sans-serif;
     font-size: 3rem;
-    grid-column: 1 / -1;
-    margin: 0;
-  }
-  #parrafo {
-    font-size: 2rem;
-    margin: 0;
-    font-family: "Pixelify Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400; /* Ajusta el valor de font-weight */
-    font-style: normal;
+    margin: 0 0 0.5rem 0;
   }
 
-  /* Media queries para dispositivos móviles */
+  #parrafo {
+    font-size: 1.5rem;
+    margin: 0;
+    line-height: 1.5;
+  }
+
   @media (max-width: 600px) {
-    #container {
-      padding: 0.5rem;
+    #conte-img-h1 {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
     }
+
     #imagen-container {
       width: 100px;
       height: 100px;
     }
+
     #name {
       font-size: 2rem;
-    }
-    #about {
-      font-size: 2rem;
-    }
-    #parrafo {
-      font-size: 1.5rem;
     }
   }
 </style>

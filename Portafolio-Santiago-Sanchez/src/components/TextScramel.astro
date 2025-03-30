@@ -101,7 +101,7 @@ const { t } = Astro.props as Props;
 
     const next = () => {
       fx.setText(phrases[counter]).then(() => {
-        setTimeout(next, 800);
+        setTimeout(next, 1000);
       });
       counter = (counter + 1) % phrases.length;
     };
@@ -117,16 +117,17 @@ const { t } = Astro.props as Props;
 <style>
   @import url("https://fonts.googleapis.com/css?family=Roboto+Mono:100");
   .container {
-    height: 50%;
+    height: 55%;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 1rem;
   }
   .text {
     font-family: "Roboto Mono", monospace;
     font-weight: 100;
-    font-size: 28px;
+    font-size: 2rem;
     color: #fafafa;
   }
   .dud {

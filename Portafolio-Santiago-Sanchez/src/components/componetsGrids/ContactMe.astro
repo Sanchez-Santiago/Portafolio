@@ -3,7 +3,7 @@ const { t } = Astro.props;
 ---
 
 <div class="container">
-  <h1>{t?.ContactMe}</h1>
+  <h1 class="titulo">{t?.ContactMe}</h1>
   <form
     action="https://formsubmit.co/bccb837118903122749568394ce06bb1"
     method="POST"
@@ -65,6 +65,10 @@ const { t } = Astro.props;
   }
 
   h1 {
+    font-family: "Teko", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-size: 3rem;
     text-align: center;
     color: #ffffff;
   }
@@ -92,7 +96,13 @@ const { t } = Astro.props;
     color: rgba(232, 252, 226, 0.918);
     border: none;
     border-radius: 5px;
-    font-size: 18px;
+    font-family: "Doto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+    font-variation-settings: "ROND" 2;
+    font-size: 1rem;
+    font-weight: 800px;
     cursor: pointer;
     transition: 0.3s;
   }
