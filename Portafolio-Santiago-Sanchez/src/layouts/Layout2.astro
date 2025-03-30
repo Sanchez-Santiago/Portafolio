@@ -1,5 +1,6 @@
 ---
 import SolarSystem from "../components/SolarSystem.astro";
+const { title = "Página con Animación de Estrellas" } = Astro.props;
 ---
 
 <!doctype html>
@@ -15,7 +16,7 @@ import SolarSystem from "../components/SolarSystem.astro";
       rel="stylesheet"
     />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro Basics</title>
+    <title>{title}</title>
     <style lang="scss"></style>
   </head>
   <style>
