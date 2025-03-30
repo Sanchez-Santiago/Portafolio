@@ -8,7 +8,9 @@ const { t } = Astro.props;
     <div id="imagen-container">
       <img id="imagen" src={santiagoImg.src} alt="Logo" />
     </div>
-    <h1 id="name">{t?.header?.name || "Nombre por defecto"}</h1>
+    <h1 id="name" class="glitch" data-text="GLITCH">
+      {t?.header?.name || "Nombre por defecto"}
+    </h1>
   </div>
   <div id="about" class="cont">
     <h2 id="sobre-mi">{t?.about?.title || "Sobre Mí"}:</h2>
@@ -58,6 +60,12 @@ const { t } = Astro.props;
     font-weight: 700;
     margin: 0.5rem 0;
     margin-left: auto;
+  }
+
+  @keyframes rot {
+    to {
+      rotate: 360deg;
+    }
   }
 
   /* Sección 'Sobre Mí' en la segunda fila */

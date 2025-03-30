@@ -1,6 +1,11 @@
 ---
-import ShootingStar from "../components/componetsGrids/ShootingStar.astro";
+import TextScramel from "../components/TextScramel.astro";
 import Layout3 from "../layouts/Layout3.astro";
+
+const t = "Hola";
 ---
 
-<Layout3 />
+<Layout3>
+  <TextScramel t={t} />
+  <!-- Botón de cambio de idioma fijo en la esquina inferior derecha -->
+</Layout3>

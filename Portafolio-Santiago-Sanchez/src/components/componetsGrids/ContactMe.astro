@@ -1,5 +1,9 @@
+---
+const { t } = Astro.props;
+---
+
 <div class="container">
-  <h1>FormSubmit Demo</h1>
+  <h1>{t?.ContactMe}</h1>
   <form
     action="https://formsubmit.co/bccb837118903122749568394ce06bb1"
     method="POST"
@@ -34,7 +38,7 @@
         rows="5"
         required></textarea>
     </div>
-    <button type="submit" class="btn">Form</button>
+    <button type="submit" class="btn">{t.Enviar}</button>
 
     <input
       type="hidden"
@@ -54,33 +58,38 @@
 
 <style>
   .container {
-    background: rgba(49, 122, 20, 0.171);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 100%;
   }
 
   h1 {
     text-align: center;
-    color: #f7f3f3;
+    color: #ffffff;
   }
 
   .form-control {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid #eec50d;
+    border: 1px solid #f0f0f063;
     border-radius: 5px;
     font-size: 16px;
+    background-color: #287e1db6;
+    color: rgb(235, 248, 232);
+  }
+
+  .form-control::placeholder {
+    color: white;
+    opacity: 1;
   }
 
   .btn {
     width: 100%;
     padding: 10px;
-    background: #65e632;
-    color: white;
+    background: #155f0e;
+    color: rgba(232, 252, 226, 0.918);
     border: none;
     border-radius: 5px;
     font-size: 18px;
@@ -89,6 +98,7 @@
   }
 
   .btn:hover {
-    background: #0056b3;
+    background: #0057b3bd;
+    border: solid 1px rgba(255, 255, 255, 0.425);
   }
 </style>

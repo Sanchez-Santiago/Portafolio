@@ -9,6 +9,8 @@
     },
     "Contact": "CONTACTO",
     "TituleProyects": "Proyectos",
+    "ContactMe": "Contactame",
+    "Enviar": "Enviar",
     "Cards": {
       "Cards1": {
         "title": "Simulador ARM",
@@ -50,6 +52,8 @@
     },
     "Contact": "CONTACT",
     "TituleProyects": "Proyects",
+    "ContactMe": "Contact Me",
+    "Enviar": "Enviar",
     "Cards": {
       "Cards1": {
         "title": "Simulador ARM",
