@@ -117,19 +117,35 @@ const { t } = Astro.props as Props;
 <style>
   @import url("https://fonts.googleapis.com/css?family=Roboto+Mono:100");
   .container {
-    height: 55%;
+    /* Dimensiones fijas */
     width: 100%;
+    max-width: 800px; /* O el ancho máximo que prefieras */
+    height: 120px; /* Altura fija */
+    margin: 0 auto; /* Centrado */
+
+    /* Flexbox para centrado */
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
+
+    /* Contenido excedente */
+    overflow: hidden;
+    padding: 0.5rem;
+    box-sizing: border-box;
   }
+
   .text {
     font-family: "Roboto Mono", monospace;
     font-weight: 100;
     font-size: 2rem;
     color: #fafafa;
+
+    /* Control de texto */
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 100%;
   }
+
   .dud {
     color: #757575;
   }
