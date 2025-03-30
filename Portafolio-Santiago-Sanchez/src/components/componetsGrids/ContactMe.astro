@@ -1,0 +1,94 @@
+<div class="container">
+  <h1>FormSubmit Demo</h1>
+  <form
+    action="https://formsubmit.co/bccb837118903122749568394ce06bb1"
+    method="POST"
+  >
+    <div class="form-group">
+      <div class="form-row">
+        <div class="col">
+          <input
+            type="text"
+            name="name"
+            class="form-control"
+            placeholder="Full Name"
+            required
+          />
+        </div>
+        <div class="col">
+          <input
+            type="email"
+            name="email"
+            class="form-control"
+            placeholder="Email Address"
+            required
+          />
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <textarea
+        placeholder="Your Message"
+        class="form-control"
+        name="message"
+        rows="5"
+        required></textarea>
+    </div>
+    <button type="submit" class="btn">Form</button>
+
+    <input
+      type="hidden"
+      name="_next"
+      value="https://portafolio-santiago-sanchez.netlify.app/es/"
+    />
+
+    <input type="hidden" name="_captcha" value="false" />
+
+    <input
+      type="hidden"
+      name="_autoresponse"
+      value="¡Gracias por contactarte conmigo! En breve te contestaré lo antes posible."
+    />
+  </form>
+</div>
+
+<style>
+  .container {
+    background: rgba(49, 122, 20, 0.171);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+  }
+
+  h1 {
+    text-align: center;
+    color: #f7f3f3;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #eec50d;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 10px;
+    background: #65e632;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .btn:hover {
+    background: #0056b3;
+  }
+</style>
