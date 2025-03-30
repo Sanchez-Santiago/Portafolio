@@ -1,5 +1,6 @@
 ---
 import santiagoImg from "../../assets/Santiago-Sanchez.jpeg";
+import TextScramel from "../TextScramel.astro";
 const { t } = Astro.props;
 ---
 
@@ -12,8 +13,9 @@ const { t } = Astro.props;
       {t?.header?.name || "Nombre por defecto"}
     </h1>
   </div>
-  <div id="about" class="cont">
-    <h2 id="sobre-mi">{t?.about?.title || "Sobre Mí"}:</h2>
+  <div class="cont">
+    <TextScramel t={t} />
+    <h2 id="about" id="sobre-mi">{t?.about?.title || "Sobre Mí"}:</h2>
     <p id="parrafo">
       {t?.about?.text || "Texto de presentación por defecto"}
     </p>

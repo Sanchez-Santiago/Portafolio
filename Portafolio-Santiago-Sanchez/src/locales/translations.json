@@ -40,8 +40,19 @@
         "link": "https://me-perdonas-porfa.netlify.app/",
         "technology": "Astro"
       }
-    }
+    },
+    "phrases": [
+    "Apasionado por la tecnología",
+    "Cada línea de código cuenta",
+    "Construyendo el futuro, un pixel a la vez",
+    "El código es mi lienzo",
+    "Innovar para transformar",
+    "Conectando ideas con tecnología",
+    "Transformando desafíos en soluciones"
+  ]
   },
+
+
   "en": {
     "header": {
       "name": "SANTIAGO SANCHEZ"
@@ -83,6 +94,15 @@
         "link": "https://me-perdonas-porfa.netlify.app/",
         "technology": "Astro"
       }
-    }
+    },
+     "phrases": [
+    "Passionate about technology",
+    "Every line of code matters",
+    "Building the future, one pixel at a time",
+    "Code is my canvas",
+    "Innovate to transform",
+    "Connecting ideas with technology",
+    "Turning challenges into solutions"
+  ]
   }
 }

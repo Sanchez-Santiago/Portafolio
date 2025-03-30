@@ -1,12 +1,17 @@
 ---
-const { t } = Astro.props;
+interface Props {
+  t: {
+    phrases: string[]; // <- Así se tipa correctamente
+  };
+}
+const { t } = Astro.props as Props;
+// t.phrases es tu array de strings
 ---
 
 <script>
   // ——————————————————————————————————————————————————
   // TextScramble
   // ——————————————————————————————————————————————————
-
   class TextScramble {
     el: HTMLElement;
     chars: string;
@@ -34,20 +39,19 @@ const { t } = Astro.props;
     setText(newText: string): Promise<void> {
       const oldText = this.el.innerText;
       const length = Math.max(oldText.length, newText.length);
-      return new Promise<void>((resolve) => {
-        this.resolve = resolve;
-        this.queue = [];
-        for (let i = 0; i < length; i++) {
-          const from = oldText[i] || "";
-          const to = newText[i] || "";
-          const start = Math.floor(Math.random() * 40);
-          const end = start + Math.floor(Math.random() * 40);
-          this.queue.push({ from, to, start, end });
-        }
-        cancelAnimationFrame(this.frameRequest);
-        this.frame = 0;
-        this.update();
-      });
+      const promise = new Promise<void>((resolve) => (this.resolve = resolve));
+      this.queue = [];
+      for (let i = 0; i < length; i++) {
+        const from = oldText[i] || "";
+        const to = newText[i] || "";
+        const start = Math.floor(Math.random() * 40);
+        const end = start + Math.floor(Math.random() * 40);
+        this.queue.push({ from, to, start, end });
+      }
+      cancelAnimationFrame(this.frameRequest);
+      this.frame = 0;
+      this.update();
+      return promise;
     }
 
     update(): void {
@@ -85,63 +89,46 @@ const { t } = Astro.props;
   // ——————————————————————————————————————————————————
   // Example
   // ——————————————————————————————————————————————————
+  document.addEventListener("DOMContentLoaded", () => {
+    const el = document.querySelector(".text") as HTMLElement | null; // 👈 Agregamos " | null"
 
-  const phrases = [
-    "Dev",
-    "sooner or later",
-    "you're going to realize",
-    "just as I did",
-    "that there's a difference",
-    "between knowing the path",
-    "and walking the path",
-  ];
+    if (!el) return; // 👈 Si el elemento no existe, salimos de la función.
 
-  const el = document.querySelector(".text") as HTMLElement | null;
-  if (!el) {
-    throw new Error("El elemento con la clase '.text' no fue encontrado.");
-  }
-  const fx = new TextScramble(el);
+    const phrases = JSON.parse(el.dataset.phrases || "[]"); // 👈 Convertimos la cadena en un array
 
-  let counter = 0;
-  const next = () => {
-    fx.setText(phrases[counter]).then(() => {
-      setTimeout(next, 800);
-    });
-    counter = (counter + 1) % phrases.length;
-  };
+    const fx = new TextScramble(el);
+    let counter = 0;
 
-  next();
+    const next = () => {
+      fx.setText(phrases[counter]).then(() => {
+        setTimeout(next, 800);
+      });
+      counter = (counter + 1) % phrases.length;
+    };
+
+    next();
+  });
 </script>
 
 <div class="container">
-  <div class="text">{t}</div>
+  <div class="text" data-phrases={JSON.stringify(t.phrases ?? [])}></div>
 </div>
 
 <style>
   @import url("https://fonts.googleapis.com/css?family=Roboto+Mono:100");
-
-  html,
-  body {
-    font-family: "Roboto Mono", monospace;
-    background: #212121;
-    height: 100%;
-    margin: 0;
-  }
-
   .container {
-    height: 100%;
+    height: 50%;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-
   .text {
+    font-family: "Roboto Mono", monospace;
     font-weight: 100;
     font-size: 28px;
     color: #fafafa;
   }
-
   .dud {
     color: #757575;
   }
