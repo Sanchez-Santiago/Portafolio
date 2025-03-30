@@ -11,6 +11,7 @@ import DogGrid from "../../components/componetsGrids/DogGrid.astro";
 import ClokGrid from "../../components/componetsGrids/ClockGrid.astro";
 import CardsGrid from "../../components/componetsGrids/CardsGrid.astro";
 import ShootingStar from "../../components/componetsGrids/ShootingStar.astro";
+import ContactMe from "../../components/componetsGrids/Contact_me.astro";
 
 // 1. Definir tipo para las traducciones
 type Translations = typeof translations;
@@ -56,7 +57,9 @@ const t = translations[currentLang];
     </div>
     <div class="grid-item item-30">30</div>
     <div class="grid-item item-31">31</div>
-    <div class="grid-item item-32">32</div>
+    <div class="grid-item item-32">
+      <ContactMe />
+    </div>
   </div>
 
   <!-- Botón de cambio de idioma fijo en la esquina inferior derecha -->
