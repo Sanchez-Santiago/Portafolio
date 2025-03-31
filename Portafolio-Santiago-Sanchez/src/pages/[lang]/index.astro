@@ -12,6 +12,7 @@ import ClokGrid from "../../components/componetsGrids/ClockGrid.astro";
 import CardsGrid from "../../components/componetsGrids/CardsGrid.astro";
 import ShootingStar from "../../components/componetsGrids/ShootingStar.astro";
 import ContactMe from "../../components/componetsGrids/ContactMe.astro";
+import EarthDay from "../../components/componetsGrids/EarthDay.astro";
 
 // 1. Definir tipo para las traducciones
 type Translations = typeof translations;
@@ -56,7 +57,9 @@ const t = translations[currentLang];
       <Contact t={t} />
     </div>
     <div class="grid-item item-30">30</div>
-    <div class="grid-item item-31">31</div>
+    <div class="grid-item item-31">
+      <EarthDay />
+    </div>
     <div class="grid-item item-32">
       <ContactMe t={t} />
     </div>

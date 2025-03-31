@@ -101,7 +101,7 @@ const { t } = Astro.props as Props;
 
     const next = () => {
       fx.setText(phrases[counter]).then(() => {
-        setTimeout(next, 1000);
+        setTimeout(next, 2000);
       });
       counter = (counter + 1) % phrases.length;
     };
@@ -120,7 +120,7 @@ const { t } = Astro.props as Props;
     /* Dimensiones fijas */
     width: 100%;
     max-width: 800px; /* O el ancho máximo que prefieras */
-    height: 120px; /* Altura fija */
+    height: 150px; /* Altura fija */
     margin: 0 auto; /* Centrado */
 
     /* Flexbox para centrado */
