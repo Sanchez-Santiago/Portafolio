@@ -9,7 +9,7 @@
     },
     "Contact": "CONTACTO",
     "TituleProyects": "Proyectos",
-    "ContactMe": "Contactame",
+    "ContactMe": "Contáctame",
     "Enviar": "Enviar",
     "Cards": {
       "Cards1": {
@@ -42,16 +42,15 @@
       }
     },
     "phrases": [
-    "Apasionado por la tecnología",
-    "Cada línea de código cuenta",
-    "Construyendo el futuro, un pixel a la vez",
-    "El código es mi lienzo",
-    "Innovar para transformar",
-    "Conectando ideas con tecnología",
-    "Transformando desafíos en soluciones"
-  ]
+      "Apasionado por la tecnología",
+      "Cada línea de código cuenta",
+      "Construyendo el futuro, un pixel a la vez",
+      "El código es mi lienzo",
+      "Innovar para transformar",
+      "Conectando ideas con tecnología",
+      "Transformando desafíos en soluciones"
+    ]
   },
-
 
   "en": {
     "header": {
@@ -62,47 +61,47 @@
       "text": "I am a passionate developer, always seeking new challenges. I love learning, creating digital innovations, and transforming ideas into creative and functional solutions, digit by digit and code by code."
     },
     "Contact": "CONTACT",
-    "TituleProyects": "Proyects",
+    "TituleProyects": "Projects",
     "ContactMe": "Contact Me",
-    "Enviar": "Enviar",
+    "Enviar": "Send",
     "Cards": {
       "Cards1": {
-        "title": "Simulador ARM",
-        "text": "Texto de la tarjeta 1",
+        "title": "ARM Simulator",
+        "text": "An emulator for the ARM architecture, developed in Rust. This project allows users to execute ARM assembly code in a controlled environment, visualizing memory states and register values. A powerful tool for understanding low-level computer architecture and assembly programming.",
         "image": "/assets/Proyects/ARM.webp",
         "link": "https://github.com/Sanchez-Santiago/Simulador-ARM-",
         "technology": "Rust"
       },
       "Cards2": {
-        "title": "Juego de la Vida",
-        "text": "Texto de la tarjeta 1",
+        "title": "Game of Life",
+        "text": "Interactive implementation of Conway's famous Game of Life, developed in Java. It allows users to design their own patterns, generate random configurations, and control the simulation with options to start, pause, and restart the process. A fascinating visual experience of cellular automata in action.",
         "image": "/assets/Proyects/Juego_De_La_Vida.webp",
         "link": "https://github.com/Sanchez-Santiago/Juago-De-La-Vida",
         "technology": "Java"
       },
       "Cards3": {
-        "title": "San Valentin",
-        "text": "Texto de la tarjeta 1",
+        "title": "Valentine's Day",
+        "text": "Interactive webpage designed to invite someone to be my Valentine, with an attractive design and a personalized experience to make the proposal even more special.",
         "image": "/assets/Proyects/San_Valentin.webp",
         "link": "https://san-valentin-ss.netlify.app/",
         "technology": "React"
       },
       "Cards4": {
-        "title": "Me Perdonas",
-        "text": "Texto de la tarjeta 1",
+        "title": "Forgive Me",
+        "text": "A website designed for those moments when you need to apologize in an original and creative way. With personalized messages, romantic visual effects, and even a 'forgive me' button that can't be ignored. Perfect for calming any emotional storm and restoring peace in your relationship.",
         "image": "/assets/Proyects/Me_Perdonas.webp",
         "link": "https://me-perdonas-porfa.netlify.app/",
         "technology": "Astro"
       }
     },
-     "phrases": [
-    "Passionate about technology",
-    "Every line of code matters",
-    "Building the future, one pixel at a time",
-    "Code is my canvas",
-    "Innovate to transform",
-    "Connecting ideas with technology",
-    "Turning challenges into solutions"
-  ]
+    "phrases": [
+      "Passionate about technology",
+      "Every line of code matters",
+      "Building the future, one pixel at a time",
+      "Code is my canvas",
+      "Innovate to transform",
+      "Connecting ideas with technology",
+      "Turning challenges into solutions"
+    ]
   }
 }
