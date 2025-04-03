@@ -1,32 +1,20 @@
 ---
 interface Props {
-  t: {
-    phrases: string[]; // <- Así se tipa correctamente
-  };
+  t: string[];
+  timeSpeed?: number;
 }
-const { t } = Astro.props as Props;
-// t.phrases es tu array de strings
+
+const { t, timeSpeed } = Astro.props;
+const speed = timeSpeed ?? 2000; // Valor por defecto en caso de no definirse
+const phrases = t || [];
 ---
 
-<script>
+<script define:vars={{ speed, phrases }}>
   // ——————————————————————————————————————————————————
   // TextScramble
   // ——————————————————————————————————————————————————
   class TextScramble {
-    el: HTMLElement;
-    chars: string;
-    queue: Array<{
-      from: string;
-      to: string;
-      start: number;
-      end: number;
-      char?: string;
-    }>;
-    frame: number;
-    frameRequest: number;
-    resolve: () => void;
-
-    constructor(el: HTMLElement) {
+    constructor(el) {
       this.el = el;
       this.chars = "!<>-_\\/[]{}—=+*^?#________";
       this.queue = [];
@@ -36,10 +24,10 @@ const { t } = Astro.props as Props;
       this.update = this.update.bind(this);
     }
 
-    setText(newText: string): Promise<void> {
+    setText(newText) {
       const oldText = this.el.innerText;
       const length = Math.max(oldText.length, newText.length);
-      const promise = new Promise<void>((resolve) => (this.resolve = resolve));
+      const promise = new Promise((resolve) => (this.resolve = resolve));
       this.queue = [];
       for (let i = 0; i < length; i++) {
         const from = oldText[i] || "";
@@ -54,7 +42,7 @@ const { t } = Astro.props as Props;
       return promise;
     }
 
-    update(): void {
+    update() {
       let output = "";
       let complete = 0;
       for (let i = 0, n = this.queue.length; i < n; i++) {
@@ -81,7 +69,7 @@ const { t } = Astro.props as Props;
       }
     }
 
-    randomChar(): string {
+    randomChar() {
       return this.chars[Math.floor(Math.random() * this.chars.length)];
     }
   }
@@ -90,18 +78,16 @@ const { t } = Astro.props as Props;
   // Example
   // ——————————————————————————————————————————————————
   document.addEventListener("DOMContentLoaded", () => {
-    const el = document.querySelector(".text") as HTMLElement | null; // 👈 Agregamos " | null"
+    const el = document.querySelector(".text");
 
-    if (!el) return; // 👈 Si el elemento no existe, salimos de la función.
-
-    const phrases = JSON.parse(el.dataset.phrases || "[]"); // 👈 Convertimos la cadena en un array
+    if (!el) return; // Si el elemento no existe, salimos de la función.
 
     const fx = new TextScramble(el);
     let counter = 0;
 
     const next = () => {
       fx.setText(phrases[counter]).then(() => {
-        setTimeout(next, 2000);
+        setTimeout(next, speed);
       });
       counter = (counter + 1) % phrases.length;
     };
@@ -111,42 +97,42 @@ const { t } = Astro.props as Props;
 </script>
 
 <div class="container">
-  <div class="text" data-phrases={JSON.stringify(t.phrases ?? [])}></div>
+  <div class="text"></div>
 </div>
 
 <style>
   @import url("https://fonts.googleapis.com/css?family=Roboto+Mono:100");
   .container {
-    /* Dimensiones fijas */
     width: 100%;
-    max-width: 800px; /* O el ancho máximo que prefieras */
-    height: 150px; /* Altura fija */
-    margin: 0 auto; /* Centrado */
-
-    /* Flexbox para centrado */
+    flex-grow: 1;
+    min-width: 0;
+    max-width: 800px;
+    min-height: 180px; /* Altura mínima */
+    margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
-
-    /* Contenido excedente */
-    overflow: hidden;
+    overflow: visible; /* Permitir que se muestre el contenido extra */
     padding: 0.5rem;
     box-sizing: border-box;
   }
 
   .text {
-    font-family: "Roboto Mono", monospace;
-    font-weight: 100;
-    font-size: 2rem;
-    color: #fafafa;
-
-    /* Control de texto */
+    font-family: inherit; /* Hereda la fuente del padre */
+    font-weight: inherit; /* Hereda el peso de fuente del padre */
+    font-size: inherit; /* Hereda el tamaño de fuente del padre */
+    color: inherit; /* Hereda el color del padre */
     text-overflow: ellipsis;
     display: inline-block;
     max-width: 100%;
   }
 
   .dud {
-    color: #757575;
+    color: rgba(
+      255,
+      255,
+      255,
+      0.5
+    ); /* Color más suave para los caracteres aleatorios */
   }
 </style>

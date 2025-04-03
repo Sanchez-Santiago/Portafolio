@@ -1,28 +1,17 @@
 ---
 import welom from "../locales/welcome.json";
+import t from "../locales/welcome.json";
+
+import TextScramel from "./effect/TextScramel.astro";
 const translationsJSON = JSON.stringify(welom);
 ---
 
 <div id="container">
-  <a href="/es" id="welcome">Welcome</a>
+  <a href="/es" class="welcome" id="welcome">
+    <TextScramel t={t.welcome} timeSpeed={1000} />
+  </a>
 </div>
-<script define:vars={{ translationsJSON }}>
-  // Usar define:vars para pasar la variable del contexto de Astro al script
-  const translations = JSON.parse(translationsJSON);
-  console.log("Translations:", translations);
-  const keys = Object.keys(translations);
-  let index = 0;
-  function updateText() {
-    const welcomeEl = document.getElementById("welcome");
-    if (welcomeEl) {
-      welcomeEl.innerText = translations[keys[index]];
-    }
-    index = (index + 1) % keys.length;
-  }
-  // Cambiar a 2 segundos (2000ms) como solicitaste
-  updateText();
-  setInterval(updateText, 2000);
-</script>
+
 <style>
   html,
   body {
@@ -39,7 +28,8 @@ const translationsJSON = JSON.stringify(welom);
     align-items: center;
     backdrop-filter: blur(5px); /* Blur en el contenedor */
   }
-  a {
+  .welcome,
+  .welcome * {
     font-family: "Alfa Slab One", serif;
     font-weight: 400;
     font-style: normal;
@@ -51,7 +41,7 @@ const translationsJSON = JSON.stringify(welom);
     text-decoration: none;
     /* background-color: rgba(0, 123, 255, 0.5); /* Transparencia */
     color: #fff;
-    font-size: 3rem;
+    font-size: 4rem;
     border-radius: 15px; /* Bordes redondeados */
     transition:
       background-color 0.3s ease,
@@ -61,7 +51,9 @@ const translationsJSON = JSON.stringify(welom);
     border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil */
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Sombra difuminada */
   }
+
   a:hover {
+    border: 2px solid rgba(255, 255, 255, 0.158); /* Borde sutil */
     /* background-color: rgba(0, 86, 179, 0.7); /* Transparencia al hacer hover */
     backdrop-filter: blur(12px); /* Aumentar blur al hover */
     -webkit-backdrop-filter: blur(12px);
