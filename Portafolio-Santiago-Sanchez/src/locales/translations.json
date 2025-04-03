@@ -49,7 +49,16 @@
       "Innovar para transformar",
       "Conectando ideas con tecnología",
       "Transformando desafíos en soluciones"
-    ]
+    ],
+    "Experence": "Experiencia",
+    "ExperenceCards":{
+      "ExpCard":{
+        "Empresa": "Arias Perez SAS",
+        "PuestoRol": "Tecnico Electromecanico",
+        "Descripcion": "Mantenimiento a intalaciones electrica y creacion de nuevas instalaciones electriacas",
+        "Fecha": "octubre de 2020 a diciembre de 2021"
+      }
+    }
   },
 
   "en": {
@@ -102,6 +111,15 @@
       "Innovate to transform",
       "Connecting ideas with technology",
       "Turning challenges into solutions"
-    ]
+    ],
+    "Experence": "Experience",
+    "ExperenceCards":{
+      "ExpCard":{
+        "Empresa": "Arias Perez SAS",
+        "PuestoRol": "Tecnico Electromecanico",
+        "Descripcion": "Mantenimiento a intalaciones electrica y creacion de nuevas instalaciones electriacas",
+        "Fecha": "octubre de 2020 a diciembre de 2021"
+      }
+    }
   }
 }

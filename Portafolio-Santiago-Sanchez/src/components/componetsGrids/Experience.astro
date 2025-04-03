@@ -1,0 +1,45 @@
+---
+const { t } = Astro.props;
+const ExperenceCards = (
+  t && t.ExperenceCards ? Object.values(t.ExperenceCards) : []
+) as any[];
+---
+
+<div class="conteiner_experience">
+  <h1 class="titulo">{t.Experence}</h1>
+  <div class="cardsExp">
+    {
+      ExperenceCards.map((card: any) => (
+        <div class="card">
+          <h2>{card.Empresa}</h2>
+          <h3>{card.PuestoRol}</h3>
+          <p>{card.Descripcion}</p>
+          <h3>{card.Fecha}</h3>
+        </div>
+      ))
+    }
+  </div>
+</div>
+<style>
+  .conteiner_experience {
+    align-items: center;
+    justify-items: center;
+  }
+
+  .cardsExp {
+    align-items: center;
+    justify-items: center;
+  }
+
+  .card {
+    align-items: center;
+    justify-items: center;
+  }
+
+  .titulo {
+    font-family: "Teko", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-size: 3rem;
+  }
+</style>
