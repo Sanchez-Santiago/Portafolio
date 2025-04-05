@@ -1,128 +1,82 @@
+---
+import SolarSystem from "../components/effect/SolarSystem.astro";
+const { title = "Página con Animación de Estrellas" } = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg" href="/My-Logo3.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro Basics</title>
-    <!-- Precarga -->
-    <link
-      rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Sixtyfour&family=Roboto:wght@100;300&display=swap"
-      as="style"
-    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Anton&family=Boldonse&family=Doto:wght@100..900&family=Lilita+One&family=Permanent+Marker&family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&family=Sixtyfour+Convergence&family=Tektur:wght@400..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Anton&family=Boldonse&family=Doto:wght@100..900&family=Lilita+One&family=Oswald:wght@200..700&family=Permanent+Marker&family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&family=Sixtyfour+Convergence&family=Teko:wght@300..700&display=swap"
       rel="stylesheet"
     />
-
-    <style is:global>
-      @import url("https://fonts.googleapis.com/css2?family=Sixtyfour&family=Roboto:wght@100;300&display=swap");
-
-      body {
-        margin: 0;
-        padding: 0;
-        color: #fff;
-        font-family: "Roboto", sans-serif; /* Solo fuente base */
-        position: relative;
-        min-height: 100vh;
-      }
-
-      /* Capas de fondo */
-      .background {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-size: cover;
-        background-position: center;
-        transition:
-          opacity 2s ease-in-out,
-          filter 2s ease-in-out;
-        filter: blur(8px);
-        opacity: 0;
-        z-index: -2;
-      }
-
-      .background.active {
-        opacity: 1;
-        filter: blur(0);
-      }
-
-      /* Degradado overlay */
-      .gradient-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          45deg,
-          rgba(0, 0, 0, 0.7) 0%,
-          rgba(100, 0, 100, 0.3) 100%
-        );
-        z-index: -1;
-      }
-    </style>
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <style lang="scss"></style>
   </head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      color: #fff;
+      background-color: rgb(12, 32, 1);
+      font-family: Arial, sans-serif;
+      position: relative;
+      min-height: 100vh;
+      background: linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(100, 0, 100, 0.3) 100%
+      );
+    }
+
+    /* Capas de fondo */
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      transition:
+        opacity 2s ease-in-out,
+        filter 2s ease-in-out;
+      filter: blur(8px);
+      opacity: 0;
+      z-index: -2;
+    }
+
+    .background.active {
+      opacity: 1;
+      filter: blur(0);
+    }
+
+    /* Degradado overlay */
+    .gradient-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(100, 0, 100, 0.3) 100%
+      );
+      z-index: -1;
+    }
+  </style>
 
   <body>
+    <SolarSystem />
+
+    <!-- Contenido principal -->
     <slot />
-
-    <!-- Capas de fondo -->
-    <div class="background active"></div>
-    <div class="background"></div>
-
-    <!-- Overlay de degradado -->
-    <div class="gradient-overlay"></div>
-
-    <script>
-      const images = [
-        "/assets/Wallpaper/imagen1.webp",
-        "/assets/Wallpaper/imagen2.webp",
-        "/assets/Wallpaper/imagen3.webp",
-        "/assets/Wallpaper/imagen4.webp",
-        "/assets/Wallpaper/imagen5.webp",
-        "/assets/Wallpaper/imagen6.webp",
-        "/assets/Wallpaper/imagen7.webp",
-        "/assets/Wallpaper/imagen8.webp",
-        "/assets/Wallpaper/imagen9.webp",
-        "/assets/Wallpaper/imagen10.webp",
-        "/assets/Wallpaper/imagen11.webp",
-        "/assets/Wallpaper/imagen12.webp",
-        "/assets/Wallpaper/imagen13.webp",
-      ];
-
-      const backgrounds = document.querySelectorAll(
-        ".background"
-      ) as NodeListOf<HTMLElement>;
-      let currentActive = 0;
-      let index = 1;
-
-      // Configuración inicial
-      backgrounds[0].style.backgroundImage = `url(${images[0]})`;
-
-      function cambiarFondo() {
-        const nextActive = 1 - currentActive;
-
-        // Prepara la siguiente imagen con type assertion
-        (backgrounds[nextActive] as HTMLElement).style.backgroundImage =
-          `url(${images[index]})`;
-
-        // Transición
-        backgrounds[nextActive].classList.add("active");
-        backgrounds[currentActive].classList.remove("active");
-
-        // Actualiza índices
-        currentActive = nextActive;
-        index = (index + 1) % images.length;
-      }
-
-      setInterval(cambiarFondo, 5000);
-    </script>
   </body>
 </html>

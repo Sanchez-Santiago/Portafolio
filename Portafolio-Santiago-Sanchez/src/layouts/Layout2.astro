@@ -1,10 +1,11 @@
 ---
-import SolarSystem from "../components/effect/SolarSystem.astro";
+import StarAnimation from "../components/effect/StarAnimation.astro";
+
 const { title = "Página con Animación de Estrellas" } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -12,71 +13,158 @@ const { title = "Página con Animación de Estrellas" } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Anton&family=Boldonse&family=Doto:wght@100..900&family=Lilita+One&family=Oswald:wght@200..700&family=Permanent+Marker&family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&family=Sixtyfour+Convergence&family=Teko:wght@300..700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Anton&family=Boldonse&family=Doto:wght,ROND@100..900,2&family=Lilita+One&family=Oswald:wght@200..700&family=Permanent+Marker&family=Pixelify+Sans:wght@400..700&family=Sixtyfour+Convergence&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Teko:wght@300..700&display=swap"
       rel="stylesheet"
     />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
     <style lang="scss"></style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
   </head>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      color: #fff;
-      background-color: rgb(12, 32, 1);
-      font-family: Arial, sans-serif;
-      position: relative;
-      min-height: 100vh;
-      background: linear-gradient(
-        45deg,
-        rgba(0, 0, 0, 0.7) 0%,
-        rgba(100, 0, 100, 0.3) 100%
-      );
-    }
-
-    /* Capas de fondo */
-    .background {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      transition:
-        opacity 2s ease-in-out,
-        filter 2s ease-in-out;
-      filter: blur(8px);
-      opacity: 0;
-      z-index: -2;
-    }
-
-    .background.active {
-      opacity: 1;
-      filter: blur(0);
-    }
-
-    /* Degradado overlay */
-    .gradient-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-        45deg,
-        rgba(0, 0, 0, 0.7) 0%,
-        rgba(100, 0, 100, 0.3) 100%
-      );
-      z-index: -1;
-    }
-  </style>
-
   <body>
-    <SolarSystem />
-
-    <!-- Contenido principal -->
+    <StarAnimation />
     <slot />
+    <script is:inline>
+      document.addEventListener("DOMContentLoaded", () => {
+        const maxStars = 300;
+        let starsCount = 0;
+        const stars = [];
+
+        const canvas = document.getElementById("animation-canvas");
+        const canvasSpace = document.getElementById("animation-space-canvas");
+        const ctx = canvasSpace.getContext("2d");
+        const canvas2 = initCanvasCachedGradient();
+
+        function random(min, max) {
+          if (arguments.length < 2) {
+            max = min;
+            min = 0;
+          }
+          if (min > max) {
+            const hold = max;
+            max = min;
+            min = hold;
+          }
+          return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function maxOrbit(x, y) {
+          const max = Math.max(x, y);
+          const diameter = Math.round(Math.sqrt(max * max + max * max));
+          return diameter / 2;
+        }
+
+        class Star {
+          constructor() {
+            const contentWidth = window.innerWidth;
+            const contentHeight = window.innerHeight;
+
+            this.orbitRadius = random(maxOrbit(contentWidth, contentHeight));
+            this.radius = random(60, this.orbitRadius) / 10;
+            this.orbitX = contentWidth / 2;
+            this.orbitY = contentHeight / 2;
+            this.timePassed = random(0, maxStars);
+            this.speed = random(this.orbitRadius) / 200000;
+            this.alpha = random(2, 10) / 10;
+
+            starsCount++;
+            stars[starsCount] = this;
+          }
+
+          draw() {
+            const contentWidth = window.innerWidth;
+            const contentHeight = window.innerHeight;
+
+            const x =
+              Math.sin(this.timePassed) * this.orbitRadius + this.orbitX;
+            const y =
+              Math.cos(this.timePassed) * this.orbitRadius + this.orbitY;
+            const twinkle = random(10);
+
+            if (twinkle === 1 && this.alpha > 0) {
+              this.alpha -= 0.05;
+            } else if (twinkle === 2 && this.alpha < 1) {
+              this.alpha += 0.05;
+            }
+
+            ctx.globalAlpha = this.alpha;
+            ctx.drawImage(
+              canvas2,
+              x - this.radius / 2,
+              y - this.radius / 2,
+              this.radius,
+              this.radius
+            );
+            this.timePassed += this.speed;
+          }
+        }
+
+        function initCanvasCachedGradient() {
+          const canvas2 = document.createElement("canvas");
+          const w2 = (canvas2.width = 100);
+          const h2 = (canvas2.height = 100);
+          const ctx2 = canvas2.getContext("2d");
+
+          const gradientCache = ctx2.createRadialGradient(
+            w2 / 2,
+            h2 / 2,
+            0,
+            w2 / 2,
+            h2 / 2,
+            w2 / 2
+          );
+
+          gradientCache.addColorStop(0.025, "rgba(255, 255, 255, 1)");
+          gradientCache.addColorStop(0.1, "rgba(255, 255, 255, 0.2)");
+          gradientCache.addColorStop(0.25, "rgba(255, 255, 255, 0.07)");
+          gradientCache.addColorStop(1, "transparent");
+
+          ctx2.fillStyle = gradientCache;
+          ctx2.beginPath();
+          ctx2.arc(w2 / 2, h2 / 2, w2 / 2, 0, Math.PI * 2);
+          ctx2.fill();
+
+          return canvas2;
+        }
+
+        function starsAnimation() {
+          ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+          ctx.globalCompositeOperation = "source-over";
+          ctx.globalAlpha = 0.8;
+          ctx.fillStyle = "transparent";
+          ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+          ctx.globalCompositeOperation = "lighter";
+
+          for (let i = 1; i < stars.length; i++) {
+            stars[i].draw();
+          }
+
+          requestAnimationFrame(starsAnimation);
+        }
+
+        function initStarsAnimation() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          canvasSpace.width = window.innerWidth;
+          canvasSpace.height = window.innerHeight;
+
+          for (let i = 0; i < maxStars; i++) {
+            new Star();
+          }
+
+          document.querySelector(".animation-wrapper").classList.add("active");
+          starsAnimation();
+        }
+
+        window.addEventListener("resize", () => {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          canvasSpace.width = window.innerWidth;
+          canvasSpace.height = window.innerHeight;
+        });
+
+        initStarsAnimation();
+      });
+    </script>
   </body>
 </html>

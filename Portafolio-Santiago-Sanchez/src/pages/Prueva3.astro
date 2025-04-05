@@ -1,5 +1,11 @@
 ---
-import MediaPlayer from "../components/MediaPlayer2.astro";
+import t from "../locales/translations.json";
+import Experience from "../components/componetsGrids/Experience.astro";
+import Layout3 from "../layouts/Layout2.astro";
+
+const exp = t.es;
 ---
 
-<MediaPlayer />
+<Layout3>
+  <Experience t={exp} />
+</Layout3>

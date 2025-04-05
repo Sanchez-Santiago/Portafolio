@@ -8,32 +8,32 @@
       "text": "Soy un desarrollador web apasionado, siempre en busca de nuevos retos. Me encanta aprender, innovar y transformar ideas en soluciones digitales efectivas."
     },
     "Contact": "CONTACTO",
-    "TituleProyects": "Proyectos",
+    "ProjectsTitle": "Proyectos",
     "ContactMe": "Contáctame",
     "Enviar": "Enviar",
     "Cards": {
-      "Cards1": {
+      "Card1": {
         "title": "Simulador ARM",
         "text": "Soy un desarrollador apasionado, siempre en busca de nuevos desafíos. Me encanta aprender, crear innovaciones digitales y transformar ideas en soluciones creativas y funcionales, dígito a dígito y código a código.",
         "image": "/assets/Proyects/ARM.webp",
         "link": "https://github.com/Sanchez-Santiago/Simulador-ARM-",
         "technology": "Rust"
       },
-      "Cards2": {
+      "Card2": {
         "title": "Juego de la Vida",
         "text": "Implementación interactiva del famoso Juego de la Vida de Conway, desarrollada en Java. Permite a los usuarios diseñar sus propios patrones, generar configuraciones aleatorias y controlar la simulación con opciones para iniciar, pausar y reiniciar el proceso. Una experiencia visual fascinante de autómatas celulares en acción.",
         "image": "/assets/Proyects/Juego_De_La_Vida.webp",
         "link": "https://github.com/Sanchez-Santiago/Juago-De-La-Vida",
         "technology": "Java"
       },
-      "Cards3": {
-        "title": "San Valentin",
+      "Card3": {
+        "title": "San Valentín",
         "text": "Página web interactiva diseñada para invitar a alguien a ser mi San Valentín, con un diseño atractivo y una experiencia personalizada para hacer la propuesta aún más especial.",
         "image": "/assets/Proyects/San_Valentin.webp",
         "link": "https://san-valentin-ss.netlify.app/",
         "technology": "React"
       },
-      "Cards4": {
+      "Card4": {
         "title": "Me Perdonas",
         "text": "Un sitio web diseñado para aquellos momentos en los que necesitas disculparte de una forma original y creativa. Con mensajes personalizados, efectos visuales románticos y hasta un botón de 'perdóname' que no se puede ignorar. Perfecta para calmar cualquier tormenta emocional y recuperar la paz en tu relación.",
         "image": "/assets/Proyects/Me_Perdonas.webp",
@@ -50,52 +50,80 @@
       "Conectando ideas con tecnología",
       "Transformando desafíos en soluciones"
     ],
-    "Experence": "Experiencia",
-    "ExperenceCards":{
-      "ExpCard":{
+    "Experience": "Experiencia",
+    "ExperienceCards": {
+      "Card1": {
         "Empresa": "Arias Perez SAS",
-        "PuestoRol": "Tecnico Electromecanico",
-        "Descripcion": "Mantenimiento a intalaciones electrica y creacion de nuevas instalaciones electriacas",
-        "Fecha": "octubre de 2020 a diciembre de 2021"
+        "PuestoRol": "Técnico Electromecánico",
+        "Descripcion": "Responsable del mantenimiento de instalaciones eléctricas y la implementación de nuevas infraestructuras, optimizando procesos y asegurando el funcionamiento seguro y eficiente de los sistemas.",
+        "Fecha": "Octubre de 2020 a Diciembre de 2021",
+        "imagen": "/assets/Wallpaper/exp5.webp"
+      },
+      "Card2": {
+        "Empresa": "Continuum Global",
+        "PuestoRol": "Asesor de Portabilidad Numérica y Atención al Cliente",
+        "Descripcion": "Encargado de gestionar procesos de portabilidad numérica y brindar soporte integral a clientes, mejorando la experiencia del usuario y optimizando la comunicación entre áreas técnicas y comerciales.",
+        "Fecha": "Enero de 2023 a actualmente",
+        "imagen": "/assets/Wallpaper/exp9.webp"
+      },
+      "Card3": {
+        "Empresa": "Innovatech Solutions",
+        "PuestoRol": "Desarrollador Web",
+        "Descripcion": "Desarrollo y mantenimiento de aplicaciones web responsivas, integrando soluciones innovadoras y colaborando estrechamente con equipos multidisciplinarios para impulsar la transformación digital.",
+        "Fecha": "Julio de 2024 a actualidad",
+        "imagen": "/assets/Wallpaper/exp2.webp"
+      },
+      "Card4": {
+        "Empresa": "Alpha Motors",
+        "PuestoRol": "Referente de Ventas",
+        "Descripcion": "Responsable de la estrategia y ejecución de ventas, gestionando relaciones con clientes y optimizando procesos comerciales para aumentar la rentabilidad.",
+        "Fecha": "Diciembre de 2022 a Agosto de 2023",
+        "imagen": "/assets/Wallpaper/exp3.webp"
+      },
+      "Card5": {
+        "Empresa": "Market Line S. A.",
+        "PuestoRol": "Empleado de Telemarketing",
+        "Descripcion": "Responsable de la atención al cliente y la ejecución de campañas de telemarketing, contribuyendo a fortalecer la imagen de la marca y mejorar la captación de clientes.",
+        "Fecha": "Enero de 2023 a actualmente",
+        "imagen": "/assets/Wallpaper/exp11.webp"
       }
     }
   },
-
   "en": {
     "header": {
       "name": "SANTIAGO SANCHEZ"
     },
     "about": {
-      "title": "About me",
+      "title": "About Me",
       "text": "I am a passionate developer, always seeking new challenges. I love learning, creating digital innovations, and transforming ideas into creative and functional solutions, digit by digit and code by code."
     },
     "Contact": "CONTACT",
-    "TituleProyects": "Projects",
+    "ProjectsTitle": "Projects",
     "ContactMe": "Contact Me",
     "Enviar": "Send",
     "Cards": {
-      "Cards1": {
+      "Card1": {
         "title": "ARM Simulator",
         "text": "An emulator for the ARM architecture, developed in Rust. This project allows users to execute ARM assembly code in a controlled environment, visualizing memory states and register values. A powerful tool for understanding low-level computer architecture and assembly programming.",
         "image": "/assets/Proyects/ARM.webp",
         "link": "https://github.com/Sanchez-Santiago/Simulador-ARM-",
         "technology": "Rust"
       },
-      "Cards2": {
+      "Card2": {
         "title": "Game of Life",
         "text": "Interactive implementation of Conway's famous Game of Life, developed in Java. It allows users to design their own patterns, generate random configurations, and control the simulation with options to start, pause, and restart the process. A fascinating visual experience of cellular automata in action.",
         "image": "/assets/Proyects/Juego_De_La_Vida.webp",
         "link": "https://github.com/Sanchez-Santiago/Juago-De-La-Vida",
         "technology": "Java"
       },
-      "Cards3": {
+      "Card3": {
         "title": "Valentine's Day",
         "text": "Interactive webpage designed to invite someone to be my Valentine, with an attractive design and a personalized experience to make the proposal even more special.",
         "image": "/assets/Proyects/San_Valentin.webp",
         "link": "https://san-valentin-ss.netlify.app/",
         "technology": "React"
       },
-      "Cards4": {
+      "Card4": {
         "title": "Forgive Me",
         "text": "A website designed for those moments when you need to apologize in an original and creative way. With personalized messages, romantic visual effects, and even a 'forgive me' button that can't be ignored. Perfect for calming any emotional storm and restoring peace in your relationship.",
         "image": "/assets/Proyects/Me_Perdonas.webp",
@@ -112,13 +140,42 @@
       "Connecting ideas with technology",
       "Turning challenges into solutions"
     ],
-    "Experence": "Experience",
-    "ExperenceCards":{
-      "ExpCard":{
+    "Experience": "Experience",
+    "ExperienceCards": {
+      "Card1": {
         "Empresa": "Arias Perez SAS",
-        "PuestoRol": "Tecnico Electromecanico",
-        "Descripcion": "Mantenimiento a intalaciones electrica y creacion de nuevas instalaciones electriacas",
-        "Fecha": "octubre de 2020 a diciembre de 2021"
+        "PuestoRol": "Electromechanical Technician",
+        "Descripcion": "Responsible for maintaining electrical installations and creating new infrastructures.",
+        "Fecha": "October 2020 to December 2021",
+        "imagen": "/assets/Wallpaper/exp5.webp"
+      },
+      "Card2": {
+        "Empresa": "Continuum Global",
+        "PuestoRol": "Number Portability Advisor & Customer Service",
+        "Descripcion": "Managed number portability processes and provided comprehensive support to clients, enhancing user experience and optimizing communication between technical and commercial teams.",
+        "Fecha": "January 2023 to Present",
+        "imagen": "/assets/Wallpaper/exp9.webp"
+      },
+      "Card3": {
+        "Empresa": "Innovatech Solutions",
+        "PuestoRol": "Web Developer",
+        "Descripcion": "Developed and maintained responsive web applications, integrating innovative solutions and working closely with multidisciplinary teams to drive digital transformation.",
+        "Fecha": "July 2024 to Present",
+        "imagen": "/assets/Wallpaper/exp2.webp"
+      },
+      "Card4": {
+        "Empresa": "Alpha Motors",
+        "PuestoRol": "Sales Lead",
+        "Descripcion": "Oversaw sales strategies and execution, managed client relationships, and optimized commercial processes to boost profitability.",
+        "Fecha": "December 2022 to August 2023",
+        "imagen": "/assets/Wallpaper/exp3.webp"
+      },
+      "Card5": {
+        "Empresa": "Market Line S. A.",
+        "PuestoRol": "Telemarketing Representative",
+        "Descripcion": "Provided customer service and executed telemarketing campaigns, helping to strengthen the brand image and improve client acquisition.",
+        "Fecha": "January 2023 to Present",
+        "imagen": "/assets/Wallpaper/exp11.webp"
       }
     }
   }

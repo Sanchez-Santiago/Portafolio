@@ -3,7 +3,6 @@ interface Props {
   t: string[];
   timeSpeed?: number;
 }
-
 const { t, timeSpeed } = Astro.props;
 const speed = timeSpeed ?? 2000; // Valor por defecto en caso de no definirse
 const phrases = t || [];
@@ -79,25 +78,28 @@ const phrases = t || [];
   // ——————————————————————————————————————————————————
   document.addEventListener("DOMContentLoaded", () => {
     const el = document.querySelector(".text");
-
     if (!el) return; // Si el elemento no existe, salimos de la función.
 
+    // Antes de iniciar el efecto, establecemos un tamaño fijo
+    const container = document.querySelector(".text-container");
+
+    // Iniciar efecto
     const fx = new TextScramble(el);
     let counter = 0;
-
     const next = () => {
       fx.setText(phrases[counter]).then(() => {
         setTimeout(next, speed);
       });
       counter = (counter + 1) % phrases.length;
     };
-
     next();
   });
 </script>
 
 <div class="container">
-  <div class="text"></div>
+  <div class="text-container">
+    <div class="text"></div>
+  </div>
 </div>
 
 <style>
@@ -105,34 +107,60 @@ const phrases = t || [];
   .container {
     width: 100%;
     flex-grow: 1;
-    min-width: 1000;
     max-width: 1000px;
-    min-height: 200px; /* Altura mínima */
+    max-height: 500px;
     margin: 0 auto;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start; /* Cambiado a flex-start para alinear a la izquierda */
     align-items: center;
-    overflow: visible; /* Permitir que se muestre el contenido extra */
-    padding: 0.5rem;
+    padding: 1rem;
     box-sizing: border-box;
   }
 
-  .text {
-    font-family: inherit; /* Hereda la fuente del padre */
-    font-weight: inherit; /* Hereda el peso de fuente del padre */
-    font-size: inherit; /* Hereda el tamaño de fuente del padre */
-    color: inherit; /* Hereda el color del padre */
-    text-overflow: ellipsis;
-    display: inline-block;
+  .text-container {
+    display: flex;
+    justify-content: flex-start; /* Cambiado a flex-start para alinear a la izquierda */
+    align-items: center;
+    width: 100%;
     max-width: 100%;
+    height: 4em; /* Altura fija de 4 líneas de texto aproximadamente */
+    overflow: hidden; /* Crucial: oculta todo lo que exceda este contenedor */
+    padding: 0.5rem;
+    box-sizing: border-box;
+    position: relative; /* Para posicionamiento absoluto del texto */
+  }
+
+  .text {
+    position: absolute; /* Saca el texto del flujo normal */
+    width: 100%;
+    max-height: 100%;
+    text-align: left; /* Cambiado a left para alinear a la izquierda */
+    white-space: normal; /* Permite saltos de línea naturales */
+    overflow: hidden; /* Oculta cualquier texto que exceda */
+    text-overflow: ellipsis; /* Muestra puntos suspensivos para texto cortado */
+    display: -webkit-box; /* Para limitar a un número específico de líneas */
+    -webkit-line-clamp: 3; /* Máximo de líneas a mostrar */
+    -webkit-box-orient: vertical; /* Orientación del texto */
+    line-height: 1.3; /* Espaciado entre líneas para mejor legibilidad */
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    color: inherit;
+    left: 0; /* Asegura que el texto comience desde la izquierda */
   }
 
   .dud {
-    color: rgba(
-      255,
-      255,
-      255,
-      0.5
-    ); /* Color más suave para los caracteres aleatorios */
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* Ajustes específicos para dispositivos móviles */
+  @media screen and (max-width: 768px) {
+    .text-container {
+      height: 3.5em; /* Altura ajustada para móviles */
+    }
+
+    .text {
+      -webkit-line-clamp: 2; /* Menos líneas en móviles */
+    }
   }
 </style>
