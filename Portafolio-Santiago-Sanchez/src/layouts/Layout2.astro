@@ -1,5 +1,6 @@
 ---
 import StarAnimation from "../components/effect/StarAnimation.astro";
+import CustomCursor from "../components/effect/CustomCursor.astro";
 
 const { title = "Página con Animación de Estrellas" } = Astro.props;
 ---
@@ -17,44 +18,96 @@ const { title = "Página con Animación de Estrellas" } = Astro.props;
       rel="stylesheet"
     />
     <meta name="generator" content={Astro.generator} />
-    <style lang="scss"></style>
+    <style lang="scss">
+      /* Eliminado el noise-overlay que causaba una sombra rara */
+      html.lenis {
+        height: auto;
+      }
+      
+      .lenis-smooth {
+        scroll-behavior: auto !important;
+      }
+      
+      .lenis-smooth [data-lenis-prevent] {
+        overscroll-behavior: contain;
+      }
+      
+      .lenis-stopped {
+        overflow: hidden;
+      }
+    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
   </head>
   <body>
+    <CustomCursor />
     <StarAnimation />
     <slot />
-    <script is:inline>
-      document.addEventListener("DOMContentLoaded", () => {
-        const maxStars = 300;
-        let starsCount = 0;
-        const stars = [];
+    
+    <script>
+      import Lenis from 'lenis';
+      import { gsap } from "gsap";
+      import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-        const canvas = document.getElementById("animation-canvas");
-        const canvasSpace = document.getElementById("animation-space-canvas");
-        const ctx = canvasSpace.getContext("2d");
-        const canvas2 = initCanvasCachedGradient();
+      gsap.registerPlugin(ScrollTrigger);
 
-        function random(min, max) {
-          if (arguments.length < 2) {
+      // 1. Setup Lenis
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        smoothWheel: true,
+      });
+
+      function raf(time: number) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+
+      requestAnimationFrame(raf);
+
+      // Connect Lenis to ScrollTrigger
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+      gsap.ticker.lagSmoothing(0);
+
+      // 2. Star Animation Logic (Refactored from inline)
+      const maxStars = 300;
+      let starsCount = 0;
+      const stars: any[] = [];
+
+      const canvas = document.getElementById("animation-canvas") as HTMLCanvasElement;
+      const canvasSpace = document.getElementById("animation-space-canvas") as HTMLCanvasElement;
+      
+      if (canvas && canvasSpace) {
+        const ctx = canvasSpace.getContext("2d")!;
+        
+        function random(min: number, max?: number) {
+          if (max === undefined) {
             max = min;
             min = 0;
-          }
-          if (min > max) {
-            const hold = max;
-            max = min;
-            min = hold;
           }
           return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 
-        function maxOrbit(x, y) {
-          const max = Math.max(x, y);
-          const diameter = Math.round(Math.sqrt(max * max + max * max));
+        function maxOrbit(x: number, y: number) {
+          const maxDim = Math.max(x, y);
+          const diameter = Math.round(Math.sqrt(maxDim * maxDim + maxDim * maxDim));
           return diameter / 2;
         }
 
         class Star {
+          orbitRadius: number;
+          radius: number;
+          orbitX: number;
+          orbitY: number;
+          timePassed: number;
+          speed: number;
+          alpha: number;
+
           constructor() {
             const contentWidth = window.innerWidth;
             const contentHeight = window.innerHeight;
@@ -72,13 +125,8 @@ const { title = "Página con Animación de Estrellas" } = Astro.props;
           }
 
           draw() {
-            const contentWidth = window.innerWidth;
-            const contentHeight = window.innerHeight;
-
-            const x =
-              Math.sin(this.timePassed) * this.orbitRadius + this.orbitX;
-            const y =
-              Math.cos(this.timePassed) * this.orbitRadius + this.orbitY;
+            const x = Math.sin(this.timePassed) * this.orbitRadius + this.orbitX;
+            const y = Math.cos(this.timePassed) * this.orbitRadius + this.orbitY;
             const twinkle = random(10);
 
             if (twinkle === 1 && this.alpha > 0) {
@@ -99,11 +147,11 @@ const { title = "Página con Animación de Estrellas" } = Astro.props;
           }
         }
 
-        function initCanvasCachedGradient() {
-          const canvas2 = document.createElement("canvas");
-          const w2 = (canvas2.width = 100);
-          const h2 = (canvas2.height = 100);
-          const ctx2 = canvas2.getContext("2d");
+        const canvas2 = (() => {
+          const c = document.createElement("canvas");
+          const w2 = (c.width = 100);
+          const h2 = (c.height = 100);
+          const ctx2 = c.getContext("2d")!;
 
           const gradientCache = ctx2.createRadialGradient(
             w2 / 2,
@@ -124,8 +172,13 @@ const { title = "Página con Animación de Estrellas" } = Astro.props;
           ctx2.arc(w2 / 2, h2 / 2, w2 / 2, 0, Math.PI * 2);
           ctx2.fill();
 
-          return canvas2;
-        }
+          return c;
+        })();
+
+        let currentScrollY = 0;
+        window.addEventListener("scroll", () => {
+          currentScrollY = window.scrollY;
+        });
 
         function starsAnimation() {
           ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
@@ -135,10 +188,14 @@ const { title = "Página con Animación de Estrellas" } = Astro.props;
           ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
           ctx.globalCompositeOperation = "lighter";
 
+          ctx.save();
+          ctx.translate(0, -currentScrollY * 0.2); 
+
           for (let i = 1; i < stars.length; i++) {
             stars[i].draw();
           }
-
+          
+          ctx.restore();
           requestAnimationFrame(starsAnimation);
         }
 
@@ -152,7 +209,8 @@ const { title = "Página con Animación de Estrellas" } = Astro.props;
             new Star();
           }
 
-          document.querySelector(".animation-wrapper").classList.add("active");
+          const wrapper = document.querySelector(".animation-wrapper");
+          if (wrapper) wrapper.classList.add("active");
           starsAnimation();
         }
 
@@ -164,7 +222,7 @@ const { title = "Página con Animación de Estrellas" } = Astro.props;
         });
 
         initStarsAnimation();
-      });
+      }
     </script>
   </body>
 </html>

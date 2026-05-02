@@ -1,0 +1,154 @@
+---
+import Card from "./Card.astro";
+const { t } = Astro.props as any;
+
+let githubProjects = [];
+try {
+  const res = await fetch('https://api.github.com/users/Sanchez-Santiago/repos?type=public&sort=updated');
+  if (res.ok) {
+    const repos = await res.json();
+    const ownRepos = repos.filter((r: any) => !r.fork);
+    githubProjects = ownRepos.map((repo: any) => ({
+      title: repo.name.replace(/-/g, ' '),
+      text: repo.description || 'No description provided.',
+      link: repo.html_url,
+      technology: repo.language || 'Code',
+      image: `https://opengraph.githubassets.com/1/${repo.owner.login}/${repo.name}`
+    }));
+  }
+} catch (e) {
+  console.error("Error fetching github repos:", e);
+}
+
+const staticCards = (t && t.Cards ? Object.values(t.Cards) : []) as any[];
+const cards = githubProjects.length > 0 ? githubProjects : staticCards;
+---
+
+<div class="projects-section">
+  <h1 class="projects-title">{t.ProjectsTitle}</h1>
+  <div class="projects-grid">
+    {
+      cards.map((card: any, index: number) => (
+        <div class={`project-item ${index >= 6 ? 'hidden-project' : ''}`}>
+          <Card
+            title={card.title}
+            content={card.text}
+            image={card.image}
+            link={card.link}
+            technology={card.technology}
+          />
+        </div>
+      ))
+    }
+  </div>
+  {cards.length > 6 && (
+    <button id="load-more-btn" class="load-more-btn">
+      Ver más
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+    </button>
+  )}
+</div>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Lógica para "Ver Más"
+  const loadMoreBtn = document.getElementById('load-more-btn');
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener('click', () => {
+      const hiddenProjects = document.querySelectorAll('.hidden-project');
+      const projectsToShow = Array.from(hiddenProjects).slice(0, 6);
+      
+      projectsToShow.forEach(project => {
+        project.classList.remove('hidden-project');
+        // Pequeña animación al aparecer
+        gsap.fromTo(project, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 });
+      });
+
+      // Si ya no quedan proyectos ocultos, esconder el botón
+      const remainingHidden = document.querySelectorAll('.hidden-project');
+      if (remainingHidden.length === 0) {
+        loadMoreBtn.style.display = 'none';
+      }
+    });
+  }
+</script>
+
+<style>
+  .projects-section {
+    width: 100%;
+    height: 100%;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .projects-title {
+    font-family: "Teko", sans-serif;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 2rem;
+    background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.4) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    justify-items: center;
+    perspective: 1200px;
+  }
+
+  @media (max-width: 640px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .hidden-project {
+    display: none;
+  }
+
+  .load-more-btn {
+    margin-top: 3rem;
+    padding: 0.8rem 2rem;
+    background: rgba(19, 158, 163, 0.1);
+    border: 1px solid rgba(19, 158, 163, 0.3);
+    border-radius: 50px;
+    color: #fff;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  .load-more-btn:hover {
+    background: rgba(19, 158, 163, 0.3);
+    border-color: #139ea3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(19, 158, 163, 0.2);
+  }
+
+  .load-more-btn svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s;
+  }
+
+  .load-more-btn:hover svg {
+    transform: translateY(2px);
+  }
+</style>

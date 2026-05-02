@@ -1,12 +1,20 @@
 import React from "react";
 
+/**
+ * @param {{ currentLang: string }} props
+ */
 export default function LanguageSwitcher({ currentLang }) {
-  const alternateLang = currentLang === "es" ? "en 🇺🇸" : "es 🇪🇸";
-  const hrefLang = currentLang === "es" ? "en" : "es";
+  const isEs = currentLang === "es";
+  const nextLang = isEs ? "en" : "es";
+  const nextLangLabel = isEs ? "ENGLISH" : "ESPAÑOL";
+  const flag = isEs ? "🇺🇸" : "🇪🇸";
 
   return (
-    <div>
-      <a href={`/${hrefLang}`}>{alternateLang}</a>
+    <div className="language-switcher-wrapper">
+      <a href={`/${nextLang}`} className="lang-link">
+        <span className="lang-text">{nextLangLabel}</span>
+        <span className="lang-flag">{flag}</span>
+      </a>
     </div>
   );
 }

@@ -1,0 +1,202 @@
+---
+const { t } = Astro.props;
+---
+
+<div class="form-wrapper">
+  <div class="form-container">
+    <h1 class="form-title">{t?.ContactMe}</h1>
+    <form
+      class="contact-form"
+      action="https://formsubmit.co/bccb837118903122749568394ce06bb1"
+      method="POST"
+    >
+      <div class="form-grid">
+        <div class="input-group">
+          <input
+            type="text"
+            name="name"
+            class="form-input"
+            placeholder="Full Name"
+            required
+          />
+          <div class="input-glow"></div>
+        </div>
+        <div class="input-group">
+          <input
+            type="email"
+            name="email"
+            class="form-input"
+            placeholder="Email Address"
+            required
+          />
+          <div class="input-glow"></div>
+        </div>
+      </div>
+      
+      <div class="input-group">
+        <textarea
+          placeholder="Your Message"
+          class="form-input form-textarea"
+          name="message"
+          rows="5"
+          required></textarea>
+        <div class="input-glow"></div>
+      </div>
+
+      <button type="submit" class="submit-btn">
+        <span class="btn-text">{t.Enviar}</span>
+        <div class="btn-shine"></div>
+      </button>
+
+      <input
+        type="hidden"
+        name="_next"
+        value="https://portafolio-santiago-sanchez.netlify.app/es/"
+      />
+      <input type="hidden" name="_captcha" value="false" />
+      <input
+        type="hidden"
+        name="_autoresponse"
+        value="¡Gracias por contactarte conmigo! En breve te contestaré lo antes posible."
+      />
+    </form>
+  </div>
+</div>
+
+<style>
+  .form-wrapper {
+    width: 100%;
+    height: 100%;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .form-container {
+    width: 100%;
+    max-width: 100%; /* Permitir que ocupe todo el espacio del item */
+  }
+
+  .form-title {
+    font-family: "Teko", sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.4) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .input-group {
+    position: relative;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 0.95rem;
+    outline: none;
+    transition: background 0.3s, border-color 0.3s;
+    backdrop-filter: blur(10px);
+  }
+
+  .form-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .form-input:focus {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(38, 187, 18, 0.4);
+  }
+
+  .input-glow {
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(90deg, #139ea3, #26bb12);
+    border-radius: 14px;
+    z-index: -1;
+    opacity: 0;
+    scale: 0.95;
+    filter: blur(8px);
+    transition: opacity 0.4s, scale 0.4s;
+  }
+
+  .form-textarea {
+    resize: none;
+    min-height: 150px;
+  }
+
+  .submit-btn {
+    position: relative;
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(90deg, #139ea3, #26bb12);
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(19, 158, 163, 0.3);
+  }
+
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+
+  .btn-text {
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-shine {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .submit-btn:hover .btn-shine {
+    left: 100%;
+  }
+</style>

@@ -1,48 +1,50 @@
-# Astro Starter Kit: Basics
+# Portafolio Sánchez-Santiago 🚀
 
-```sh
-bun create astro@latest -- --template basics
-```
+Portafolio personal construido con **Astro**, **GSAP** y **Bun**. Presenta un diseño de cuadrícula tipo "Bento Box" moderno y premium con efectos de glassmorphism interactivos y animaciones de alto rendimiento.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## ✨ Características Principales
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- **Diseño Bento Grid**: Sistema de cuadrícula dinámico y responsivo para mostrar proyectos, habilidades y experiencia.
+- **Scroll de Lujo**: Desplazamiento ultra suave utilizando **Lenis** para una navegación fluida y profesional.
+- **Cursor Personalizado**: Un cursor interactivo que reacciona a los elementos de la interfaz, mejorando la inmersión.
+- **Efectos de Iluminación**: Spotlight Border Glow en las tarjetas Bento que siguen el cursor del ratón.
+- **Animaciones GSAP**: Animaciones de entrada e interacción fluidas y de alto rendimiento utilizando GSAP y ScrollTrigger.
+- **Diseño Glassmorphism**: Estética de interfaz moderna mediante filtros de desenfoque de fondo, bordes sutiles y texturas de ruido.
+- **Bilingüe (i18n)**: Soporte completo para inglés y español con un selector de idioma personalizado.
+- **Astro & Bun**: Aprovechando la velocidad de Astro y la eficiencia del entorno de ejecución Bun.
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## 🛠️ Estructura del Proyecto
 
 ```text
 /
-├── public/
-│   └── favicon.svg
+├── public/          # Archivos estáticos (imágenes, iconos, fuentes)
 ├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
+│   ├── components/  # Partes reutilizables de la interfaz y unidades Bento
+│   ├── layouts/     # Envoltorios globales de página
+│   ├── locales/     # Archivos de traducción i18n
+│   └── pages/       # Rutas del proyecto ([lang]/index.astro)
 └── package.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🧞 Comandos
 
-## 🧞 Commands
+Todos los comandos se ejecutan desde la raíz del proyecto:
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
+| Comando                   | Acción                                           |
 | :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
+| `bun install`             | Instala las dependencias                         |
+| `bun dev`                 | Inicia el servidor de desarrollo local           |
+| `bun build`               | Construye el sitio para producción               |
+| `bun preview`             | Previsualiza la construcción de producción       |
+| `bun astro check`         | Ejecuta comprobaciones de diagnóstico            |
 
-## 👀 Want to learn more?
+## 🎨 Tecnologías
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- **Framework**: [Astro](https://astro.build/)
+- **Animación**: [GSAP](https://gsap.com/)
+- **Runtime**: [Bun](https://bun.sh/)
+- **Estilos**: Vanilla CSS / SCSS
+- **Iconos**: SVG personalizados y conjuntos de iconos especializados
+
+---
+*Creado por Santiago Sánchez*

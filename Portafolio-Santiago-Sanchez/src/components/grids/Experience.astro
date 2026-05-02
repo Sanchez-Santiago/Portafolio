@@ -1,0 +1,263 @@
+---
+const { t } = Astro.props;
+const ExperenceCards = (
+  t && t.ExperienceCards ? Object.values(t.ExperienceCards) : []
+) as any[];
+---
+
+<div class="experience-wrapper">
+  <div class="experience-container">
+    <div class="header-container">
+      <h1 class="section-title">{t.Experience}</h1>
+    </div>
+    <div class="carousel-wrapper">
+      <button id="prev-btn" class="nav-btn float-left" aria-label="Anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <div class="cards-viewport" id="exp-viewport">
+      <div class="cards-track">
+        {
+          ExperenceCards.map((card: any) => (
+            <div class="exp-card">
+              <div class="card-glass" style={`background-image: url(${card.imagen})`}></div>
+              <div class="card-content">
+                <div class="card-header">
+                  <h2 class="company-name">{card.Empresa}</h2>
+                  <h3 class="role-title">{card.PuestoRol}</h3>
+                </div>
+                <div class="card-body">
+                  <p class="description">{card.Descripcion}</p>
+                  <span class="date">{card.Fecha}</span>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+    <button id="next-btn" class="nav-btn float-right" aria-label="Siguiente">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const viewport = document.getElementById('exp-viewport');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+
+  if (viewport && prevBtn && nextBtn) {
+    const scrollAmount = 350 + 32; // card width + gap
+
+    prevBtn.addEventListener('click', () => {
+      viewport.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      viewport.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+  }
+</script>
+
+<style>
+  .experience-wrapper {
+    width: 100%;
+    height: 100%;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Mantener limpio el borde del bento */
+  }
+
+  .experience-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .section-title {
+    font-family: "Teko", sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0;
+    text-align: left;
+    background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.4) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .carousel-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-btn {
+    background: rgba(19, 158, 163, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    z-index: 10;
+  }
+
+  .float-left {
+    position: absolute;
+    left: 0;
+  }
+
+  .float-right {
+    position: absolute;
+    right: 0;
+  }
+
+  .nav-btn:hover {
+    background: #139ea3;
+    transform: scale(1.1);
+  }
+
+  .nav-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .cards-viewport {
+    width: 100%;
+    overflow-x: auto;
+    padding: 2rem 1rem 4rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(19, 158, 163, 0.4) transparent;
+  }
+
+  .cards-viewport::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .cards-viewport::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #139ea3, #26bb12);
+    border-radius: 10px;
+  }
+
+  .cards-track {
+    display: flex;
+    gap: 2rem;
+    padding-bottom: 1rem;
+  }
+
+  .exp-card {
+    position: relative;
+    flex: 0 0 350px;
+    height: 450px;
+    border-radius: 24px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    cursor: pointer;
+    transition: border-color 0.4s;
+  }
+
+  .exp-card:hover {
+    border-color: rgba(19, 158, 163, 0.5);
+  }
+
+  .card-glass {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px) brightness(0.3);
+    transition: all 0.5s ease;
+    z-index: 0;
+  }
+
+  .exp-card:hover .card-glass {
+    filter: blur(2px) brightness(0.5);
+    transform: scale(1.1);
+  }
+
+  .card-content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .company-name {
+    font-family: "Teko", sans-serif;
+    font-size: 2.8rem;
+    line-height: 1;
+    color: #139ea3;
+    margin: 0;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  }
+
+  .role-title {
+    font-family: "Inter", sans-serif;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.8);
+    margin-top: 0.5rem;
+    font-weight: 500;
+  }
+
+  .card-body {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .exp-card:hover .card-body {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 1.5rem;
+  }
+
+  .date {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(19, 158, 163, 0.2);
+    border: 1px solid rgba(19, 158, 163, 0.3);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #139ea3;
+  }
+
+  @media (max-width: 768px) {
+    .exp-card {
+      flex: 0 0 300px;
+      height: 400px;
+    }
+  }
+</style>
