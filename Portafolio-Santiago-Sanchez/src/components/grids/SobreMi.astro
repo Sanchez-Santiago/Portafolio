@@ -4,100 +4,174 @@ import TextScramel from "../effect/TextScramel.astro";
 const { t } = Astro.props;
 ---
 
-<div id="container">
-  <div id="conte-img-h1" class="cont">
-    <div id="imagen-container">
-      <img id="imagen" src={santiagoImg.src} alt="Logo" />
+<div class="sobre-mi-card">
+  <!-- Cabecera Perfil -->
+  <div class="profile-header">
+    <div class="avatar-container">
+      <img class="avatar" src={santiagoImg.src} alt="Santiago Sanchez" />
     </div>
-    <h1 id="name" class="glitch" data-text="GLITCH">
-      {t?.header?.name || "Nombre por defecto"}
-    </h1>
+    <div class="profile-title">
+      <h1 class="profile-name" data-i18n="header.name">{t?.header?.name || "Santiago Sanchez"}</h1>
+      <span class="profile-role">SOFTWARE DEVELOPER</span>
+    </div>
   </div>
-  <div class="cont">
-    <TextScramel t={t.phrases} timeSpeed={3000} />
-    <h2 id="about" id="sobre-mi">{t?.about?.title || "Sobre Mí"}:</h2>
-    <p id="parrafo">
-      {t?.about?.text || "Texto de presentación por defecto"}
+
+  <!-- Contenido -->
+  <div class="profile-content">
+    <span class="section-tag">INFORMACIÓN</span>
+    <h2 class="section-title" data-i18n="about.title">{t?.about?.title || "Sobre Mí"}</h2>
+    
+    <!-- Animación de frases -->
+    <div class="phrases-scramble">
+      <TextScramel t={t.phrases} timeSpeed={3000} />
+    </div>
+
+    <p class="profile-bio" data-i18n="about.text">
+      {t?.about?.text || "Soy un desarrollador web apasionado, siempre en busca de nuevos retos. Me encanta aprender, innovar y transformar ideas en soluciones digitales efectivas."}
     </p>
   </div>
 
-  <style>
-    /* Contenedor principal simplificado */
-    #container {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem; /* Espacio consistente entre secciones */
-      padding: 0;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    /* Sección superior optimizada */
-    #conte-img-h1 {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      padding: 0 1rem;
-    }
-
-    #imagen-container {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 2px solid white;
-      flex-shrink: 0;
-    }
-
-    #name {
-      font-family: "Doto", sans-serif;
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin: 0;
-      line-height: 1;
-    }
-
-    /* Sección de contenido */
-    .cont {
-      font-family: "Roboto Mono", monospace;
-      font-weight: 100;
-      font-size: 2rem;
-      color: #fafafa;
-      gap: 1rem;
-      padding: 1rem;
-      margin: 0;
-    }
-
-    #about {
-      font-family: "Teko", sans-serif;
-      font-size: 3rem;
-      margin: 0 0 0.5rem 0;
-    }
-
-    #parrafo {
-      font-size: 1.5rem;
-      font-weight: 200;
-      margin: 0;
-      line-height: 1.5;
-    }
-
-    @media (max-width: 600px) {
-      #conte-img-h1 {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
-      }
-
-      #imagen-container {
-        width: 100px;
-        height: 100px;
-      }
-
-      #name {
-        font-size: 2rem;
-      }
-    }
-  </style>
+  <!-- Botones de Acción -->
+  <div class="profile-actions">
+    <a href="/assets/Santiago-Sanchez-CV.pdf" download class="btn btn-primary">
+      Descargar CV
+    </a>
+  </div>
 </div>
+
+<style>
+  .sobre-mi-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    height: 100%;
+    color: #ffffff;
+  }
+
+  /* Cabecera Perfil */
+  .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .avatar-container {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #00ff66;
+    box-shadow: 0 0 18px rgba(0, 255, 102, 0.25);
+    flex-shrink: 0;
+  }
+
+  .avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .profile-title {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .profile-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  .profile-role {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: #00ff66;
+    letter-spacing: 2px;
+    font-weight: 700;
+  }
+
+  /* Contenido */
+  .profile-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .section-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: #555555;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+
+  .section-title {
+    font-family: 'Teko', sans-serif;
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1;
+    color: #ffffff;
+  }
+
+  .phrases-scramble {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: #00ff66;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    text-shadow: 0 0 6px rgba(0, 255, 102, 0.2);
+  }
+
+  .profile-bio {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: #999999;
+    margin: 0.5rem 0 0 0;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* Acciones */
+  .profile-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+  }
+
+  .btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    flex: 1;
+  }
+
+  .btn-primary {
+    background-color: #00ff66;
+    color: #050505;
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+  }
+
+  .btn-primary:hover {
+    background-color: #ffffff;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 600px) {
+    .profile-actions {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+  }
+</style>

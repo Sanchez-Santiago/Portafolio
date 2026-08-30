@@ -1,221 +1,506 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import TextScramel from "../components/effect/TextScramel.astro";
 
-export async function getStaticPaths() {
-  return [
-    { params: { lang: "es" } },
-    { params: { lang: "en" } },
-    { path: "/favicon.ico", _route: false },
-  ];
-}
+const es = {
+  subtitle: "SYSTEM.MISSING_ROUTE",
+  title: "PÁGINA NO ENCONTRADA",
+  funny: "Recargá todas las veces que quieras… esto no va a aparecer.",
+  btn: "Volver al inicio",
+  phrases: [
+    "Estás lejos… esto no es por acá.",
+    "404: esta ruta no existe ni a fuerza de recargar.",
+    "Te perdiste, pero qué buen estilo trajiste.",
+    "Ni Gandalf te encuentra esta página.",
+    "Lo que buscás no está. Probá volver al inicio.",
+  ],
+};
+
+const en = {
+  subtitle: "SYSTEM.MISSING_ROUTE",
+  title: "PAGE NOT FOUND",
+  funny: "Reload as many times as you want… this page isn't coming back.",
+  btn: "Back to home",
+  phrases: [
+    "You're far off… this isn't around here.",
+    "404: this route doesn't exist, no matter how many reloads.",
+    "You got lost, but you brought great style.",
+    "Not even Gandalf can find this page.",
+    "What you're looking for isn't here. Try heading home.",
+  ],
+};
 ---
 
-<Layout title="404">
-  <h1 class="error-code">404</h1>
+<Layout title="404 | Santiago Sanchez">
+  <div class="not-found-screen">
+    <!-- Cabecera -->
+    <header class="nf-header">
+      <div class="logo">
+        <span class="code-bracket">&lt;/&gt;</span>
+        <span class="logo-text">DEV</span>
+      </div>
+      <div class="lang-selector">
+        <button id="nf-es" class="lang-btn active">ES</button>
+        <span class="divider">|</span>
+        <button id="nf-en" class="lang-btn">EN</button>
+      </div>
+    </header>
 
-  <div class="cloak-wrapper">
-    <div class="cloak-container">
-      <div class="cloak-effect"></div>
+    <!-- Radar / Orbes (fondo animado) -->
+    <div class="radar-container">
+      <div class="radar-orbit orbit-1">
+        <div class="satellite sat-1"></div>
+      </div>
+      <div class="radar-orbit orbit-2">
+        <div class="satellite sat-2"></div>
+      </div>
+      <div class="radar-orbit orbit-3">
+        <div class="satellite sat-3"></div>
+        <div class="satellite sat-3-2"></div>
+      </div>
+      <div class="radar-orbit orbit-4">
+        <div class="satellite sat-4"></div>
+      </div>
+      <div class="radar-center">
+        <div class="pulse-ring"></div>
+        <div class="center-dot"></div>
+      </div>
     </div>
+
+    <!-- Contenido central -->
+    <main class="nf-main">
+      <span class="subtitle" id="nf-subtitle" data-i18n="404.subtitle">SYSTEM.MISSING_ROUTE</span>
+      <h1 class="nf-code" data-text="404">404</h1>
+      <h2 class="nf-title" id="nf-title">PÁGINA NO ENCONTRADA</h2>
+
+      <div class="scramble-wrapper">
+        <TextScramel t={es.phrases} timeSpeed={2500} id="nf-scramble" />
+      </div>
+
+      <p class="nf-funny" id="nf-funny">Recargá todas las veces que quieras… esto no va a aparecer.</p>
+
+      <a href="/" class="home-btn">
+        <span class="arrow">←</span>
+        <span id="nf-btn">Volver al inicio</span>
+      </a>
+    </main>
   </div>
 
-  <div class="error-info">
-    <p class="error-message">
-      We're fairly sure that page used to be here, but seems to have gone
-      missing. We do apologise on its behalf.
-    </p>
-    <a
-      href="/"
-      class="home-link"
-      role="button"
-      aria-label="Return to home page"
-    >
-      Home page
-    </a>
-  </div>
+  <script define:vars={{ es, en }}>
+    // Detección de idioma + toggle manual
+    document.addEventListener("DOMContentLoaded", () => {
+      const subtitleEl = document.getElementById("nf-subtitle");
+      const titleEl = document.getElementById("nf-title");
+      const funnyEl = document.getElementById("nf-funny");
+      const btnEl = document.getElementById("nf-btn");
+      const scrambleEl = document.getElementById("nf-scramble");
+      const btnEs = document.getElementById("nf-es");
+      const btnEn = document.getElementById("nf-en");
+
+      const applyLang = (lang) => {
+        const dict = lang === "en" ? en : es;
+        document.documentElement.lang = lang;
+        document.title = lang === "en" ? "404 | Santiago Sanchez" : "404 | Santiago Sanchez";
+        if (subtitleEl) subtitleEl.textContent = dict.subtitle;
+        if (titleEl) titleEl.textContent = dict.title;
+        if (funnyEl) funnyEl.textContent = dict.funny;
+        if (btnEl) btnEl.textContent = dict.btn;
+        if (scrambleEl) {
+          scrambleEl.dispatchEvent(
+            new CustomEvent("scramble:set", {
+              detail: { phrases: dict.phrases },
+            })
+          );
+        }
+        if (btnEs && btnEn) {
+          btnEs.classList.toggle("active", lang !== "en");
+          btnEn.classList.toggle("active", lang === "en");
+        }
+      };
+
+      const pathLang = (window.location.pathname.split("/")[1] || "").toLowerCase();
+      const navLang = (navigator.language || "es").toLowerCase();
+      const initial = pathLang === "en" || pathLang === "es"
+        ? pathLang
+        : navLang.startsWith("en")
+          ? "en"
+          : "es";
+
+      applyLang(initial);
+
+      if (btnEs) btnEs.addEventListener("click", () => applyLang("es"));
+      if (btnEn) btnEn.addEventListener("click", () => applyLang("en"));
+    });
+  </script>
 </Layout>
 
-<style is:global>
-  @import url("https://fonts.googleapis.com/css2?family=Sixtyfour&display=swap");
-
-  :root {
-    --shadow: rgba(0, 0, 0, 0.9);
-    --bg: #0a0a0a;
-    --lit-header: #878a87;
-    --speed: 2s;
-    --transition: all 0.3s ease;
-    --glow-color: rgba(7, 112, 3, 0.7);
-  }
-
-  body {
+<style>
+  .not-found-screen {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #050505;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    gap: 1.5rem;
-    background: var(--bg);
-    margin: 0;
-    position: relative;
     overflow: hidden;
   }
 
-  .error-code {
-    font-family: "Sixtyfour", cursive !important;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    font-variation-settings:
-      "BLED" 60,
-      "SCAN" 25,
-      "XELA" 8,
-      "YELA" 8;
-    animation:
-      swing var(--speed) ease-in-out infinite,
-      glitch 2s infinite alternate;
-    font-size: clamp(5rem, 40vmin, 20rem);
-    margin: 0;
-    letter-spacing: 1rem;
-    color: var(--lit-header);
-    text-shadow:
-      0 0 10px var(--glow-color),
-      0 0 20px var(--glow-color),
-      2px 2px 4px var(--shadow);
-    position: relative;
-    z-index: 2;
-    text-transform: uppercase;
+  /* Cabecera */
+  .nf-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    z-index: 10;
   }
 
-  .cloak-effect {
-    position: fixed;
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  .code-bracket {
+    color: #00ff66;
+    text-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
+  }
+
+  .logo-text {
+    color: #ffffff;
+    letter-spacing: 1px;
+  }
+
+  .lang-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .lang-btn {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    padding: 0.2rem 0.5rem;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .lang-btn:hover {
+    color: #aaa;
+  }
+
+  .lang-btn.active {
+    color: #00ff66;
+    text-shadow: 0 0 8px rgba(0, 255, 102, 0.5);
+  }
+
+  .divider {
+    color: #333;
+  }
+
+  /* Contenido central */
+  .nf-main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 5;
+    padding: 0 1.5rem;
+    max-width: 760px;
+  }
+
+  .subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9rem;
+    color: #00ff66;
+    letter-spacing: 6px;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
+  }
+
+  .nf-code {
+    font-family: 'Teko', sans-serif;
+    font-size: clamp(7rem, 20vw, 13rem);
+    font-weight: 700;
+    line-height: 0.9;
+    margin: 0.25rem 0 0 0;
+    letter-spacing: 4px;
+    color: #ffffff;
+    position: relative;
+    text-shadow: 0 0 40px rgba(0, 255, 102, 0.3);
+  }
+
+  /* Efecto glitch sobre el 404 */
+  .nf-code::before,
+  .nf-code::after {
+    content: attr(data-text);
+    position: absolute;
     inset: 0;
-    background: radial-gradient(
-      circle at center,
-      transparent 30%,
-      rgba(0, 0, 0, 0.95)
-    );
-    animation:
-      cloak-anim var(--speed) ease-in-out infinite,
-      static-flicker 0.5s infinite alternate;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .nf-code::before {
+    color: #00ff66;
+    z-index: -1;
+    animation: glitch-shift 3s infinite linear alternate-reverse;
+    opacity: 0.65;
+  }
+
+  .nf-code::after {
+    color: rgba(255, 255, 255, 0.5);
+    z-index: -2;
+    animation: glitch-shift 3.6s infinite linear alternate-reverse;
+    opacity: 0.45;
+  }
+
+  @keyframes glitch-shift {
+    0% { transform: translate(0, 0); clip-path: inset(0 0 0 0); }
+    20% { transform: translate(-3px, 2px); clip-path: inset(20% 0 40% 0); }
+    40% { transform: translate(3px, -1px); clip-path: inset(60% 0 10% 0); }
+    60% { transform: translate(-2px, 0); clip-path: inset(0 0 80% 0); }
+    80% { transform: translate(2px, 1px); clip-path: inset(40% 0 30% 0); }
+    100% { transform: translate(0, 0); clip-path: inset(0 0 0 0); }
+  }
+
+  .nf-title {
+    font-family: 'Teko', sans-serif;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin: 0.25rem 0 1.25rem 0;
+    color: #ffffff;
+  }
+
+  .scramble-wrapper {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: #888888;
+    min-height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .nf-funny {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: #666666;
+    margin: 0 0 2.25rem 0;
+    line-height: 1.5;
+    max-width: 520px;
+  }
+
+  /* Botón de vuelta al inicio */
+  .home-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem 2.2rem;
+    background-color: #00ff66;
+    color: #050505;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 50px;
+    font-size: 1.05rem;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0 0 25px rgba(0, 255, 102, 0.25);
+  }
+
+  .home-btn:hover {
+    background-color: #ffffff;
+    box-shadow: 0 0 35px rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .home-btn .arrow {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+  }
+
+  .home-btn:hover .arrow {
+    transform: translateX(-4px);
+  }
+
+  /* Radar / Orbes */
+  .radar-container {
+    position: absolute;
+    width: 650px;
+    height: 650px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.75;
     pointer-events: none;
     z-index: 1;
-    mix-blend-mode: multiply;
   }
 
-  .error-info {
-    color: rgba(255, 255, 255, 0.85);
-    text-align: center;
-    max-width: 44ch;
-    padding: 0 1rem;
+  .radar-orbit {
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 50%;
+  }
+
+  .orbit-1 {
+    width: 200px;
+    height: 200px;
+    border-color: rgba(0, 255, 102, 0.05);
+    animation: rotate 15s linear infinite;
+  }
+
+  .orbit-2 {
+    width: 350px;
+    height: 350px;
+    animation: rotate-reverse 25s linear infinite;
+  }
+
+  .orbit-3 {
+    width: 500px;
+    height: 500px;
+    border-color: rgba(0, 255, 102, 0.03);
+    animation: rotate 40s linear infinite;
+  }
+
+  .orbit-4 {
+    width: 650px;
+    height: 650px;
+    animation: rotate-reverse 60s linear infinite;
+  }
+
+  .satellite {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: #00ff66;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #00ff66;
+  }
+
+  .sat-1 {
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 255, 102, 0.6);
+  }
+
+  .sat-2 {
+    bottom: 50%;
+    right: -3px;
+    transform: translateY(50%);
+    width: 4px;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: none;
+  }
+
+  .sat-3 {
+    top: 15%;
+    left: 15%;
+  }
+
+  .sat-3-2 {
+    bottom: 15%;
+    right: 15%;
+    width: 5px;
+    height: 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: none;
+  }
+
+  .sat-4 {
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .radar-center {
     position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .center-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #00ff66;
+    border-radius: 50%;
+    box-shadow: 0 0 15px 5px rgba(0, 255, 102, 0.6);
     z-index: 2;
-    font-size: 1.1rem;
-    line-height: 1.6;
   }
 
-  .home-link {
-    border: 1px solid var(--glow-color);
-    padding: 0.75rem 2.5rem;
-    border-radius: 6px;
-    text-decoration: none;
-    color: var(--lit-header);
-    margin-top: 1.5rem;
-    display: inline-block;
-    transition: var(--transition);
-    background: rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    position: relative;
-    z-index: 3;
-    font-weight: bold;
-    text-shadow: 0 0 5px var(--glow-color);
+  .pulse-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgba(0, 255, 102, 0.4);
+    border-radius: 50%;
+    animation: pulse-ring 2.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    z-index: 1;
   }
 
-  .home-link:hover,
-  .home-link:focus {
-    background: rgba(0, 255, 255, 0.1);
-    transform: translateY(-3px);
-    box-shadow:
-      0 0 20px var(--glow-color),
-      inset 0 0 10px var(--glow-color);
-    outline: none;
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
   }
 
-  @keyframes swing {
-    0%,
-    100% {
-      transform: translateX(-12px);
-    }
-    50% {
-      transform: translateX(12px);
-    }
+  @keyframes rotate-reverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
   }
 
-  @keyframes cloak-anim {
-    0%,
-    100% {
-      opacity: 0.8;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.9;
-      transform: scale(1.03);
-    }
-  }
-
-  @keyframes glitch {
+  @keyframes pulse-ring {
     0% {
-      text-shadow: 0 0 10px var(--glow-color);
+      transform: scale(0.3);
+      opacity: 1;
     }
-    20% {
-      transform: skewX(5deg);
-    }
-    40% {
-      transform: skewX(-5deg);
-    }
-    60% {
-      text-shadow: 5px 5px 0 var(--glow-color);
-    }
-    80% {
-      transform: skewY(3deg);
-    }
-    100% {
-      text-shadow: -5px -5px 0 var(--glow-color);
-    }
-  }
-
-  @keyframes static-flicker {
-    0% {
-      opacity: 0.8;
-    }
-    100% {
-      opacity: 0.95;
+    80%, 100% {
+      transform: scale(2.5);
+      opacity: 0;
     }
   }
 
   @media (max-width: 768px) {
-    .error-code {
-      font-size: 15vw;
-      letter-spacing: 0.5rem;
-      font-variation-settings:
-        "BLED" 40,
-        "SCAN" 15;
+    .nf-header {
+      padding: 1.5rem;
     }
-
-    .error-message {
-      font-size: 1rem;
+    .radar-container {
+      width: 400px;
+      height: 400px;
     }
-
-    .home-link {
-      padding: 0.6rem 1.8rem;
+    .orbit-4 {
+      display: none;
     }
-  }
-
-  @media (max-width: 480px) {
-    .error-code {
-      font-size: 18vw;
-      font-variation-settings:
-        "BLED" 30,
-        "SCAN" 10;
+    .orbit-3 {
+      width: 400px;
+      height: 400px;
+    }
+    .nf-funny {
+      margin-bottom: 1.75rem;
     }
   }
 </style>

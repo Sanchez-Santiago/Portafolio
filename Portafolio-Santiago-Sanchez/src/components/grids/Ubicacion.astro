@@ -1,0 +1,318 @@
+---
+// Ubicacion.astro — Actualizada a Argentina, Córdoba Capital
+// Estadísticas obtenidas desde la API de GitHub en tiempo de build
+
+let totalProjects = 6;
+let totalCommits = 1200;
+
+try {
+  const GITHUB_USER = "Sanchez-Santiago";
+  let repos: any[] = [];
+  let page = 1;
+  let hasMore = true;
+
+  while (hasMore) {
+    const res = await fetch(
+      `https://api.github.com/users/${GITHUB_USER}/repos?type=public&sort=updated&per_page=100&page=${page}`
+    );
+    if (!res.ok) break;
+    const data = await res.json();
+    if (!Array.isArray(data) || data.length === 0) break;
+    repos = repos.concat(data);
+    hasMore = data.length === 100;
+    page++;
+  }
+
+  const ownRepos = repos.filter((r: any) => !r.fork);
+  if (ownRepos.length > 0) {
+    totalProjects = ownRepos.length;
+
+    let commits = 0;
+    for (const repo of ownRepos) {
+      let commitPage = 1;
+      let moreCommits = true;
+      while (moreCommits) {
+        const cRes = await fetch(
+          `https://api.github.com/repos/${GITHUB_USER}/${repo.name}/commits?per_page=100&page=${commitPage}`
+        );
+        if (!cRes.ok) break;
+        const cData = await cRes.json();
+        if (!Array.isArray(cData) || cData.length === 0) break;
+        commits += cData.length;
+        moreCommits = cData.length === 100;
+        commitPage++;
+      }
+    }
+    totalCommits = commits > 0 ? commits : totalCommits;
+  }
+} catch (e) {
+  console.error("Error fetching github stats:", e);
+}
+
+const formatProjects = String(totalProjects).padStart(2, "0");
+const formatCommits =
+  totalCommits >= 1000
+    ? `${(totalCommits / 1000).toFixed(1).replace(/\.0$/, "")}k`
+    : String(totalCommits);
+---
+
+<div class="ubicacion-card">
+  <div class="ubicacion-header">
+    <span class="ubicacion-tag">GEOLOCATION</span>
+    <span class="ubicacion-title">Córdoba, Argentina <span class="flag-icon">🇦🇷</span></span>
+    <span class="timezone-text">UTC-3 · América/Argentina/Cordoba</span>
+  </div>
+
+  <div class="map-container">
+    <!-- SVG Mapa estilizado de Argentina con punto en Córdoba -->
+    <svg viewBox="0 0 120 220" xmlns="http://www.w3.org/2000/svg" class="arg-map">
+      <!-- Contorno de Argentina -->
+      <path
+        d="M45 5 L65 6 L72 12 L78 10 L82 18 L80 28 L86 34 L85 44 L90 50 L88 62 L92 70 L88 82 L90 94 L84 104 L80 115 L75 124 L72 136 L68 148 L62 160 L55 172 L50 185 L44 196 L38 205 L33 210 L28 206 L32 195 L36 182 L34 170 L38 158 L40 145 L38 132 L35 120 L32 108 L28 96 L30 84 L26 72 L28 60 L24 50 L26 40 L30 30 L28 20 L34 12 L40 8 Z"
+        fill="rgba(0, 255, 102, 0.04)"
+        stroke="#00ff66"
+        stroke-width="1.2"
+        stroke-linejoin="round"
+        class="map-path"
+      />
+      <!-- Punto Córdoba (centro-norte del mapa) -->
+      <circle cx="57" cy="90" r="14" fill="none" stroke="rgba(0, 255, 102, 0.35)" stroke-width="0.8" class="ping-circle" />
+      <circle cx="57" cy="90" r="7" fill="none" stroke="rgba(0, 255, 102, 0.55)" stroke-width="0.8" class="ping-circle-small" />
+      <circle cx="57" cy="90" r="3" fill="#00ff66" class="cordoba-dot" />
+      <!-- Label -->
+      <text x="62" y="93" fill="#ffffff" font-size="6" font-family="'Space Mono', monospace" font-weight="bold">CÓRDOBA</text>
+    </svg>
+
+    <!-- Planeta girando (cohete orbitando la Tierra) -->
+    <div class="planet-wrap">
+      <div class="planet">
+        <div class="planet-sphere"></div>
+        <div class="planet-orbiter">
+          <div class="rocket"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Estadísticas -->
+  <div class="stats-grid">
+    <div class="stat-box">
+      <span class="stat-num">{formatProjects}</span>
+      <span class="stat-desc">PROYECTOS</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num">{formatCommits}</span>
+      <span class="stat-desc">COMMITS</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num">99%</span>
+      <span class="stat-desc">MATE 🧉</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .ubicacion-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 1rem;
+    color: #ffffff;
+  }
+
+  .ubicacion-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .ubicacion-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: #555555;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+
+  .ubicacion-title {
+    font-family: 'Teko', sans-serif;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0;
+  }
+
+  .flag-icon {
+    font-size: 1.25rem;
+    vertical-align: middle;
+  }
+
+  .timezone-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: #00ff66;
+  }
+
+  .map-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-grow: 1;
+    padding: 0.25rem 0;
+  }
+
+  .arg-map {
+    width: auto;
+    height: 160px;
+  }
+
+  /* ── Planeta girando ── */
+  .planet-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .planet {
+    position: relative;
+    width: 120px;
+    height: 120px;
+  }
+
+  .planet-sphere {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4fc1e9 0%, #1e6f9e 60%, #0b3d5c 100%);
+    box-shadow:
+      0 0 0 8px rgba(79, 193, 233, 0.08),
+      0 0 0 16px rgba(79, 193, 233, 0.04),
+      inset -10px -8px 20px rgba(0, 0, 0, 0.35);
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    overflow: hidden;
+  }
+
+  /* Continentes simplificados */
+  .planet-sphere::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 12px;
+    border-radius: 50%;
+    background: #2f9e63;
+    top: 18px;
+    left: 14px;
+    box-shadow:
+      10px 22px 0 -3px #2f9e63,
+      24px 12px 0 -5px #3bb273;
+  }
+
+  .planet-sphere::after {
+    content: '';
+    position: absolute;
+    width: 26px;
+    height: 8px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.75);
+    top: 30px;
+    left: -6px;
+    box-shadow: 18px 10px 0 -3px rgba(255, 255, 255, 0.6);
+  }
+
+  .planet-orbiter {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    animation: planet-rotate 12s linear infinite;
+  }
+
+  .rocket {
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 14px;
+    height: 14px;
+  }
+
+  .rocket::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 7px;
+    width: 0;
+    height: 0;
+    border-bottom: 5px solid transparent;
+    border-top: 5px solid transparent;
+    border-right: 8px solid #fff;
+  }
+
+  @keyframes planet-rotate {
+    to { transform: rotate(360deg); }
+  }
+
+  .map-path {
+    filter: drop-shadow(0 0 4px rgba(0, 255, 102, 0.12));
+    transition: fill 0.3s ease, stroke-width 0.3s ease;
+  }
+
+  .ubicacion-card:hover .map-path {
+    stroke-width: 1.8px;
+    fill: rgba(0, 255, 102, 0.07);
+  }
+
+  .ping-circle {
+    animation: ping-wave 2.2s ease-out infinite;
+    transform-origin: 57px 90px;
+  }
+
+  .ping-circle-small {
+    animation: ping-wave 2.2s ease-out infinite 0.8s;
+    transform-origin: 57px 90px;
+  }
+
+  @keyframes ping-wave {
+    0% { transform: scale(0.2); opacity: 1; }
+    100% { transform: scale(1.6); opacity: 0; }
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 0.75rem;
+  }
+
+  .stat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    padding: 0.4rem 0.2rem;
+  }
+
+  .stat-num {
+    font-family: 'Teko', sans-serif;
+    font-size: 1.5rem;
+    color: #00ff66;
+    line-height: 1;
+  }
+
+  .stat-desc {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    color: #666666;
+    text-align: center;
+    font-weight: 700;
+  }
+</style>

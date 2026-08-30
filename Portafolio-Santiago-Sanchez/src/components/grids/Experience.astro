@@ -8,7 +8,7 @@ const ExperenceCards = (
 <div class="experience-wrapper">
   <div class="experience-container">
     <div class="header-container">
-      <h1 class="section-title">{t.Experience}</h1>
+      <h1 class="section-title" data-i18n="Experience">{t.Experience}</h1>
     </div>
     <div class="carousel-wrapper">
       <button id="prev-btn" class="nav-btn float-left" aria-label="Anterior">
@@ -17,17 +17,17 @@ const ExperenceCards = (
       <div class="cards-viewport" id="exp-viewport">
       <div class="cards-track">
         {
-          ExperenceCards.map((card: any) => (
+          ExperenceCards.map((card: any, i: number) => (
             <div class="exp-card">
               <div class="card-glass" style={`background-image: url(${card.imagen})`}></div>
               <div class="card-content">
                 <div class="card-header">
-                  <h2 class="company-name">{card.Empresa}</h2>
-                  <h3 class="role-title">{card.PuestoRol}</h3>
+                  <h2 class="company-name" data-i18n={`ExperienceCards.Card${i + 1}.Empresa`}>{card.Empresa}</h2>
+                  <h3 class="role-title" data-i18n={`ExperienceCards.Card${i + 1}.PuestoRol`}>{card.PuestoRol}</h3>
                 </div>
                 <div class="card-body">
-                  <p class="description">{card.Descripcion}</p>
-                  <span class="date">{card.Fecha}</span>
+                  <p class="description" data-i18n={`ExperienceCards.Card${i + 1}.Descripcion`}>{card.Descripcion}</p>
+                  <span class="date" data-i18n={`ExperienceCards.Card${i + 1}.Fecha`}>{card.Fecha}</span>
                 </div>
               </div>
             </div>
@@ -108,18 +108,18 @@ const ExperenceCards = (
   }
 
   .nav-btn {
-    background: rgba(19, 158, 163, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 255, 102, 0.12);
+    border: 1px solid rgba(0, 255, 102, 0.3);
     border-radius: 50%;
     width: 50px;
     height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #fff;
+    color: #00ff66;
     cursor: pointer;
     transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     z-index: 10;
   }
 
@@ -134,7 +134,8 @@ const ExperenceCards = (
   }
 
   .nav-btn:hover {
-    background: #139ea3;
+    background: #00ff66;
+    color: #050505;
     transform: scale(1.1);
   }
 
@@ -148,7 +149,7 @@ const ExperenceCards = (
     overflow-x: auto;
     padding: 2rem 1rem 4rem;
     scrollbar-width: thin;
-    scrollbar-color: rgba(19, 158, 163, 0.4) transparent;
+    scrollbar-color: rgba(0, 255, 102, 0.4) transparent;
   }
 
   .cards-viewport::-webkit-scrollbar {
@@ -156,7 +157,7 @@ const ExperenceCards = (
   }
 
   .cards-viewport::-webkit-scrollbar-thumb {
-    background: linear-gradient(90deg, #139ea3, #26bb12);
+    background: linear-gradient(90deg, #00ff66, #26bb12);
     border-radius: 10px;
   }
 
@@ -180,7 +181,7 @@ const ExperenceCards = (
   }
 
   .exp-card:hover {
-    border-color: rgba(19, 158, 163, 0.5);
+    border-color: rgba(0, 255, 102, 0.4);
   }
 
   .card-glass {
@@ -212,9 +213,9 @@ const ExperenceCards = (
     font-family: "Teko", sans-serif;
     font-size: 2.8rem;
     line-height: 1;
-    color: #139ea3;
+    color: #00ff66;
     margin: 0;
-    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   }
 
   .role-title {
@@ -246,12 +247,12 @@ const ExperenceCards = (
   .date {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background: rgba(19, 158, 163, 0.2);
-    border: 1px solid rgba(19, 158, 163, 0.3);
+    background: rgba(0, 255, 102, 0.1);
+    border: 1px solid rgba(0, 255, 102, 0.3);
     border-radius: 50px;
     font-size: 0.85rem;
     font-weight: 600;
-    color: #139ea3;
+    color: #00ff66;
   }
 
   @media (max-width: 768px) {

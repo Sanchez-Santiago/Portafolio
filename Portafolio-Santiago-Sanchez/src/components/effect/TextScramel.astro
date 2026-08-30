@@ -2,16 +2,14 @@
 interface Props {
   t: string[];
   timeSpeed?: number;
+  id?: string;
 }
-const { t, timeSpeed } = Astro.props;
-const speed = timeSpeed ?? 2000; // Valor por defecto en caso de no definirse
+const { t, timeSpeed, id = "scramble-" + Math.random().toString(36).slice(2,7) } = Astro.props;
+const speed = timeSpeed ?? 2000;
 const phrases = t || [];
 ---
 
-<script define:vars={{ speed, phrases }}>
-  // ——————————————————————————————————————————————————
-  // TextScramble
-  // ——————————————————————————————————————————————————
+<script define:vars={{ speed, phrases, id }}>
   class TextScramble {
     constructor(el) {
       this.el = el;
@@ -21,6 +19,7 @@ const phrases = t || [];
       this.frameRequest = 0;
       this.resolve = () => {};
       this.update = this.update.bind(this);
+      this.chars = "!<>-_\\/[]{}—=+*^?#________";
     }
 
     setText(newText) {
@@ -31,8 +30,8 @@ const phrases = t || [];
       for (let i = 0; i < length; i++) {
         const from = oldText[i] || "";
         const to = newText[i] || "";
-        const start = Math.floor(Math.random() * 40);
-        const end = start + Math.floor(Math.random() * 40);
+        const start = Math.floor(Math.random() * 30);
+        const end = start + Math.floor(Math.random() * 30);
         this.queue.push({ from, to, start, end });
       }
       cancelAnimationFrame(this.frameRequest);
@@ -54,7 +53,7 @@ const phrases = t || [];
             char = this.randomChar();
             this.queue[i].char = char;
           }
-          output += `<span class="dud">${char}</span>`;
+          output += `<span class="dud-${id}">${char}</span>`;
         } else {
           output += from;
         }
@@ -73,94 +72,50 @@ const phrases = t || [];
     }
   }
 
-  // ——————————————————————————————————————————————————
-  // Example
-  // ——————————————————————————————————————————————————
-  document.addEventListener("DOMContentLoaded", () => {
-    const el = document.querySelector(".text");
-    if (!el) return; // Si el elemento no existe, salimos de la función.
-
-    // Antes de iniciar el efecto, establecemos un tamaño fijo
-    const container = document.querySelector(".text-container");
-
-    // Iniciar efecto
+  // Use a specific ID to avoid conflicts when multiple instances exist
+  const startScramble = () => {
+    const el = document.getElementById(id);
+    if (!el) return;
     const fx = new TextScramble(el);
     let counter = 0;
+    // Estado mutable del idioma actual: se actualiza con "scramble:set"
+    let currentPhrases = phrases;
     const next = () => {
-      fx.setText(phrases[counter]).then(() => {
+      fx.setText(currentPhrases[counter]).then(() => {
         setTimeout(next, speed);
       });
-      counter = (counter + 1) % phrases.length;
+      counter = (counter + 1) % currentPhrases.length;
     };
     next();
-  });
+
+    // Escuchar cambios externos de idioma (evento "scramble:set")
+    el.addEventListener("scramble:set", (e) => {
+      const newPhrases = e?.detail?.phrases || e?.detail;
+      if (Array.isArray(newPhrases) && newPhrases.length) {
+        currentPhrases = newPhrases;
+        counter = 0;
+        fx.setText(newPhrases[0]);
+      }
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", startScramble);
+  } else {
+    startScramble();
+  }
 </script>
 
-<div class="container">
-  <div class="text-container">
-    <div class="text"></div>
-  </div>
-</div>
+<span id={id} class="scramble-text"></span>
 
-<style>
-  @import url("https://fonts.googleapis.com/css?family=Roboto+Mono:100");
-  .container {
-    width: 100%;
-    flex-grow: 1;
-    max-width: 1000px;
-    max-height: 500px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: flex-start; /* Cambiado a flex-start para alinear a la izquierda */
-    align-items: center;
-    padding: 1rem;
-    box-sizing: border-box;
-  }
-
-  .text-container {
-    display: flex;
-    justify-content: flex-start; /* Cambiado a flex-start para alinear a la izquierda */
-    align-items: center;
-    width: 100%;
-    max-width: 100%;
-    height: 4em; /* Altura fija de 4 líneas de texto aproximadamente */
-    overflow: hidden; /* Crucial: oculta todo lo que exceda este contenedor */
-    padding: 0.5rem;
-    box-sizing: border-box;
-    position: relative; /* Para posicionamiento absoluto del texto */
-  }
-
-  .text {
-    position: absolute; /* Saca el texto del flujo normal */
-    width: 100%;
-    max-height: 100%;
-    text-align: center; /* Cambiado a left para alinear a la izquierda */
-    white-space: normal; /* Permite saltos de línea naturales */
-    overflow: hidden; /* Oculta cualquier texto que exceda */
-    text-overflow: ellipsis; /* Muestra puntos suspensivos para texto cortado */
-    display: -webkit-box; /* Para limitar a un número específico de líneas */
-    -webkit-line-clamp: 3; /* Máximo de líneas a mostrar */
-    -webkit-box-orient: vertical; /* Orientación del texto */
-    line-height: 1.3; /* Espaciado entre líneas para mejor legibilidad */
+<style define:vars={{ id }}>
+  .scramble-text {
+    display: inline-block;
+    min-width: 1ch;
     font-family: inherit;
-    font-weight: inherit;
     font-size: inherit;
+    font-weight: inherit;
     color: inherit;
-    left: 0; /* Asegura que el texto comience desde la izquierda */
-  }
-
-  .dud {
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  /* Ajustes específicos para dispositivos móviles */
-  @media screen and (max-width: 768px) {
-    .text-container {
-      height: 3.5em; /* Altura ajustada para móviles */
-    }
-
-    .text {
-      -webkit-line-clamp: 2; /* Menos líneas en móviles */
-    }
+    white-space: nowrap;
   }
 </style>

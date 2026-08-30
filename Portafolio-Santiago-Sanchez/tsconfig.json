@@ -1,14 +1,5 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "compilerOptions": {
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "moduleResolution": "bundler",
-    "allowJs": true,
-    "checkJs": true,
-    "isolatedModules": true
-  },
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"]
 }

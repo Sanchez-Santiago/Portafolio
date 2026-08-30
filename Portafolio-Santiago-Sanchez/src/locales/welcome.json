@@ -1,30 +1,16 @@
-{"welcome": [
-  "Welcome",
-  "Bienvenido",
-  "Bienvenue",
-  "Willkommen",
-  "Benvenuto",
-  "Bem-vindo",
-  "Добро пожаловать",
-  "欢迎",
-  "ようこそ",
-  "환영합니다",
-  "مرحبًا",
-  "स्वागत है",
-  "Welkom",
-  "Välkommen",
-  "Witamy",
-  "Hoş geldiniz",
-  "Chào mừng",
-  "Καλώς ήρθατε",
-  "ยินดีต้อนรับ",
-  "ברוך הבא",
-  "Vítejte",
-  "Velkommen",
-  "Tervetuloa",
-  "Üdvözöljük",
-  "Selamat datang",
-  "Velkommen",
-  "Ласкаво просимо"
-]
+{
+  "es": [
+    "¡Bienvenido!",
+    "¡Hola!",
+    "Me alegra verte aquí",
+    "Explorá mi portfolio",
+    "Programming is my passion"
+  ],
+  "en": [
+    "Welcome!",
+    "Hello!",
+    "Glad to see you here",
+    "Explore my portfolio",
+    "Programming is my passion"
+  ]
 }

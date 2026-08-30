@@ -1,61 +1,425 @@
 ---
-import welom from "../locales/welcome.json";
-import t from "../locales/welcome.json";
-
+import welcomeJSON from "../locales/welcome.json";
 import TextScramel from "./effect/TextScramel.astro";
-const translationsJSON = JSON.stringify(welom);
+
+const phases = welcomeJSON;
+const esPhrases = phases.es;
+const enPhrases = phases.en;
 ---
 
-<div id="container">
-  <a href="/es" class="welcome" id="welcome">
-    <TextScramel t={t.welcome} timeSpeed={1000} />
-  </a>
+<div class="welcome-screen">
+  <!-- Cabecera -->
+  <header class="welcome-header">
+    <div class="logo">
+      <span class="code-bracket">&lt;/&gt;</span>
+      <span class="logo-text">DEV</span>
+    </div>
+    
+    <div class="lang-selector">
+      <button id="btn-es" class="lang-btn active">ES</button>
+      <span class="divider">|</span>
+      <button id="btn-en" class="lang-btn">EN</button>
+    </div>
+  </header>
+
+  <!-- Orbes y Radar (Animación de fondo) -->
+  <div class="radar-container">
+    <div class="radar-orbit orbit-1">
+      <div class="satellite sat-1"></div>
+    </div>
+    <div class="radar-orbit orbit-2">
+      <div class="satellite sat-2"></div>
+    </div>
+    <div class="radar-orbit orbit-3">
+      <div class="satellite sat-3"></div>
+      <div class="satellite sat-3-2"></div>
+    </div>
+    <div class="radar-orbit orbit-4">
+      <div class="satellite sat-4"></div>
+    </div>
+    <div class="radar-center">
+      <div class="pulse-ring"></div>
+      <div class="center-dot"></div>
+    </div>
+  </div>
+
+  <!-- Contenido Central -->
+  <main class="welcome-main">
+    <span class="subtitle">PORTAFOLIO WEB</span>
+    <h1 class="main-title">SANTIAGO SANCHEZ</h1>
+    
+    <!-- Scrambled Welcome Greetings -->
+    <div class="scramble-wrapper">
+      <TextScramel t={esPhrases} timeSpeed={2000} id="welcome-scramble" />
+    </div>
+
+    <!-- Botón de Entrada -->
+    <a href="/es" id="explore-btn" class="explore-btn">
+      <span>Explorar</span> <span class="arrow">→</span>
+    </a>
+  </main>
 </div>
 
+<script define:vars={{ esPhrases, enPhrases }}>
+  // Lógica para cambiar el idioma destino en el botón de exploración
+  document.addEventListener("DOMContentLoaded", () => {
+    const btnEs = document.getElementById("btn-es");
+    const btnEn = document.getElementById("btn-en");
+    const exploreBtn = document.getElementById("explore-btn");
+    const scrambleEl = document.getElementById("welcome-scramble");
+
+    const setLang = (lang) => {
+      if (lang === "en") {
+        btnEn.classList.add("active");
+        btnEs.classList.remove("active");
+      } else {
+        btnEs.classList.add("active");
+        btnEn.classList.remove("active");
+      }
+      exploreBtn.href = lang === "en" ? "/en" : "/es";
+      if (scrambleEl) {
+        scrambleEl.dispatchEvent(
+          new CustomEvent("scramble:set", {
+            detail: { phrases: lang === "en" ? enPhrases : esPhrases },
+          })
+        );
+      }
+    };
+
+    if (btnEs && btnEn && exploreBtn) {
+      btnEs.addEventListener("click", () => setLang("es"));
+      btnEn.addEventListener("click", () => setLang("en"));
+    }
+  });
+</script>
+
 <style>
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-  }
-  #container {
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Teko:wght@400;700&family=Inter:wght@300;400;700;900&display=swap');
+
+  .welcome-screen {
+    position: relative;
     width: 100%;
-    height: 100%;
-    /* background-color: transparent; /* Fondo transparente */
+    height: 100vh;
+    background-color: #050505;
+    color: #ffffff;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(5px); /* Blur en el contenedor */
-  }
-  .welcome,
-  .welcome * {
-    font-family: "Alfa Slab One", serif;
-    font-weight: 400;
-    font-style: normal;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 80%; /* Reducido para mejor efecto visual */
-    height: 50%;
-    text-decoration: none;
-    /* background-color: rgba(0, 123, 255, 0.5); /* Transparencia */
-    color: #fff;
-    font-size: 4rem;
-    border-radius: 15px; /* Bordes redondeados */
-    transition:
-      background-color 0.3s ease,
-      backdrop-filter 0.3s ease;
-    backdrop-filter: blur(10px); /* Blur más intenso en el botón */
-    -webkit-backdrop-filter: blur(10px); /* Soporte para Safari */
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil */
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Sombra difuminada */
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
   }
 
-  a:hover {
-    border: 2px solid rgba(255, 255, 255, 0.158); /* Borde sutil */
-    /* background-color: rgba(0, 86, 179, 0.7); /* Transparencia al hacer hover */
-    backdrop-filter: blur(12px); /* Aumentar blur al hover */
-    -webkit-backdrop-filter: blur(12px);
+  /* Cabecera */
+  .welcome-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    z-index: 10;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  .code-bracket {
+    color: #00ff66;
+    text-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
+  }
+
+  .logo-text {
+    color: #ffffff;
+    letter-spacing: 1px;
+  }
+
+  .lang-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .lang-btn {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .lang-btn:hover {
+    color: #aaa;
+  }
+
+  .lang-btn.active {
+    color: #00ff66;
+    text-shadow: 0 0 8px rgba(0, 255, 102, 0.5);
+  }
+
+  .divider {
+    color: #333;
+  }
+
+  /* Contenido Principal */
+  .welcome-main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 5;
+    pointer-events: auto;
+    margin-top: 2rem;
+  }
+
+  .subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9rem;
+    color: #00ff66;
+    letter-spacing: 6px;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
+  }
+
+  .main-title {
+    font-family: 'Teko', sans-serif;
+    font-size: clamp(4rem, 10vw, 7.5rem);
+    font-weight: 700;
+    line-height: 0.85;
+    margin: 0 0 1.5rem 0;
+    letter-spacing: 2px;
+    color: #ffffff;
+  }
+
+  .scramble-wrapper {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: #888888;
+    min-height: 2.5rem;
+    margin-bottom: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Botón explorar */
+  .explore-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem 2.2rem;
+    background-color: #00ff66;
+    color: #050505;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 50px;
+    font-size: 1.05rem;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0 0 25px rgba(0, 255, 102, 0.25);
+  }
+
+  .explore-btn:hover {
+    background-color: #ffffff;
+    box-shadow: 0 0 35px rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .explore-btn:active {
+    transform: translateY(0);
+  }
+
+  .arrow {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+  }
+
+  .explore-btn:hover .arrow {
+    transform: translateX(4px);
+  }
+
+  /* Radar / Orbes Animación */
+  .radar-container {
+    position: absolute;
+    width: 650px;
+    height: 650px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.75;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .radar-orbit {
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 50%;
+  }
+
+  .orbit-1 {
+    width: 200px;
+    height: 200px;
+    border-color: rgba(0, 255, 102, 0.05);
+    animation: rotate 15s linear infinite;
+  }
+
+  .orbit-2 {
+    width: 350px;
+    height: 350px;
+    animation: rotate-reverse 25s linear infinite;
+  }
+
+  .orbit-3 {
+    width: 500px;
+    height: 500px;
+    border-color: rgba(0, 255, 102, 0.03);
+    animation: rotate 40s linear infinite;
+  }
+
+  .orbit-4 {
+    width: 650px;
+    height: 650px;
+    animation: rotate-reverse 60s linear infinite;
+  }
+
+  /* Satélites */
+  .satellite {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: #00ff66;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #00ff66;
+  }
+
+  .sat-1 {
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 255, 102, 0.6);
+  }
+
+  .sat-2 {
+    bottom: 50%;
+    right: -3px;
+    transform: translateY(50%);
+    width: 4px;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: none;
+  }
+
+  .sat-3 {
+    top: 15%;
+    left: 15%;
+    background-color: #00ff66;
+  }
+
+  .sat-3-2 {
+    bottom: 15%;
+    right: 15%;
+    width: 5px;
+    height: 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: none;
+  }
+
+  .sat-4 {
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Centro */
+  .radar-center {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .center-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #00ff66;
+    border-radius: 50%;
+    box-shadow: 0 0 15px 5px rgba(0, 255, 102, 0.6);
+    z-index: 2;
+  }
+
+  .pulse-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgba(0, 255, 102, 0.4);
+    border-radius: 50%;
+    animation: pulse-ring 2.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    z-index: 1;
+  }
+
+  /* Animaciones */
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes rotate-reverse {
+    from {
+      transform: rotate(360deg);
+    }
+    to {
+      transform: rotate(0deg);
+    }
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(0.3);
+      opacity: 1;
+    }
+    80%, 100% {
+      transform: scale(2.5);
+      opacity: 0;
+    }
+  }
+
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .welcome-header {
+      padding: 1.5rem;
+    }
+    .radar-container {
+      width: 400px;
+      height: 400px;
+    }
+    .orbit-4 {
+      display: none;
+    }
+    .orbit-3 {
+      width: 400px;
+      height: 400px;
+    }
   }
 </style>
