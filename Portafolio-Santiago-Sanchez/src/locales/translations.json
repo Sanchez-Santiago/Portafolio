@@ -27,6 +27,17 @@
       "title": "Mascota: Mía 🐶",
       "message": "Mía me inspira a seguir siempre adelante"
     },
+    "skill": {
+      "tag": "TECNOLOGÍAS",
+      "title": "Habilidades",
+      "center": "Skills",
+      "desc": "Constantemente motivado a ampliar mis horizontes profesionales en el mundo del desarrollo de software."
+    },
+    "contact": {
+      "name": "Nombre",
+      "email": "Email",
+      "message": "Mensaje..."
+    },
     "Cards": {
       "Card1": {
         "title": "Tecnologías Móviles · Backend",
@@ -248,6 +259,17 @@
     "mascota": {
       "title": "Pet: Mía 🐶",
       "message": "Mía inspires me to always keep going"
+    },
+    "skill": {
+      "tag": "TECHNOLOGIES",
+      "title": "Skills",
+      "center": "Skills",
+      "desc": "Constantly motivated to broaden my professional horizons in the world of software development."
+    },
+    "contact": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message..."
     },
     "Cards": {
       "Card1": {

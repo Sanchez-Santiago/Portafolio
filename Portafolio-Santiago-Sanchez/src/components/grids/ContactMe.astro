@@ -6,7 +6,7 @@ const { t } = Astro.props;
 <div class="contact-wrapper">
   <!-- Header -->
   <div class="contact-header">
-    <span class="contact-tag">CONTACTO</span>
+    <span class="contact-tag" data-i18n="Contact">{t?.Contact || "CONTACTO"}</span>
     <h2 class="contact-title" data-i18n="ContactMe">{t?.ContactMe || "Contáctame"}</h2>
   </div>
 
@@ -17,10 +17,10 @@ const { t } = Astro.props;
     method="POST"
   >
     <div class="form-row">
-      <input type="text" name="name" class="form-input" placeholder="Nombre" required />
-      <input type="email" name="email" class="form-input" placeholder="Email" required />
+      <input type="text" name="name" class="form-input" data-i18n="contact.name" placeholder={t?.contact?.name || "Nombre"} required />
+      <input type="email" name="email" class="form-input" data-i18n="contact.email" placeholder={t?.contact?.email || "Email"} required />
     </div>
-    <textarea placeholder="Mensaje..." class="form-input form-textarea" name="message" rows="3" required></textarea>
+    <textarea placeholder={t?.contact?.message || "Mensaje..."} data-i18n="contact.message" class="form-input form-textarea" name="message" rows="3" required></textarea>
     <button type="submit" class="submit-btn">
       <span data-i18n="Enviar">{t?.Enviar || "Enviar mensaje"}</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>

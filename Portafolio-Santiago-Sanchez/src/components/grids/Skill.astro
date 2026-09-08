@@ -1,11 +1,12 @@
 ---
 /** Inspiración de: Anne Klapwijk */
+const { t } = Astro.props;
 ---
 
 <div class="habilidades-card">
   <div class="habilidades-header">
-    <span class="habilidades-tag">TECNOLOGÍAS</span>
-    <span class="habilidades-title">Habilidades</span>
+    <span class="habilidades-tag" data-i18n="skill.tag">{t?.skill?.tag || "TECNOLOGÍAS"}</span>
+    <span class="habilidades-title" data-i18n="skill.title">{t?.skill?.title || "Habilidades"}</span>
   </div>
 
   <!-- Contenedor del Orbe Giratorio -->
@@ -13,7 +14,7 @@
     <div class="orbit">
       <ul class="orbit-wrap">
         <li class="orbit-center">
-          <h1 class="orbit-center__text">Skills</h1>
+          <h1 class="orbit-center__text" data-i18n="skill.center">{t?.skill?.center || "Skills"}</h1>
         </li>
 
         <li>
@@ -118,8 +119,8 @@
       <span class="tech-chip">Rust</span>
       <span class="tech-chip">JavaScript</span>
     </div>
-    <p class="habilidades-desc">
-      Constantemente motivado a ampliar mis horizontes profesionales en el mundo del desarrollo de software.
+    <p class="habilidades-desc" data-i18n="skill.desc">
+      {t?.skill?.desc || "Constantemente motivado a ampliar mis horizontes profesionales en el mundo del desarrollo de software."}
     </p>
   </div>
 </div>
