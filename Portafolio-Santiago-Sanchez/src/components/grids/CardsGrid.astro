@@ -1,6 +1,118 @@
 ---
 import Card from "./Card.astro";
-const { t } = Astro.props as any;
+import { existsSync } from "node:fs";
+const { t, lang = "es" } = Astro.props as any;
+
+const GITHUB_USER = "Sanchez-Santiago";
+const BANNER_DIR = new URL("../../../public/assets/Proyects/", import.meta.url);
+
+// Si existe una imagen real de banner para el repo, la usa; si no, genera el SVG on-brand
+const projectImage = (repoName: string, title: string, tech?: string, stars?: number, path?: string) => {
+  if (!repoName) return makeBanner(title, tech, stars, path);
+  for (const ext of [".webp", ".jpg", ".png"]) {
+    if (existsSync(new URL(`${repoName}${ext}`, BANNER_DIR)))
+      return `/assets/Proyects/${repoName}${ext}`;
+  }
+  return makeBanner(title, tech, stars, path);
+};
+
+// Cards curadas del hardcodeo, indexadas por nombre exacto de repo para cruzar con el API
+const staticCards = (t && t.Cards ? Object.values(t.Cards) : []) as any[];
+const staticByRepo = new Map<string, { index: number; card: any }>();
+staticCards.forEach((card: any, index: number) => {
+  if (card.repoName) staticByRepo.set(card.repoName, { index, card });
+});
+
+const fmtUpdated = (iso?: string) => {
+  if (!iso) return "";
+  try {
+    const d = new Date(iso);
+    if (isNaN(d.getTime())) return "";
+    const label = t?.banner?.updated || "Actualizado";
+    const date = d.toLocaleDateString(lang === "en" ? "en-US" : "es-AR", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+    return `${label} ${date}`;
+  } catch {
+    return "";
+  }
+};
+
+// Colores oficiales de lenguajes (GitHub Linguist)
+const LANG_COLORS: Record<string, string> = {
+  JavaScript: "#f1e05a",
+  TypeScript: "#3178c6",
+  Python: "#3572A5",
+  Java: "#b07219",
+  "C++": "#f34b7d",
+  C: "#555555",
+  Rust: "#dea584",
+  HTML: "#e34c26",
+  CSS: "#563d7c",
+  Kotlin: "#A97BFF",
+  Go: "#00ADD8",
+  Shell: "#89e051",
+  PHP: "#4F5D95",
+  Ruby: "#701516",
+  Swift: "#FFAC45",
+  Dart: "#00B4AB",
+  Astro: "#FF5D01",
+};
+
+const langColor = (lang: string) => LANG_COLORS[lang] || "#00ff66";
+
+const escXml = (s: any) =>
+  String(s ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+
+// Genera un banner SVG 1200x630 en data-URI, on-brand con el sitio
+function makeBanner(title: string, tech?: string, stars?: number, path?: string, updated?: string) {
+  const rawName = String(title ?? "").replace(/-/g, " ").toUpperCase();
+  const display = rawName.length > 26 ? rawName.slice(0, 25).trim() + "…" : rawName;
+  const fs = display.length > 20 ? 44 : display.length > 12 ? 60 : 78;
+  const color = langColor(tech || "Code");
+  const starsLabel = stars ? `★ ${stars >= 1000 ? (stars / 1000).toFixed(1).replace(/\.0$/, "") + "k" : stars}` : "";
+
+  const svg = `
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d0d0d"/>
+      <stop offset="100%" stop-color="#121212"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="15%" cy="0%" r="90%">
+      <stop offset="0%" stop-color="rgba(0,255,102,0.16)"/>
+      <stop offset="55%" stop-color="rgba(0,255,102,0.03)"/>
+      <stop offset="100%" stop-color="rgba(0,255,102,0)"/>
+    </radialGradient>
+    <pattern id="dots" width="36" height="36" patternUnits="userSpaceOnUse">
+      <circle cx="18" cy="18" r="1.2" fill="rgba(255,255,255,0.045)"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+  <rect x="0" y="622" width="1200" height="8" fill="#00ff66"/>
+  <rect x="64" y="52" width="158" height="36" rx="18" fill="rgba(0,255,102,0.08)" stroke="rgba(0,255,102,0.35)" stroke-width="1.5"/>
+  <text x="143" y="77" text-anchor="middle" font-family="Consolas, Menlo, monospace" font-size="15" font-weight="700" letter-spacing="3" fill="#00ff66">PROYECTO</text>
+  <text x="1136" y="80" text-anchor="end" font-family="Consolas, Menlo, monospace" font-size="24" font-weight="700" fill="#00ff66">&lt;/&gt; DEV</text>
+  <text x="64" y="310" font-family="Arial, Helvetica, sans-serif" font-size="${fs}" font-weight="700" letter-spacing="2" fill="#ffffff">${escXml(display)}</text>
+  ${path ? `<text x="64" y="356" font-family="Consolas, Menlo, monospace" font-size="20" letter-spacing="1" fill="#8a8a8a">${escXml(path)}</text>` : `<text x="64" y="356" font-family="Consolas, Menlo, monospace" font-size="20" letter-spacing="1" fill="#8a8a8a">portafolio de ${escXml(GITHUB_USER)}</text>`}
+  ${updated ? `<text x="64" y="396" font-family="Consolas, Menlo, monospace" font-size="18" letter-spacing="1" fill="#666666">${escXml(updated)}</text>` : ""}
+  <circle cx="70" cy="548" r="12" fill="${color}"/>
+  <text x="96" y="555" font-family="Consolas, Menlo, monospace" font-size="22" font-weight="700" letter-spacing="1" fill="#ffffff">${escXml(tech || "Code")}</text>
+  ${starsLabel ? `<text x="1136" y="556" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#00ff66">★ ${starsLabel}</text>` : ""}
+  <text x="1136" y="600" text-anchor="end" font-family="Consolas, Menlo, monospace" font-size="17" fill="#666666">github.com/${escXml(GITHUB_USER)}</text>
+</svg>`;
+
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg).replace(/"/g, "%22")}`;
+}
 
 let githubProjects = [];
 try {
@@ -9,7 +121,7 @@ try {
   let hasMore = true;
   while (hasMore) {
     const res = await fetch(
-      `https://api.github.com/users/Sanchez-Santiago/repos?type=public&sort=updated&per_page=100&page=${page}`
+      `https://api.github.com/users/${GITHUB_USER}/repos?type=public&sort=updated&per_page=100&page=${page}`
     );
     if (!res.ok) break;
     const repos = await res.json();
@@ -17,13 +129,26 @@ try {
 
     const ownRepos = repos.filter((r: any) => !r.fork);
     githubProjects.push(
-      ...ownRepos.map((repo: any) => ({
-        title: repo.name.replace(/-/g, ' '),
-        text: repo.description || 'No description provided.',
-        link: repo.html_url,
-        technology: repo.language || 'Code',
-        image: `https://opengraph.githubassets.com/1/${repo.owner.login}/${repo.name}`
-      }))
+      ...ownRepos.map((repo: any) => {
+        const curated = staticByRepo.get(repo.name);
+        const title = curated ? curated.card.title : repo.name.replace(/-/g, ' ');
+        const text = curated ? curated.card.text : (repo.description || 'No description provided.');
+        const tech = curated ? curated.card.technology : (repo.language || 'Code');
+        const stars = repo.stargazers_count || 0;
+        return {
+          title,
+          text,
+          link: repo.html_url,
+          technology: tech,
+          stars,
+          repoPath: `${repo.owner.login}/${repo.name}`,
+          image: projectImage(repo.name, title, tech, stars, `${repo.owner.login}/${repo.name}`),
+          updated: fmtUpdated(repo.updated_at),
+          i18nTitle: curated ? `Cards.Card${curated.index + 1}.title` : undefined,
+          i18nText: curated ? `Cards.Card${curated.index + 1}.text` : undefined,
+          i18nTech: curated ? `Cards.Card${curated.index + 1}.technology` : undefined,
+        };
+      })
     );
 
     // Si la página trajo menos del máximo, no hay más páginas
@@ -34,9 +159,16 @@ try {
   console.error("Error fetching github repos:", e);
 }
 
-const staticCards = (t && t.Cards ? Object.values(t.Cards) : []) as any[];
-const cards = githubProjects.length > 0 ? githubProjects : staticCards;
-const usingStatic = githubProjects.length === 0;
+const cards =
+  githubProjects.length > 0
+    ? githubProjects
+    : staticCards.map((card: any, index: number) => ({
+        ...card,
+        image: projectImage(card.repoName || "", card.title || "", card.technology, card.stars || 0, card.repoName ? `${GITHUB_USER}/${card.repoName}` : undefined),
+        i18nTitle: `Cards.Card${index + 1}.title`,
+        i18nText: `Cards.Card${index + 1}.text`,
+        i18nTech: `Cards.Card${index + 1}.technology`,
+      }));
 ---
 
 <div class="projects-section">
@@ -51,9 +183,9 @@ const usingStatic = githubProjects.length === 0;
             image={card.image ?? ""}
             link={card.link}
             technology={card.technology}
-            i18nTitle={usingStatic ? `Cards.Card${index + 1}.title` : undefined}
-            i18nText={usingStatic ? `Cards.Card${index + 1}.text` : undefined}
-            i18nTech={usingStatic ? `Cards.Card${index + 1}.technology` : undefined}
+            i18nTitle={card.i18nTitle}
+            i18nText={card.i18nText}
+            i18nTech={card.i18nTech}
           />
         </div>
       ))
@@ -121,8 +253,14 @@ const usingStatic = githubProjects.length === 0;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
     width: 100%;
-    justify-items: center;
+    align-items: stretch;
     perspective: 1200px;
+  }
+
+  .project-item {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
   }
 
   @media (max-width: 640px) {

@@ -9,6 +9,9 @@
     },
     "Contact": "CONTACTO",
     "ProjectsTitle": "Proyectos",
+    "banner": {
+      "updated": "Actualizado"
+    },
     "ContactMe": "Contáctame",
     "Enviar": "Enviar",
     "nav": {
@@ -26,28 +29,148 @@
     },
     "Cards": {
       "Card1": {
-        "title": "Simulador ARM",
-        "text": "Soy un desarrollador apasionado, siempre en busca de nuevos desafíos. Me encanta aprender, crear innovaciones digitales y transformar ideas en soluciones creativas y funcionales, dígito a dígito y código a código.",
-        "link": "https://github.com/Sanchez-Santiago/Simulador-ARM-",
-        "technology": "Rust"
+        "title": "Tecnologías Móviles · Backend",
+        "text": "Backend para aplicaciones móviles, desarrollado en Kotlin como parte de la materia Tecnologías Móviles. Expone una API REST robusta que el frontend móvil consume de manera segura y eficiente.",
+        "link": "https://github.com/Sanchez-Santiago/Tecnologias-Moviles-BackEnd",
+        "technology": "Kotlin",
+        "stars": 1,
+        "repoName": "Tecnologias-Moviles-BackEnd"
       },
       "Card2": {
-        "title": "Juego de la Vida",
-        "text": "Implementación interactiva del famoso Juego de la Vida de Conway, desarrollada en Java. Permite a los usuarios diseñar sus propios patrones, generar configuraciones aleatorias y controlar la simulación con opciones para iniciar, pausar y reiniciar el proceso. Una experiencia visual fascinante de autómatas celulares en acción.",
-        "link": "https://github.com/Sanchez-Santiago/Juago-De-La-Vida",
-        "technology": "Java"
+        "title": "System Back Office",
+        "text": "Sistema de back office para la gestión de operaciones internas: seguimiento, validación y control de gestiones, con un panel limpio y eficiente para equipos administrativos.",
+        "link": "https://github.com/Sanchez-Santiago/System-Back-Office",
+        "technology": "TypeScript",
+        "stars": 0,
+        "repoName": "System-Back-Office"
       },
       "Card3": {
+        "title": "Tecnologías Móviles · Frontend",
+        "text": "Frontend de aplicaciones móviles en Kotlin para la materia Tecnologías Móviles: interfaz nativa, navegación fluida y consumo de APIs, con una experiencia de usuario pulida.",
+        "link": "https://github.com/Sanchez-Santiago/Tecnologias-Moviles-FrontEnd",
+        "technology": "Kotlin",
+        "stars": 1,
+        "repoName": "Tecnologias-Moviles-FrontEnd"
+      },
+      "Card4": {
+        "title": "Proyect Web II · Frontend",
+        "text": "Frontend del proyecto de la materia Proyecto Web II: maquetación y estilos cuidados, componentes responsivos y una interfaz accesible construida con CSS moderno.",
+        "link": "https://github.com/Sanchez-Santiago/Proyect-Web-II-FrontEnd",
+        "technology": "CSS",
+        "stars": 0,
+        "repoName": "Proyect-Web-II-FrontEnd"
+      },
+      "Card5": {
+        "title": "Proyect Web II · Backend",
+        "text": "Backend en TypeScript del proyecto de Proyecto Web II: API REST, autenticación y gestión de datos para sostener la aplicación completa de extremo a extremo.",
+        "link": "https://github.com/Sanchez-Santiago/Proyect-Web-II-BackEnd",
+        "technology": "TypeScript",
+        "stars": 0,
+        "repoName": "Proyect-Web-II-BackEnd"
+      },
+      "Card6": {
+        "title": "TEG Roguelite",
+        "text": "Juego roguelite desarrollado en Godot con GDScript: generación procedural de niveles, combate por turnos y progresión del personaje en cada partida.",
+        "link": "https://github.com/Sanchez-Santiago/TEG-Roguelite",
+        "technology": "GDScript",
+        "stars": 0,
+        "repoName": "TEG-Roguelite"
+      },
+      "Card7": {
+        "title": "Mi Americano Shop",
+        "text": "Tienda online de artículos americanos: catálogo de productos, carrito de compras y checkout integrado, construida con TypeScript.",
+        "link": "https://github.com/Sanchez-Santiago/Mi_Americano_Shop",
+        "technology": "TypeScript",
+        "stars": 0,
+        "repoName": "Mi_Americano_Shop"
+      },
+      "Card8": {
+        "title": "Dogs & Cats Out of Context",
+        "text": "Sitio de memes de perros y gatos fuera de contexto, construido con Astro para una carga rápida y un despliegue simple. Un proyecto divertido para compartir.",
+        "link": "https://github.com/Sanchez-Santiago/Dog_and_Cats_out_of_Context",
+        "technology": "Astro",
+        "stars": 0,
+        "repoName": "Dog_and_Cats_out_of_Context"
+      },
+      "Card9": {
+        "title": "Práctica Backend Node.JS",
+        "text": "Práctica de backend con Node.js y JavaScript: rutas, controladores, middleware y conexión con bases de datos para afianzar los fundamentos del desarrollo de servidores.",
+        "link": "https://github.com/Sanchez-Santiago/Practica-de-backend-Node.JS",
+        "technology": "JavaScript",
+        "stars": 0,
+        "repoName": "Practica-de-backend-Node.JS"
+      },
+      "Card10": {
+        "title": "Chat Node.JS",
+        "text": "Aplicación de chat en tiempo real: servidor con Node.js, interfaz HTML/CSS y comunicación bidireccional entre usuarios.",
+        "link": "https://github.com/Sanchez-Santiago/Chat-Node.JS",
+        "technology": "HTML",
+        "stars": 0,
+        "repoName": "Chat-Node.JS"
+      },
+      "Card11": {
+        "title": "Backend Kotlin Práctica",
+        "text": "Práctica de backend en Kotlin: servicios REST, estructuras de datos y buenas prácticas de diseño para aplicaciones del lado del servidor.",
+        "link": "https://github.com/Sanchez-Santiago/Backend-Kotlin-Practica",
+        "technology": "Kotlin",
+        "stars": 0,
+        "repoName": "Backend-Kotlin-Practica"
+      },
+      "Card12": {
+        "title": "Simulador ARM",
+        "text": "Simulador de la arquitectura ARM desarrollado en Rust, pensado como herramienta educativa. Permite ejecutar código ensamblador en un entorno controlado y visualizar el estado de memoria y registros. Una forma clara de entender la arquitectura de bajo nivel y la programación en ensamblador.",
+        "link": "https://github.com/Sanchez-Santiago/Simulador-ARM-",
+        "technology": "Rust",
+        "stars": 0,
+        "repoName": "Simulador-ARM-"
+      },
+      "Card13": {
         "title": "San Valentín",
         "text": "Página web interactiva diseñada para invitar a alguien a ser mi San Valentín, con un diseño atractivo y una experiencia personalizada para hacer la propuesta aún más especial.",
         "link": "https://san-valentin-ss.netlify.app/",
-        "technology": "React"
+        "technology": "JavaScript",
+        "stars": 0,
+        "repoName": "Mi_San_Valentin"
       },
-      "Card4": {
+      "Card14": {
+        "title": "Juego de la Vida",
+        "text": "Implementación interactiva del famoso Juego de la Vida de Conway, desarrollada en Java. Permite a los usuarios diseñar sus propios patrones, generar configuraciones aleatorias y controlar la simulación con opciones para iniciar, pausar y reiniciar el proceso. Una experiencia visual fascinante de autómatas celulares en acción.",
+        "link": "https://github.com/Sanchez-Santiago/Juago-De-La-Vida",
+        "technology": "Java",
+        "stars": 0,
+        "repoName": "Juago-De-La-Vida"
+      },
+      "Card15": {
         "title": "Me Perdonas",
         "text": "Un sitio web diseñado para aquellos momentos en los que necesitas disculparte de una forma original y creativa. Con mensajes personalizados, efectos visuales románticos y hasta un botón de 'perdóname' que no se puede ignorar. Perfecta para calmar cualquier tormenta emocional y recuperar la paz en tu relación.",
         "link": "https://me-perdonas-porfa.netlify.app/",
-        "technology": "Astro"
+        "technology": "Astro",
+        "stars": 0,
+        "repoName": "Me_Perdonas"
+      },
+      "Card16": {
+        "title": "Universidad Año 2",
+        "text": "Proyectos de segundo año de universidad en C++: estructuras de datos, algoritmos y ejercicios integradores que consolidan la base de la programación.",
+        "link": "https://github.com/Sanchez-Santiago/Universidad_year_2",
+        "technology": "C++",
+        "stars": 0,
+        "repoName": "Universidad_year_2"
+      },
+      "Card17": {
+        "title": "Arquitectura en Computadoras I",
+        "text": "Trabajos prácticos de Arquitectura en Computadoras I con SystemVerilog: diseño y simulación de circuitos digitales y componentes de una CPU.",
+        "link": "https://github.com/Sanchez-Santiago/Arquitectura-en-Computadora-I",
+        "technology": "SystemVerilog",
+        "stars": 0,
+        "repoName": "Arquitectura-en-Computadora-I"
+      },
+      "Card18": {
+        "title": "Informática III",
+        "text": "Workspace de la materia Informática III en Java: ejercicios de programación orientada a objetos y resolución de problemas con estructuras diversas.",
+        "link": "https://github.com/Sanchez-Santiago/INFORMATICA-III",
+        "technology": "Java",
+        "stars": 0,
+        "repoName": "INFORMATICA-III"
       }
     },
     "phrases": [
@@ -108,6 +231,9 @@
     },
     "Contact": "CONTACT",
     "ProjectsTitle": "Projects",
+    "banner": {
+      "updated": "Updated"
+    },
     "ContactMe": "Contact Me",
     "Enviar": "Send",
     "nav": {
@@ -125,28 +251,148 @@
     },
     "Cards": {
       "Card1": {
+        "title": "Mobile Technologies · Backend",
+        "text": "Backend for mobile applications, built in Kotlin as part of the Mobile Technologies course. It exposes a robust REST API that the mobile frontend consumes securely and efficiently.",
+        "link": "https://github.com/Sanchez-Santiago/Tecnologias-Moviles-BackEnd",
+        "technology": "Kotlin",
+        "stars": 1,
+        "repoName": "Tecnologias-Moviles-BackEnd"
+      },
+      "Card2": {
+        "title": "System Back Office",
+        "text": "Back office system for managing internal operations: tracking, validation and control of procedures, with a clean and efficient dashboard for administrative teams.",
+        "link": "https://github.com/Sanchez-Santiago/System-Back-Office",
+        "technology": "TypeScript",
+        "stars": 0,
+        "repoName": "System-Back-Office"
+      },
+      "Card3": {
+        "title": "Mobile Technologies · Frontend",
+        "text": "Mobile application frontend in Kotlin for the Mobile Technologies subject: native UI, smooth navigation and API consumption, with a polished user experience.",
+        "link": "https://github.com/Sanchez-Santiago/Tecnologias-Moviles-FrontEnd",
+        "technology": "Kotlin",
+        "stars": 1,
+        "repoName": "Tecnologias-Moviles-FrontEnd"
+      },
+      "Card4": {
+        "title": "Web Project II · Frontend",
+        "text": "Frontend for the Web Project II course: careful layout and styling, responsive components and an accessible interface built with modern CSS.",
+        "link": "https://github.com/Sanchez-Santiago/Proyect-Web-II-FrontEnd",
+        "technology": "CSS",
+        "stars": 0,
+        "repoName": "Proyect-Web-II-FrontEnd"
+      },
+      "Card5": {
+        "title": "Web Project II · Backend",
+        "text": "TypeScript backend for the Web Project II project: REST API, authentication and data management to power the full application end to end.",
+        "link": "https://github.com/Sanchez-Santiago/Proyect-Web-II-BackEnd",
+        "technology": "TypeScript",
+        "stars": 0,
+        "repoName": "Proyect-Web-II-BackEnd"
+      },
+      "Card6": {
+        "title": "TEG Roguelite",
+        "text": "Roguelite game built in Godot with GDScript: procedurally generated levels, turn-based combat and character progression in every run.",
+        "link": "https://github.com/Sanchez-Santiago/TEG-Roguelite",
+        "technology": "GDScript",
+        "stars": 0,
+        "repoName": "TEG-Roguelite"
+      },
+      "Card7": {
+        "title": "Mi Americano Shop",
+        "text": "Online store for American goods: product catalog, shopping cart and integrated checkout, built with TypeScript.",
+        "link": "https://github.com/Sanchez-Santiago/Mi_Americano_Shop",
+        "technology": "TypeScript",
+        "stars": 0,
+        "repoName": "Mi_Americano_Shop"
+      },
+      "Card8": {
+        "title": "Dogs & Cats Out of Context",
+        "text": "A site of out-of-context dog and cat memes, built with Astro for fast loading and simple deployment. A fun project to share.",
+        "link": "https://github.com/Sanchez-Santiago/Dog_and_Cats_out_of_Context",
+        "technology": "Astro",
+        "stars": 0,
+        "repoName": "Dog_and_Cats_out_of_Context"
+      },
+      "Card9": {
+        "title": "Backend Practice Node.JS",
+        "text": "Backend practice with Node.js and JavaScript: routes, controllers, middleware and database connections to strengthen the fundamentals of server development.",
+        "link": "https://github.com/Sanchez-Santiago/Practica-de-backend-Node.JS",
+        "technology": "JavaScript",
+        "stars": 0,
+        "repoName": "Practica-de-backend-Node.JS"
+      },
+      "Card10": {
+        "title": "Chat Node.JS",
+        "text": "Real-time chat application: Node.js server, HTML/CSS interface and bidirectional communication between users.",
+        "link": "https://github.com/Sanchez-Santiago/Chat-Node.JS",
+        "technology": "HTML",
+        "stars": 0,
+        "repoName": "Chat-Node.JS"
+      },
+      "Card11": {
+        "title": "Backend Kotlin Practice",
+        "text": "Kotlin backend practice: REST services, data structures and good design practices for server-side applications.",
+        "link": "https://github.com/Sanchez-Santiago/Backend-Kotlin-Practica",
+        "technology": "Kotlin",
+        "stars": 0,
+        "repoName": "Backend-Kotlin-Practica"
+      },
+      "Card12": {
         "title": "ARM Simulator",
         "text": "An emulator for the ARM architecture, developed in Rust. This project allows users to execute ARM assembly code in a controlled environment, visualizing memory states and register values. A powerful tool for understanding low-level computer architecture and assembly programming.",
         "link": "https://github.com/Sanchez-Santiago/Simulador-ARM-",
-        "technology": "Rust"
+        "technology": "Rust",
+        "stars": 0,
+        "repoName": "Simulador-ARM-"
       },
-      "Card2": {
-        "title": "Game of Life",
-        "text": "Interactive implementation of Conway's famous Game of Life, developed in Java. It allows users to design their own patterns, generate random configurations, and control the simulation with options to start, pause, and restart the process. A fascinating visual experience of cellular automata in action.",
-        "link": "https://github.com/Sanchez-Santiago/Juago-De-La-Vida",
-        "technology": "Java"
-      },
-      "Card3": {
+      "Card13": {
         "title": "Valentine's Day",
         "text": "Interactive webpage designed to invite someone to be my Valentine, with an attractive design and a personalized experience to make the proposal even more special.",
         "link": "https://san-valentin-ss.netlify.app/",
-        "technology": "React"
+        "technology": "JavaScript",
+        "stars": 0,
+        "repoName": "Mi_San_Valentin"
       },
-      "Card4": {
+      "Card14": {
+        "title": "Game of Life",
+        "text": "Interactive implementation of Conway's famous Game of Life, developed in Java. It allows users to design their own patterns, generate random configurations, and control the simulation with options to start, pause, and restart the process. A fascinating visual experience of cellular automata in action.",
+        "link": "https://github.com/Sanchez-Santiago/Juago-De-La-Vida",
+        "technology": "Java",
+        "stars": 0,
+        "repoName": "Juago-De-La-Vida"
+      },
+      "Card15": {
         "title": "Forgive Me",
         "text": "A website designed for those moments when you need to apologize in an original and creative way. With personalized messages, romantic visual effects, and even a 'forgive me' button that can't be ignored. Perfect for calming any emotional storm and restoring peace in your relationship.",
         "link": "https://me-perdonas-porfa.netlify.app/",
-        "technology": "Astro"
+        "technology": "Astro",
+        "stars": 0,
+        "repoName": "Me_Perdonas"
+      },
+      "Card16": {
+        "title": "University Year 2",
+        "text": "Second-year university projects in C++: data structures, algorithms and integrative exercises that build a solid programming foundation.",
+        "link": "https://github.com/Sanchez-Santiago/Universidad_year_2",
+        "technology": "C++",
+        "stars": 0,
+        "repoName": "Universidad_year_2"
+      },
+      "Card17": {
+        "title": "Computer Architecture I",
+        "text": "Assignments for the Computer Architecture I subject using SystemVerilog: design and simulation of digital circuits and CPU components.",
+        "link": "https://github.com/Sanchez-Santiago/Arquitectura-en-Computadora-I",
+        "technology": "SystemVerilog",
+        "stars": 0,
+        "repoName": "Arquitectura-en-Computadora-I"
+      },
+      "Card18": {
+        "title": "Informatics III",
+        "text": "Workspace for the Informatics III course in Java: object-oriented programming exercises and problem solving with various data structures.",
+        "link": "https://github.com/Sanchez-Santiago/INFORMATICA-III",
+        "technology": "Java",
+        "stars": 0,
+        "repoName": "INFORMATICA-III"
       }
     },
     "phrases": [
